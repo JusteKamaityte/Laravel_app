@@ -1,15 +1,18 @@
 <?php
-date('Y-m-d H:i:s');
-print date('Y-m-d H:i:s') .'Justė grįžo į PHPFIGHTCLUB';
+$date= date('Y-m-d H:i:s');
+$vardas= "Justė";
+
 ?>
 
 <html>
-    <head>
+<head>
     <title><?php print 'Lenta | PHP Fight Club'; ?> </title>
-    </head>
+</head>
 
 <body>
-    <p><?php print 'Ko žiūri?'; ?></p>
+<p><?php print $date;?>: <?php print $vardas;?> grįžo į PHPFIGHTCLUB</p>
+<p><?php print $date;?>: <?php print $vardas;?> priėmė teisingą SPRENDIMĄ</p>
 
 </body>
 </html>
+
