@@ -1,17 +1,17 @@
 <?php
 $date= date('Y-m-d H:i:s');
 $vardas= "Justė";
+$n= rand(2, 1000);
 
 ?>
 
 <html>
 <head>
-    <title><?php print 'Lenta | PHP Fight Club'; ?> </title>
+    <title><?php print 'Facts | PHP Fight Club'; ?> </title>
 </head>
 
 <body>
-<p><?php print $date;?>: <?php print $vardas;?> grįžo į PHPFIGHTCLUB</p>
-<p><?php print $date;?>: <?php print $vardas;?> priėmė teisingą SPRENDIMĄ</p>
+<p>Per šią sekundę organizmas pagamino <?php print $n; ?>mil. kraujo ląstelių.</p>
 
 </body>
 </html>
