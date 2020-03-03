@@ -1,0 +1,513 @@
+.video_overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 84px;
+  height: 84px;
+  background: linear-gradient(45deg, #FC3869 50%, #1D1D1D 50%);
+  z-index: 2;
+}
+@media (min-width: 700px) {
+  .video_overlay {
+    height: 140px;
+    width: 140px;
+  }
+}
+@media (min-width: 1024px) {
+  .video_overlay {
+    height: 280px;
+    width: 280px;
+  }
+}
+
+body {
+  background-color: #1D1D1D;
+  color: white;
+}
+
+.container {
+  padding: 0 10px;
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .frame {
+    padding-top: 100px;
+    margin: 0 auto;
+    position: relative;
+    width: 800px;
+    height: 400px;
+    background-image: url("https://cdn.shopify.com/s/files/1/0071/0318/5009/products/Viathon-R1-frame-profile-0190_1250x.png?v=1573508398");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  section {
+    margin-top: 40px;
+  .wheel_back,
+  .wheel_front {
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    left: 70px;
+    bottom: 40px;
+  }
+
+  h1 {
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 1rem;
+    border-bottom: 1px solid #FC3869;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    z-index: 4;
+    transition: 0.3s;
+  }
+  h1:hover {
+    color: #FC3869;
+    transition: 0.3s;
+  }
+  @media (min-width: 1024px) {
+    h1 {
+      background-color: rgba(0, 0, 0, 0);
+      position: fixed;
+      bottom: 50%;
+      left: 0;
+      transform: translate(-30%, -50%) rotate(90deg);
+    }
+    .wheel_front {
+      left: 60%;
+    }
+
+    .blob {
+      position: fixed;
+      bottom: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #FC3869;
+      z-index: 4;
+      animation: blob 30s infinite ease-in-out;
+    }
+    @keyframes blob {
+      25% {
+        border-radius: 0%;
+        transform: rotate(2000deg);
+        bottom: 20%;
+        left: 70%;
+      }
+      50% {
+        border-radius: 50%;
+        left: 0;
+        bottom: 70%;
+      }
+      75% {
+        border-radius: 20%;
+        transform: rotate(1000deg);
+        bottom: 80%;
+        left: 70%;
+      }
+    .wheel1 {
+      background-image: url("https://pluspng.com/img-png/bike-tire-png-wheel-tire-bicycle-round-bike-720.png");
+    }
+
+    header {
+      font-size: 14px;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      background-color: #1D1D1D;
+      z-index: 3;
+      box-shadow: 0px 15px 20px 0px #1D1D1D;
+    }
+    header .container {
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 10px;
+    .wheel2 {
+      background-image: url("https://pngimage.net/wp-content/uploads/2018/05/bicycle-wheel-png-6.png");
+    }
+
+    nav {
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+      align-items: center;
+    }
+    nav ul {
+      display: none;
+    }
+    @media (min-width: 860px) {
+      nav ul {
+        display: flex;
+      }
+      nav ul li {
+        margin-right: 20px;
+      }
+      nav ul li:last-of-type {
+        margin: 0;
+      }
+      nav ul li a {
+        text-transform: capitalize;
+        padding: 20px 15px;
+        color: white;
+        transition: 0.3s;
+      }
+      nav ul li a:hover {
+        color: #FC3869;
+        transition: 0.3s;
+      }
+    }
+    nav img {
+      height: 30px;
+      margin-right: 40px;
+    .wheel3 {
+      background-image: url("https://i.ya-webdesign.com/images/bicycle-wheel-png-1.png");
+    }
+
+    .header_search {
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+      align-items: center;
+    }
+    .header_search i {
+      font-size: 30px;
+      margin-right: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .header_search i:hover {
+      color: #FC3869;
+      transition: 0.3s;
+    }
+    .header_search a {
+      display: none;
+      position: relative;
+      text-transform: uppercase;
+      color: #FC3869;
+      padding: 5px 0;
+      overflow: hidden;
+    }
+    .header_search a::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #FC3869;
+    }
+    .header_search a:hover::before {
+      animation: hover 0.7s ease-in-out;
+    }
+    @keyframes hover {
+      50% {
+        left: -100%;
+      }
+      100% {
+        left: 0;
+      }
+    }
+    @media (min-width: 860px) {
+      .header_search a {
+        display: block;
+      }
+    }
+
+    .logo_menu {
+      display: none;
+    }
+    @media (min-width: 860px) {
+      .logo_menu {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        align-items: center;
+        margin-left: 20px;
+      }
+    }
+    .logo_menu img {
+      height: 25px;
+    }
+
+    .burger_menu {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      transform: scale(1);
+      cursor: pointer;
+    }
+    @media (min-width: 860px) {
+      .burger_menu {
+        display: none;
+      }
+    }
+    .burger_menu:hover .burger_line:first-of-type {
+      top: 90%;
+      transition: 0.3s;
+    }
+    .burger_menu:hover .burger_line:nth-of-type(2) {
+      bottom: 0;
+      transition: 0.3s;
+      transition-delay: 0.15s;
+    }
+    .burger_line {
+      width: 100%;
+      height: 5px;
+      background-color: white;
+    .saddle {
+      position: absolute;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    .burger_line:first-of-type {
+      top: 0;
+    }
+    .burger_line:nth-of-type(2) {
+      bottom: 50%;
+      transform: translate(0, 50%);
+    }
+    .burger_line:last-of-type {
+      bottom: 0;
+    }
+
+    .grid_item_text a {
+      text-transform: uppercase;
+    }
+    .grid_item_text a:first-of-type {
+      color: #FC3869;
+    }
+    .grid_item_text a:last-of-type {
+      color: grey;
+    }
+    .grid_item_text h3 {
+      margin: 20px 0;
+    }
+    .grid_item_text h3 span {
+      color: white;
+      background-image: linear-gradient(white, white);
+      background-size: 0 0.1em;
+      background-position: 0 100%;
+      height: 200px;
+      width: 200px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transition-duration: 0.2s;
+      transition-property: background-size;
+    }
+    .grid_item_text h3 span:hover {
+      background-size: 100% 0.1em;
+      left: 26%;
+      bottom: 55%;
+    }
+
+    .right_grid_wrap h2 {
+      margin-bottom: 30px;
+    .saddle1 {
+      background-image: url("https://cdn.brooksengland.com/media/catalog/product/cache/0/small_image/350x350/602f0fa2c1f0d1ba5e241f914e856ff9/c/1/c17_all_weather_black_view_brooks_england.png");
+    }
+
+    .right_grid {
+      display: grid;
+      grid: auto/1fr 1fr;
+      grid-gap: 20px;
+    }
+    @media (min-width: 860px) {
+      .right_grid {
+        display: grid;
+        grid: auto/1fr 1fr;
+        grid-gap: 20px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .right_grid {
+        display: grid;
+        grid: auto/1fr;
+        grid-gap: inherit;
+      }
+      .saddle2 {
+        background-image: url("https://burgtec.co.uk/wp-content/uploads/9004-Cloud-saddle-CARBON-Rails.png");
+      }
+
+      .grid_item_img {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+      .grid_item_img img {
+        transition: 0.3s;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        object-fit: cover;
+        object-position: center;
+      }
+      .grid_item_img::before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+      }
+      .grid_item_img:hover .grid_item_img_overlay {
+        transition: 0.3s;
+        height: 15%;
+        width: 15%;
+      .saddle3 {
+        background-image: url("https://getdrawings.com/free-icon-bw/saddle-icon-2.png");
+      }
+      .grid_item_img:hover img {
+        transition: 0.3s;
+        transform: scale(1.2);
+      }
+      .grid_item_img .grid_item_img_overlay {
+        transition: 0.3s;
+
+      .handlebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 0;
+        width: 0;
+        background: linear-gradient(135deg, #1D1D1D 50%, white 50%);
+        height: 200px;
+        width: 200px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 55%;
+        bottom: 60%;
+      }
+
+      @media (min-width: 860px) {
+        .section_outer_grid {
+          display: grid;
+          grid: auto/1fr 1fr;
+          grid-gap: 50px;
+        }
+
+        .left_grid .grid_item {
+          position: sticky;
+          top: 80px;
+        }
+        .left_grid .grid_item .grid_item_text {
+          font-size: 1.5em;
+        }
+      }
+      @media (min-width: 1024px) {
+        .right_grid .grid_item {
+          display: flex;
+          flex-flow: row;
+          justify-content: center;
+          align-items: center;
+        }
+        .right_grid .grid_item .grid_item_img {
+          flex: 1;
+          margin-right: 20px;
+        }
+        .right_grid .grid_item .grid_item_text {
+          flex: 2;
+        }
+      }
+      form {
+        background: rgba(0, 0, 0, 0.7);
+        font-size: 2rem;
+        margin: 2em 0;
+        padding: 2em;
+        width: 100%;
+        z-index: 2;
+        position: relative;
+      }
+      @media (min-width: 700px) {
+        form {
+          width: 50%;
+        }
+      }
+      form input {
+        font-size: 1em;
+        background: none;
+        border: none;
+        border-bottom: 2px solid #FC3869;
+        display: block;
+        width: 100%;
+        margin-bottom: 1em;
+        outline: none;
+      }
+      form input[type=submit] {
+        width: 50%;
+        background-color: #FC3869;
+        color: white;
+        font-size: 0.5em;
+        border-radius: 1em/50%;
+        padding: 1em 2em;
+        transition: 0.3s;
+      }
+      form input[type=submit]:hover {
+        color: red;
+        transition: 0.3s;
+      .handlebar1 {
+        background-image: url("https://4.imimg.com/data4/VV/VV/GLADMIN-/bajajavenger-assets-images-homepage-headlight-500x500.png");
+      }
+
+      .form_video {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+      .form_video iframe {
+        min-height: 200vh;
+        min-width: 300vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+      .handlebar2 {
+        background-image: url("https://cdn3.iconfinder.com/data/icons/bicycle-6/200/53-512.png");
+      }
+
+      footer ul {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+      }
+      @media (min-width: 1024px) {
+        footer ul {
+          display: flex;
+          flex-flow: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+      footer ul li {
+        margin: 5px 0;
+      }
+      footer ul li a {
+        color: white;
+        text-transform: uppercase;
+        font-size: 0.7em;
+        padding: 15px 10px;
+        transition: 0.3s;
+      }
+      footer ul li a:hover {
+        color: grey;
+        transition: 0.3s;
+      .handlebar3 {
+        background-image: url("https://cdn.shopify.com/s/files/1/0253/1252/6445/products/EC70AX_RB_Back_1024x1024.png?v=1565373886");
+      }
