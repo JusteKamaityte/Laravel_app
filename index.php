@@ -1,29 +1,48 @@
 <?php
-$title = 'Sriuba';
-$soup_ml = rand(400,700);
-$soup_temp = rand(15, 40);
-$piss_ml = rand(100,350);
-$piss_temp = 36.4;
 
-$soup_piss_temp = round(($soup_ml * $soup_temp + $piss_ml * $piss_temp) / ($soup_ml + $piss_ml), 1);
+$print_title = 'dviratis';
+$print_title = 'dviratis';
 
-$h1 = 'Sriubos prognoze';
-$p1 = "Pradzioje puode buv $soup_ml ml. $soup_temp C. sriubos";
-$p2 = "I puoda primyzus $piss_ml ml., sriubos temperatura patapo $soup_piss_temp C.";
+$rand = rand(0,2);
+
+if ($rand == 1) {
+$wheel = 'wheel1';
+$saddle =  'saddle1';
+$handlebar = 'handlebar1';
+}
+elseif ($rand == 2) {
+$wheel = 'wheel2';
+$saddle =  'saddle2';
+$handlebar = 'handlebar2';
+}
+else {
+$wheel = 'wheel3';
+$saddle =  'saddle3';
+$handlebar = 'handlebar3';
+}
 
 ?>
 
-
-
-<html>
+<html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title><?php print $print_title?></title>
+    <style>
+
+    </style>
+    <link rel="stylesheet" href="./css/main.css">
+    <title><?php print $print_title; ?></title>
 </head>
 <body>
-    <h1><?php print $h1 ?></h1>
-    <p><?php print $p1 ?></p>
-    <p><?php print $p2 ?></p>
+<div class="<?php print $ratai; ?>"></div>
+<div class="<?php print $ratai; ?>"></div>
+<div class="<?php print $sedyne; ?>"></div>
+<div class="<?php print $vairas; ?>"></div>
+<div class="kebulas"></div>
+<div class="frame">
+    <div class="wheel_back <?php print $wheel; ?>"></div>
+    <div class="wheel_front <?php print $wheel; ?>"></div>
+    <div class="saddle <?php print $saddle; ?>"></div>
+    <div class="handlebar <?php print $handlebar; ?>"></div>
+</div>
 </body>
 </html>
-
