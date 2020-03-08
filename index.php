@@ -1,11 +1,10 @@
 <?php
-$paper = array("Copier", "Inkjet", "Laser", "Photo");
-$j = 0;
+$paper[] = "Copier";
+$paper[] = "Inkjet";
+$paper[] = "Laser";
+$paper[] = "Photo";
+print_r($paper);
 
-foreach($paper as $item){
-    echo "$j: $item<br>";
-    ++$j;
-}
 ?>
 
 <html>
