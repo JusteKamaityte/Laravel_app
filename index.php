@@ -1,6 +1,8 @@
 <?php
-for($kisene = 700; $kisene > 0; $x--){
-
+for($kisene = 100; $kisene > 0; $x--){
+ if ($kisene <50){
+     break;
+ }
 }
 ?>
 
