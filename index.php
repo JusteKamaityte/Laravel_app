@@ -1,13 +1,11 @@
 <?php
-$p1 = array("Copier", "Inkjet", "Laser", "Photo");
-echo "p1 element: " .$p1[2] . "<br>";
-
-$p2 = array('copier'=> "Copier & Multipurpose",
-            'inkjet' => "Inkjet Printer",
-            'laser'=> "Laser printer",
-            'photo'=> "Photographic Paper");
-
-echo "p2 element: " .$p2['inkjet'] ."<br>";
+$paper = array("Copier", "Inkjet", "Laser", "Photo");
+$j = 0;
+foreach ($paper as $item)
+{
+    echo "$j: $item<br>";
+    ++$j;
+}
 ?>
 
 <html>
