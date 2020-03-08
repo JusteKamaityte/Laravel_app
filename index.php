@@ -1,13 +1,12 @@
 <?php
 $paper = array('copier' => "Copier & Multipurpose",
-            'inkjet' => "Inkjet Printer",
-            'laser' => "Laser printer",
-            'photo' => "Photographic Paper");
-
-
-foreach($paper as $item => $description)
+    'inkjet' => "Inkjet Printer",
+    'laser' => "Laser Printer",
+    'photo' => "Photographic Paper");
+while (list($item, $description) = each($paper))
     echo "$item: $description<br>";
 ?>
+
 
 <html>
 <head>
