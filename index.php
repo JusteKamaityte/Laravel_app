@@ -1,20 +1,16 @@
 <?php
-for($x = 0; $x < 10; $x++){
-    
+for($kisene = 700; $kisene > 0; $x--){
+
 }
 ?>
 
-<!doctype html>
 <html>
 <head>
-    <title>PHP and HTML</title>
+    <title>CYCLES</title>
 </head>
 <body>
-<h1>Embed PHP in HTML</h1>
+<h1><?php print $kisene; ?></h1>
 
-<p>This is going to be ignored by PHP and displayed by the browser.</p>
-
-<p>This will also be ignored by PHP and displayed by the browser.</p>
 </body>
 </html>
 
