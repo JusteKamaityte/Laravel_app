@@ -1,17 +1,19 @@
 <?php
+$paper = array("Copier", "Inkjet", "Laser", "Photo");
+$j = 0;
 
+foreach($paper as $item){
+    echo "$j: $item<br>";
+    ++$j;
+}
 ?>
 
 <html>
 <head>
     <title>CYCLES</title>
+
 </head>
 <body>
-<div class="container">
-    <?php for($x= 0; $x < 10; $x++) : ?>
-        <p>pasikartojantis paragrafas</p>
-    <?php endfor; ?>
-</div>
 
 </body>
 </html>
