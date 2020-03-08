@@ -1,11 +1,5 @@
 <?php
-for($kisene = 100; $kisene > 0; $kisene--){
- if ($kisene <50){
-     break;
- }
-// kiekvieno ciklo metu kišenėje bus vienu euru mažiau
-// ciklas vyks tol kol kišenė nebus tusčia: ($kisene>0)
-}
+
 ?>
 
 <html>
@@ -13,7 +7,11 @@ for($kisene = 100; $kisene > 0; $kisene--){
     <title>CYCLES</title>
 </head>
 <body>
-<h1><?php print $kisene; ?></h1>
+<div class="container">
+    <?php for($x= 0; $x < 10; $x++) : ?>
+        <p>pasikartojantis paragrafas</p>
+    <?php endfor; ?>
+</div>
 
 </body>
 </html>
