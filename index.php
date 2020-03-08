@@ -1,11 +1,10 @@
 <?php
-$paper[0] = "Copier";
-$paper[1] = "Inkjet";
-$paper[2] = "Laser";
-$paper[3] = "Photo";
+$paper['copier'] = "Copier & Multipurpose";
+$paper['inkjet'] = "Inkjet Printer";
+$paper['laser'] = "Laser Printer";
+$paper['photo'] = "Photographic Paper";
 
-for ($j = 0; $j < 4; ++$j)
-    echo "$j: $paper[$j]<br>";
+echo $paper['laser'];
 
 ?>
 
