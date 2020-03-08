@@ -1,11 +1,12 @@
 <?php
-$paper = array("Copier", "Inkjet", "Laser", "Photo");
-$j = 0;
-foreach ($paper as $item)
-{
-    echo "$j: $item<br>";
-    ++$j;
-}
+$paper = array('copier' => "Copier & Multipurpose",
+            'inkjet' => "Inkjet Printer",
+            'laser' => "Laser printer",
+            'photo' => "Photographic Paper");
+
+
+foreach($paper as $item => $description)
+    echo "$item: $description<br>";
 ?>
 
 <html>
