@@ -25,16 +25,6 @@
             'bike'=> ' .jpg'
         ]
     ];
-//$leader= null;
-//
-//foreach ($participants as $participant){
-// $x = rand(0, 200);
-// $y = rand(0,200);
-//
-// if ($x=0 $x > 100) {
-//    $participant['name']
-// }
-
 
 var_dump($participants);
 ?>
@@ -48,30 +38,25 @@ var_dump($participants);
 </head>
 <body>
 <main class="main_section">
-    <nav></nav>
-    <h1>Tour-De</h1>
+    <nav><h1 >Tour-De-Pzdc</h1></nav>
     <div class="wrapper">
         <div class="bike">
-            <img src="css/assets/bike1.png" width="100px" height="100px">
-<!--            --><?php //foreach ($participants as $participant): ?>
-<!--                <h2> Current Leader:--><?php //print $participant['name']; ?><!--</h2>-->
-<!--                <img src="--><?php //print $participants ['bike']; ?><!--">-->
-<!--            --><?php //endforeach; ?>
+            <img src="css/assets/bike1.png" width="200px" height="200px">
         </div>
         <div class="bike">
-            <img src="css/assets/bike1.png" width="100px" height="100px" border="3px solid black">
+            <img class="bike_style" src="css/assets/bike2.png" width="200px" height="200px" >
         </div>
         <div class="bike">
-            <img src="css/assets/bike1.png" width="100px" height="100px">
+            <img class="bike_style" src="css/assets/bike3.png" width="200px" height="200px">
         </div>
         <div class="bike">
-            <img src="css/assets/bike1.png" width="100px" height="100px">
+            <img class="bike_style" src="css/assets/bike4.png" width="200px" height="200px">
         </div>
         <div class="bike">
-            <img src="css/assets/bike1.png" width="100px" height="100px">
+            <img class="bike_style" src="css/assets/bike5.png" width="200px" height="200px">
         </div>
         <div class="bike">
-            <img src="css/assets/bike1.png" width="100px" height="100px">
+            <img class="bike_style" src="css/assets/bike6.png" width="200px" height="200px">
         </div>
     </div>
 </main>
