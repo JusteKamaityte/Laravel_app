@@ -1,25 +1,27 @@
 <?php
+
 $h1 = 'Participants';
 
-    $participants = [
 
-        'names' => ['Justė', 'Algis', 'Saulius', 'Petras', 'Tomas', 'Linas'],
-        'last_names' => ['Kamaitytė', 'Algirdauskas', 'Bolauskas', 'Petrauskas', 'Tomauskas', 'Linauskas'],
-        'images' => ['css/assets/image_1.jpg', 'css/assets/image.jpg', 'assets/image.jpg', 'assets/image.jpg', 'assets/image.jpg', 'assets/image.jpg']
-//            result[],
-//            percentage[]
+        $names = ['Justė', 'Algis', 'Saulius', 'Petras', 'Tomas'];
+        $balls = [0, 1, 2, 3, 4];
 
-    ];
+        for ($i = 0 ; $i <3; $i++){
+            $name_key = array_rand($names);
+            $name = $names[$name_key];
 
-//    for $participants
-//    foreach ($participants as $value)
+            $balls_key = array_rand($balls);
+            $balls_count = $balls[$balls_key];
 
-    $key = array_rand($participants);
+            $cards= [] =[
+                'person_info' => "$name - $balls_count";
+            ];
+        }
 
-    var_dump($participants);
-
-    for ($participants = 0 ; $participants > 6 ; ++$participants)
-
+//        $cards= [
+//            ['person_info' => 'Petras - 2 '],
+//            ['person_info' => 'Tomas - 2 '],
+//        ];
 ?>
 
 
@@ -32,15 +34,10 @@ $h1 = 'Participants';
 
 </head>
 <body>
-<?php print $h1; ?>
-<div class="cards">
-    <?php foreach ($participants as $participant): ?>
-    <div class="card">
-        <img src="<?php print $participants[rand(0,3)]['images'] ?>">
-        <h2><?php print $participants[rand(0,3)]['names']; ?></h2>
-        <h2><?php print $participants[rand(0,3)]['last_names']; ?></h2>
-    </div>
+    <?php foreach ($cards as $card): ?>
+        <div class="card">
+            <span><?php print $card [0]; ?></span>
+        </div>
     <?php endforeach; ?>
-</div>
 </body>
 </html>
