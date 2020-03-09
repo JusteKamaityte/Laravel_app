@@ -1,24 +1,48 @@
 <?php
-list($a, $b) = array('Alice', 'Bob');
-echo "a=$a b=$b";
+$h1 = 'Participants';
+    $participants =[
+        [
+            'name' => 'Justė',
+            'last name' => 'Kamaitytė',
+            'photo' => 'assets/image.jpg'
+        ],
+        [
+            'name' => 'Algis',
+            'last name' => 'Algirdauskas',
+            'photo' => 'assets/image.jpg'
+        ],
+        [
+            'name' => 'Saulius',
+            'last name' => 'Bolauskas',
+            'photo' => 'assets/image.jpg'
+        ],
+        [
+            'name' => 'Petras',
+            'last name' => 'Petrauskas',
+            'photo' => 'assets/image.jpg'
+        ],
+        [
+            'name' => 'Tomas',
+            'last name' => 'Tomauskas',
+            'photo' => 'assets/image.jpg'
+        ],
+        [
+            'name' => 'Linas',
+            'last name' => 'Linauskas',
+            'photo' => 'assets/image.jpg'
+        ],
+    ];
 ?>
 
 
 
 <html>
 <head>
-    <title>CYCLES</title>
-<!--    You can see how list works a little more clearly in Example 6-9, where an array is created-->
-<!--    out of the two strings “Alice” and “Bob” and then passed to the list function, which-->
-<!--    assigns those strings as values to the variables $a and $b.-->
-
-<!--    You can take your pick when walking through arrays. Use foreach...as to create a loop-->
-<!--    that extracts values to the variable following the as, or use the each function and create-->
-<!--    your own looping system.-->
+    <title>Team</title>
 
 </head>
 <body>
-
+<h1>Participants</h1>
 </body>
 </html>
 
