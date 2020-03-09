@@ -1,42 +1,44 @@
 <?php
-    $participants = [
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' css/assets/image_1.jpg'
-        ],
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' .jpg'
-        ],
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' .jpg'
-        ],
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' .jpg'
-        ],
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' .jpg'
-        ],
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' .jpg'
-        ]
-    ];
-$leader= null;
-
-foreach ($participants as $participant){
- $x = rand(0, 200);
- $y = rand(0,200);
+//    $participants = [
+//        [
+//            'name' => 'Bimbis Pongas',
+//            'bike'=> ' css/assets/image_1.jpg'
+//        ],
+//        [
+//            'name' => 'Bimbis Pongas',
+//            'bike'=> ' .jpg'
+//        ],
+//        [
+//            'name' => 'Bimbis Pongas',
+//            'bike'=> ' .jpg'
+//        ],
+//        [
+//            'name' => 'Bimbis Pongas',
+//            'bike'=> ' .jpg'
+//        ],
+//        [
+//            'name' => 'Bimbis Pongas',
+//            'bike'=> ' .jpg'
+//        ],
+//        [
+//            'name' => 'Bimbis Pongas',
+//            'bike'=> ' .jpg'
+//        ]
+//    ];
+//$leader= null;
+//
+//foreach ($participants as $participant){
+// $x = rand(0, 200);
+// $y = rand(0,200);
 //
 // if ($x=0 $x > 100) {
 //    $participant['name']
 // }
-}
+//}
 
-var_dump($participants);
+$array =[0,[1]];
+
+var_dump($array);
 ?>
 
 
@@ -50,12 +52,12 @@ var_dump($participants);
 <main>
     <nav></nav>
     <h1>Tour-De</h1>
-    <div class="wrapper">
-            <?php foreach ($participants as $participant): ?>
-                <h2> Current Leader:<?php print $participant['name']; ?></h2>
-                <img src="<?php print $participants ['bike']; ?>">
-            <?php endforeach; ?>
-    </div>
+<!--    <div class="wrapper">-->
+<!--            --><?php //foreach ($participants as $participant): ?>
+<!--                <h2> Current Leader:--><?php //print $participant['name']; ?><!--</h2>-->
+<!--                <img src="--><?php //print $participants ['bike']; ?><!--">-->
+<!--            --><?php //endforeach; ?>
+<!--    </div>-->
 </main>
 </body>
 </html>
