@@ -3,41 +3,63 @@
 $h1 = 'Participants';
 
 
-        $names = ['Justė', 'Algis', 'Saulius', 'Petras', 'Tomas'];
-        $balls = [0, 1, 2, 3, 4];
+$names = ['Algis', 'Saulius', 'Petras', 'Jonas', 'Linas', 'Tomas'];
+$last_names = ['Algirdauskas', 'Sauliauskas', 'Petrauskas', 'Jonauskas', 'Linauskas', 'Tomauskas'];
+$photos = ['css/assets/image_1.jpg', 'css/assets/image_1.jpg', 'css/assets/image_1.jpg', 'css/assets/image_1.jpg', 'css/assets/image_1.jpg', 'css/assets/image_1.jpg'];
 
-        for ($i = 0 ; $i <3; $i++){
-            $name_key = array_rand($names);
-            $name = $names[$name_key];
 
-            $balls_key = array_rand($balls);
-            $balls_count = $balls[$balls_key];
+for ($i = 0; $i < 6; $i++) {
+    $name_key = array_rand($names);
+    $name = $names[$name_key];
+    unset ($names[$name_key]);
 
-            $cards= [] =[
-                'person_info' => "$name - $balls_count";
-            ];
-        }
+    $photo_key = array_rand($photos);
+    $photo = $photos[$photo_key];
+    unset($photos[$photo_key]);
 
-//        $cards= [
-//            ['person_info' => 'Petras - 2 '],
-//            ['person_info' => 'Tomas - 2 '],
-//        ];
+    $last_name_key = array_rand($last_names);
+    $last_name = $last_names[$last_name_key];
+    unset ($last_names[$last_name]);
+
+    $wins = rand(0, 10);
+    $lost = rand(0, 10);
+
+    $stats = "W/L: $wins/$lost";
+    $win_percentage = $wins/($wins + $lost) * 100;
+
+    $cards[] = [
+        'full_name' => $name . $last_name ,
+        'photo' => $photo,
+        'stats' => $stats,
+        'win_percentage'=> round($win_percentage) .'%'
+    ];
+}
+
+
 ?>
-
 
 
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>Team</title>
 
 </head>
 <body>
-    <?php foreach ($cards as $card): ?>
-        <div class="card">
-            <span><?php print $card [0]; ?></span>
+<main>
+    <div class="wrapper">
+        <div class="cards">
+            <?php foreach ($cards as $card): ?>
+                <div class="card">
+                    <img src="<?php print $card ['photo']; ?>">
+                    <span> <?php print $card['stats']; ?></span>
+                    <span><?php print $card['full_name']; ?></span>
+                    <span><?php print $card['win_percentage']; ?> </span>
+                </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
+    </div>
+</main>
 </body>
 </html>
