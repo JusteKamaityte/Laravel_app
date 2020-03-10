@@ -45,9 +45,9 @@ for ($i = 0; $i < 6; $i++) {
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css">
     <title>Team</title>
-
 </head>
 <body>
+<?php include 'templates/nav.php'; ?>
 <main>
     <div class="wrapper">
         <div class="cards">
