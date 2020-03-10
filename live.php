@@ -1,64 +1,70 @@
 <?php
-    $participants = [
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' css/assets/image_1.jpg'
-        ],
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' .jpg'
-        ],
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' .jpg'
-        ],
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' .jpg'
-        ],
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' .jpg'
-        ],
-        [
-            'name' => 'Bimbis Pongas',
-            'bike'=> ' .jpg'
-        ]
+$title = 'Tour-De-Pzdc';
+
+$names = ['Algis', 'Saulius', 'Petras', 'Jonas', 'Linas', 'Tomas'];
+$last_names = ['Algirdauskas', 'Sauliauskas', 'Petrauskas', 'Jonauskas', 'Linauskas', 'Tomauskas'];
+$images = ['bike1.png', 'bike2.png', 'bike3.png', 'bike4.png', 'bike5.png', 'bike6.png'];
+
+$participants = [];
+
+    for ($i = 0; $i < 6; $i++) {
+        $rand_name_key = array_rand($names);
+        $rand_last_key = array_rand($last_names);
+        $rand_image_key = array_rand($images);
+
+    $participant = [
+        'name' => $names[$rand_name_key],
+        'last_name' => $last_names[$rand_last_key],
+        'image' => "css/assets/$images[$rand_image_key]",
+        'x' => rand(0, 800),
+        'y' => rand(0, 800)
     ];
 
-var_dump($participants);
+    // Tikriname ar leader variable jau nustatyas
+    if (isset($leader)) {
+    // Jeigu leaderis yra, mes tikrinam ar einamasis dalyvis
+    // nera jo aplenkes
+    if ($participant['x'] > $leader['x']) {
+    $leader = $participant;
+    }
+    } else {
+    // Jeigu leaderio dar nera, mes ji nustatom i einamaji elementa
+    $leader = $participant;
+    }
+
+    $participants[] = $participant;
+
+    unset($names[$rand_name_key]);
+    unset($last_names[$rand_last_key]);
+    unset($images[$rand_image_key]);
+}
+
 ?>
 
-
-<html lang="en" dir="ltr">
+<html>
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/live.css">
-    <title>Team</title>
+    <title><?php print $title; ?></title>
 </head>
 <body>
-<main class="main_section">
-    <nav><h1 >Tour-De-Pzdc</h1></nav>
+<?php include 'templates/nav.php'; ?>
+<main>
     <div class="wrapper">
-        <div class="bike">
-            <img src="css/assets/bike1.png" width="200px" height="200px">
-        </div>
-        <div class="bike">
-            <img class="bike_style" src="css/assets/bike2.png" width="200px" height="200px" >
-        </div>
-        <div class="bike">
-            <img class="bike_style" src="css/assets/bike3.png" width="200px" height="200px">
-        </div>
-        <div class="bike">
-            <img class="bike_style" src="css/assets/bike4.png" width="200px" height="200px">
-        </div>
-        <div class="bike">
-            <img class="bike_style" src="css/assets/bike5.png" width="200px" height="200px">
-        </div>
-        <div class="bike">
-            <img class="bike_style" src="css/assets/bike6.png" width="200px" height="200px">
+        <div class="live-bg">
+            <div class="live">
+                <span>LIVE</span>
+            </div>
+            <div class="leader">
+                <h2>Current LEADER: <?php print "{$leader['name']} {$leader['last_name']}"; ?></h2>
+            </div>
+            <?php foreach ($participants as $participant): ?>
+                <img class="image" src="<?php print $participant['image']; ?>" style="left: <?php print $participant['x']; ?>">
+            <?php endforeach; ?>
         </div>
     </div>
 </main>
 </body>
 </html>
+
+

@@ -1,4 +1,5 @@
 <?php
+$nav = ['index', 'live','history', 'bloopers'];
 
 $h1 = 'Participants';
 
