@@ -20,15 +20,14 @@ $participants = [];
         'y' => rand(0, 800)
     ];
 
-    // Tikriname ar leader variable jau nustatyas
+
     if (isset($leader)) {
-    // Jeigu leaderis yra, mes tikrinam ar einamasis dalyvis
-    // nera jo aplenkes
+
     if ($participant['x'] > $leader['x']) {
     $leader = $participant;
     }
     } else {
-    // Jeigu leaderio dar nera, mes ji nustatom i einamaji elementa
+
     $leader = $participant;
     }
 
