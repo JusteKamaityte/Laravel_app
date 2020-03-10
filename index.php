@@ -1,13 +1,12 @@
 <?php
-$nav = ['index', 'live','history', 'bloopers'];
+$nav = [];
 
 $h1 = 'Participants';
 
 
 $names = ['Algis', 'Saulius', 'Petras', 'Jonas', 'Linas', 'Tomas'];
 $last_names = ['Algirdauskas', 'Sauliauskas', 'Petrauskas', 'Jonauskas', 'Linauskas', 'Tomauskas'];
-$photos = ['css/assets/image_1.jpg', 'css/assets/image_1.jpg', 'css/assets/image_1.jpg', 'css/assets/image_1.jpg', 'css/assets/image_1.jpg', 'css/assets/image_1.jpg'];
-
+$photos = ['css/assets/bike1.png', 'css/assets/bike2.png', 'css/assets/bike3.png', 'css/assets/bike4.png', 'css/assets/bike5.png', 'css/assets/bike6.png'];
 
 for ($i = 0; $i < 6; $i++) {
     $name_key = array_rand($names);
