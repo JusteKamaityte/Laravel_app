@@ -1,5 +1,5 @@
 <?php
-$nav = [];
+
 
 $h1 = 'Participants';
 
