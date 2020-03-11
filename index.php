@@ -52,7 +52,7 @@ for ($i = 0; $i < 6; $i++) {
         <div class="cards">
             <?php foreach ($cards as $card): ?>
                 <div class="card">
-                    <img src="<?php print $card ['photo']; ?>">
+                    <img src="<?php print $card['photo']; ?>">
                     <span> <?php print $card['stats']; ?></span>
                     <span><?php print $card['full_name']; ?></span>
                     <span><?php print $card['win_percentage']; ?> </span>
