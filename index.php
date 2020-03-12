@@ -1,43 +1,47 @@
 <?php
-    $name =
-
-    $products = ['Stumbro degtinė', 'Balzamas', 'Carlsberg alus', 'Chardonay vynas'];
-    $photos = ['css/degtinė.jpg', 'css/balzamas.jpg', 'css/carlsberg.jpg', 'css/chardonnay.jpg'];
-    $prices = [6.49, 9.50, 2.50, 11.00];
-
-    $percentage = rand(0, 15) .'%';
-    $discount_value = ($prices / 100) * $percentage;
-    $special_price = $price - $discount_value;
+$h1 = 'Drink Catalogue';
+$price_display = ' eur';
 
 
-        $cards [] = [
+        $cards = [
             [
-                'name' => $products[0],
-                'price' => $price[0],
-                'image' => $photos[0]
+                'name' => 'Stumbro degtinė',
+                'price' => 6.49,
+                'price_special' => 6.00,
+                'image' =>'css/degtinė.jpg'
             ],
             [
-                'name' => $products[1],
-                'price' => $price[1],
-                'price_special' => $special_price,
-                'image' => $photos[1]
+                'name' => 'Balzamas',
+                'price' =>  9.50,
+                'price_special' => 8.00,
+                'image' => 'css/balzamas.jpg'
             ],
             [
-                'name' => $products[2],
-                'price' => $price[2],
-                'price_special' => $special_price,
-                'image' => $photos[2]
+                'name' => 'Carlsberg alus',
+                'price' => 2.50,
+                'price_special' => 1.90,
+                'image' => 'css/carlsberg.jpg'
             ],
             [
-                'name' => $products[3],
-                'price' => $price[3],
-                'price_special' => $special_price,
-                'image' => $photos[3]
+                'name' => 'Chardonay vynas',
+                'price' => 11.00,
+                'price_special' => 10.50,
+                'image' => 'css/chardonnay.jpg'
             ]
-        ]
     ];
 
-var_dump($special_price);
+    foreach($cards['price_special'] as $key => $discount){
+
+        $discount = in_array('price_special', $cards);
+//
+//        if(isset($discount)){
+
+
+    }
+
+
+        $array = ['price' => 11.00]
+
 ?>
 
 
@@ -49,14 +53,15 @@ var_dump($special_price);
 </head>
 <body>
 <main>
+    <h1><?php $h1; ?></h1>
     <div class="wrapper">
         <div class="cards">
             <?php foreach ($cards as $card): ?>
                 <div class="card">
-                    <img src="<?php print $card['photo']; ?>">
-                    <span> <?php print $card['stats']; ?></span>
-                    <span><?php print $card['full_name']; ?></span>
-                    <span><?php print $card['price_special']; ?> </span>
+                    <span><?php print $card['price']; ?> </span>
+                    <span><?php print $card['price_special'] ; ?> </span>
+                    <img src="<?php print $card['image']; ?>">
+                    <span><?php print $card['name']; ?></span>
                 </div>
             <?php endforeach; ?>
         </div>
