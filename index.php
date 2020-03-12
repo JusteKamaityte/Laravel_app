@@ -1,10 +1,22 @@
 <?php
     $name =
 
-    $products = [
+    $products = ['Stumbro degtinė', 'Balzamas', 'Carlsberg alus', 'Chardoney vynas']
             [
                 'name' => 'Stumbro degtinė',
                 'price' => '6.49',
+                'image' => '...'
+            ],
+            [
+                'name' => 'Balzamas',
+                'price' => '9.50',
+                'price_special' => '7.99',
+                'image' => '...'
+            ],
+            [
+                'name' => 'Carlsberg alus',
+                'price' => '9.50',
+                'price_special' => '7.99',
                 'image' => '...'
             ],
             [
