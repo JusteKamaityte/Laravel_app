@@ -1,13 +1,12 @@
 <?php
 $h1 = 'Drink Catalogue';
-$price_display = ' eur';
-
+$price_display =  '';
 
         $cards = [
             [
                 'name' => 'Stumbro degtinė',
                 'price' => 6.49,
-                'price_special' => 6.00,
+
                 'image' =>'css/degtinė.jpg'
             ],
             [
@@ -30,17 +29,28 @@ $price_display = ' eur';
             ]
     ];
 
-    foreach($cards['price_special'] as $key => $discount){
+        print $cards[0]['price_special'];
 
-        $discount = in_array('price_special', $cards);
-//
-//        if(isset($discount)){
+    foreach($cards as $key => $card){
 
+        if(isset($card['price_special'])){
+            $discount = round(100 - $card['price_special']  / $card['price'] * 100) . ' &euro';
+
+            $cards[$key]['discount'] = $discount;
+
+            $cards[$key]['price_display'] = $card['price_special'];
+
+            var_dump($discount);
+        }
+
+        else{
+            $cards[$key]['price_display'] = $card['price'];
+        }
 
     }
+var_dump($cards);
 
 
-        $array = ['price' => 11.00]
 
 ?>
 
@@ -58,8 +68,12 @@ $price_display = ' eur';
         <div class="cards">
             <?php foreach ($cards as $card): ?>
                 <div class="card">
-                    <span><?php print $card['price']; ?> </span>
-                    <span><?php print $card['price_special'] ; ?> </span>
+                    <?php if (isset($card['discount'])): ?>
+                        <span><?php print $card['discount']; ?> </span>
+                    <?php endif ; ?>
+
+                    <span><?php print $card['price_display']; ?> </span>
+
                     <img src="<?php print $card['image']; ?>">
                     <span><?php print $card['name']; ?></span>
                 </div>
