@@ -1,32 +1,43 @@
 <?php
     $name =
 
-    $products = ['Stumbro degtinė', 'Balzamas', 'Carlsberg alus', 'Chardoney vynas']
+    $products = ['Stumbro degtinė', 'Balzamas', 'Carlsberg alus', 'Chardonay vynas'];
+    $photos = ['css/degtinė.jpg', 'css/balzamas.jpg', 'css/carlsberg.jpg', 'css/chardonnay.jpg'];
+    $prices = [6.49, 9.50, 2.50, 11.00];
+
+    $percentage = rand(0, 15) .'%';
+    $discount_value = ($prices / 100) * $percentage;
+    $special_price = $price - $discount_value;
+
+
+        $cards [] = [
             [
-                'name' => 'Stumbro degtinė',
-                'price' => '6.49',
-                'image' => '...'
+                'name' => $products[0],
+                'price' => $price[0],
+                'image' => $photos[0]
             ],
             [
-                'name' => 'Balzamas',
-                'price' => '9.50',
-                'price_special' => '7.99',
-                'image' => '...'
+                'name' => $products[1],
+                'price' => $price[1],
+                'price_special' => $special_price,
+                'image' => $photos[1]
             ],
             [
-                'name' => 'Carlsberg alus',
-                'price' => '9.50',
-                'price_special' => '7.99',
-                'image' => '...'
+                'name' => $products[2],
+                'price' => $price[2],
+                'price_special' => $special_price,
+                'image' => $photos[2]
             ],
             [
-                'name' => 'Balzamas',
-                'price' => '9.50',
-                'price_special' => '7.99',
-                'image' => '...'
+                'name' => $products[3],
+                'price' => $price[3],
+                'price_special' => $special_price,
+                'image' => $photos[3]
             ]
+        ]
     ];
 
+var_dump($special_price);
 ?>
 
 
