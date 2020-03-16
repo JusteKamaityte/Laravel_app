@@ -1,48 +1,37 @@
 <?php
-$h1 = 'War';
 
-$fights = [
-    'soldiers'[
-        'my_soldier'=
-        'hedge'=
-            ['enemy_soldier'=]
+$h2 = 'Enemy war';
 
+$my_soldier = 10;
+$enemy_soldier = rand(5, 15);
+$win_percentage = round($my_soldier / ($my_soldier + $enemy_soldier), 1)* 100;
+$win_chance = rand(0,100);
 
+$h1 = "Fight $my_soldier  $enemy_soldier";
+$h2 = 'enemies_killed';
 
-];
+$fights = [];
 
-//print $cards[0]['price_special'];
-
-foreach ($cards as $key => $card) {
-
-    if (isset($card['price_special'])) {
-        $discount = round(100 - $card['price_special'] / $card['price'] * 100) . ' eur';
-        $cards[$key]['discount'] = $discount;
-
-        $cards[$key]['price_display'] = $card['price_special'];
-
-        var_dump($discount);
-
-    } else {
-        $cards[$key]['price_display'] = $card['price'];
+for ($i = 0; $i < $my_soldier; $i++) {
+    for($b=0; $b<$enemy_soldier; $b++){
+        var_dump("my_soldier : {$i} kovoja su priesu: {$b}");
     }
-
-
-    if ($card['instock'] > 0) {
-
-        $cards[$key]['instock_text'] = 'Yra sandėlyje';
-
-    } else {
-        $cards[$key]['instock_text'] = 'Nėra sandėlyje';
-    }
-
-    if($card['instock']  < 0) {
-
-        $cards[$key]['instock_class'] = '...';
-    }
-
 }
-
+//    $fights[$i]['enemies_killed'] = 0;
+//    while($enemy_soldier){
+//        var_dump("Cia yra enemies: {$enemy_soldier}");
+//        $rand = rand(0, 100);
+//        if ($win_chance >= $rand) {
+//            $fights[$i]['enemies_killed'] += 1;
+//            $enemy_soldier--;
+//        } else {
+//            break;
+//        }
+//}
+//
+//foreach($fights as $fight){
+//    print"{$fight['enemies_killed']}";
+//}
 ?>
 
 
@@ -50,7 +39,7 @@ foreach ($cards as $key => $card) {
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css">
-    <title>Prekės</title>
+    <title>Fight</title>
 </head>
 <body>
 <main>
@@ -58,13 +47,16 @@ foreach ($cards as $key => $card) {
     <h2><?php print $h2; ?></h2>
     <div class="fights-container">
         <?php foreach ($fights as $fight): ?>
-            <div class="fight">
+             <div class="fight">
                 <div class="my_soldier">M</div>
                 <div class="hedge">-</div>
-                <?php for($i=0; $i < $fight['enemies_down']; $i++): ?>
+                <?php for ($i = 0;
+                $i < $fight['enemies_killed'];
+                $i++): ?>
                     <div class="enemy_soldier">E</div>
-                <?php endfor; ?>
-            </div>
+            <?php endfor; ?>
+        </div>
+        <?php endforeach; ?>
     </div>
 </main>
 </body>
