@@ -1,58 +1,30 @@
 
-main {
-    background: grey;
-}
+main
 
-.wrapper {
-    margin: 0 40px;
-}
-
-h1 {
-    color: white;
-    text-align: center;
-    padding: 40px;
-}
-
-.cards {
-    margin: 20px;
-    display: grid;
-    grid: 1fr 1fr / 1fr 1fr 1fr;
-}
-
-.card {
-    border: 1px solid black;
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    background: lightgrey;
-    transition: 0.3s;
-}
-
-.card:hover {
-    box-shadow: 10px 10px 20px black;
-}
-
-.card h2 {
-    text-align: center;
-}
-
-.card p {
-    text-align: center;
-    margin: 10px 0;
-    color: white;
-    transition: .5s;
-}
-
-.card p:hover {
-    text-decoration: underline;
-}
-
-img {
-    width : 100%;
+.fights-container{
 
 }
 
-span{
-    padding: 20px;
+.fight{
+
+}
+
+.my_soldier{
+    background-color:green;
+    height:20px;
+    width:20px;
+}
+
+.hedge{
+
+}
+
+.enemies_down{
+
+}
+
+.enemy_soldier{
     background-color: red;
+    height:20px;
+    width:20px;
 }
