@@ -9,6 +9,10 @@ function pirminis($x){
     }
          return true;
 }
+
+if($display == 1){
+    $
+}
 ?>
 
 
