@@ -1,40 +1,43 @@
 <?php
 
 
-function pirminis($x){
-    for($i = 2; $i <= $x / 2; $i++){
-        if($x % $i == 0) {
+function pirminis($x)
+{
+    for ($i = 2; $i <= $x / 2; $i++) {
+        if ($x % $i == 0) {
             return false;
         }
     }
-         return true;
+    return true;
 }
 
 /**
+ *  funkcija sumuojanti tik pirminius skaicius
  * @param $x pirmas skaicius
  * @param $y antras skaicius
  * @return mixed
  */
-    function sum($x, $y){
-        $sum = $x + $y;
-        return $sum;
-    }
+function sum($x, $y)
+{
+    $sum = $x + $y;
+    return $sum;
+}
 
 /**
  * @param $x pirmas skaicius
  * @param $y antras skaicius
  * @return bool|mixed
  */
-
-    function sum_if_prime($x, $y) {
-        if(pirminis($x) && pirminis($y)){
-            return sum(pirminis($x), $y);
-        }else {
-            return false;
-        }
+function sum_if_prime($x, $y)
+{
+    if (pirminis($x) && pirminis($y)) {
+        return sum(pirminis($x), $y);
+    } else {
+        return false;
     }
+}
 
-$x= rand(1, 100);
+$x = rand(1, 100);
 $y = rand(1, 100);
 $sum = sum_if_prime($x, $y);
 
