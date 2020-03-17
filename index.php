@@ -1,43 +1,39 @@
 <?php
-$police_reports = [
-        [
-                'subject' => 'Domantas',
-                'reason' => 'Public urination',
-                'amount' => 50
-        ],
-        [
-            'subject' => 'Migle',
-            'reason' => 'Drunk in public',
-            'amount' => 0
-        ],
-        [
-            'subject' => 'Juste',
-            'reason' => 'Skinny dipping',
-            'amount' => 0
-        ],
-        [
-            'subject' => 'Saulius',
-            'reason' => 'Constant complaining',
-            'amount' => 200
-        ]
+$stats = [
+    [
+        'city' => 'Warsawa ',
+        'virus_cases' => 50,
+
+    ],
+    [
+        'city' => 'Vilnius ',
+        'virus_cases' => 19,
+    ],
+    [
+        'city' => 'Rome ',
+        'virus_cases' => 1500,
+    ],
+    [
+        'city' => 'Berlin ',
+        'virus_cases' => 1000,
+    ],
 ];
 
-foreach($police_reports as $index => $report) {
-    if ($report['amount'] === 0) {
-        $report['warning'] = true;
+foreach ($stats as $stats_key => $stat) {
+    if ($stat['virus_cases'] < 500) {
+       $stat['is_closed'] = true;
     } else {
-        $report['warning'] = false;
+        $stat['is_closed'] = false;
     }
-    $report['text'] = $report['subject'] . '(' . $report['reason'] .')';
-    if($report['warning']){
-        $report['text'] .= 'Ispejimas';
-    }else{
-        $report['text'] .= 'Bauda' .$report['amount'];
-    }
-    $police_reports[$index] = $report;
-    }
-    var_dump($police_reports);
-    $h1 = 'Palicijos israsas';
+   if ($stat['is_closed']){
+       $stat['text'] = 'Miestas ' .$stat['city'] .'uždarytas ' .$stat['virus_cases'] .' cases';
+   }else{
+       $stat['text'] = 'Miestas ' .$stat['city'] .'atidarytas ' .$stat['virus_cases'] .' cases';
+   }
+   $stats[$stats_key]['text'] = $stat;
+}
+var_dump($stats);
+
 ?>
 
 
@@ -45,16 +41,16 @@ foreach($police_reports as $index => $report) {
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css">
-    <title><?php print $title ;?></title>
+    <title><?php print $title; ?></title>
 </head>
 <body>
-    <h1><?php print $h1 ; ?></h1>
-        <ul>
-            <?php foreach ($police_reports as $index => $report): ?>
-            <li>
-                <?php print $report['text']; ?>
-            </li>
-            <?php endforeach ; ?>
-        </ul>
+
+<ul>
+    <?php foreach ($stats as $city): ?>
+        <li>
+            <?php print $city['text']; ?>
+        </li>
+    <?php endforeach; ?>
+</ul>
 </body>
 </html>
