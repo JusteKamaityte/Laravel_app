@@ -41,9 +41,22 @@ $x = rand(1, 100);
 $y = rand(1, 100);
 $sum = sum_if_prime($x, $y);
 
-$p1 = pirminis($x) ? "{$x} yra pirminis skaicius" : "{$x} nera pirminis skaicius";
-$p2 = pirminis($y) ? "{$y} yra pirminis skaicius" : "{$y} nera pirminis skaicius";
-$p3 = $sum ? "Pirm. sk. suma: {$sum}" : "--";
+if(sum_if_prime($x, $y)){
+    $p3 = 'Pirm. sk. suma: ' . sum_if_prime($x, $y);
+} else {
+    $p3 = 'Pirm. sk. suma negalima';
+}
+
+$p1 = strtr('@skaicius @yra pirminis skaicius',[
+    '@skaicius' => $x,
+    '@yra' => (pirminis($x)) ? 'yra' : 'nera'
+]);
+
+$p2 = strtr('@skaicius @yra pirminis skaicius',[
+    '@skaicius' => $y,
+    '@yra' => (pirminis($y)) ? 'yra' : 'nera'
+]);
+
 ?>
 
 
