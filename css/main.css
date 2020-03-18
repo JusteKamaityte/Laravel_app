@@ -1,30 +1,19 @@
-
-main
-
-.fights-container{
-
+body{
+    display: grid;
 }
 
-.fight{
-
-}
-
-.my_soldier{
-    background-color:green;
-    height:20px;
-    width:20px;
-}
-
-.hedge{
-
-}
-
-.enemies_down{
-
-}
-
-.enemy_soldier{
+.red_square{
+    display: inline-block;
+    flex-direction: row;
+    height: 50px;
+    width: 50px;
     background-color: red;
-    height:20px;
-    width:20px;
+}
+
+.blue_square{
+    display: inline-block;
+    flex-direction: column;
+    height: 50px;
+    width: 50px;
+    background-color: blue;
 }

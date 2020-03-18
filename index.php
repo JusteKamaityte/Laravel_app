@@ -1,26 +1,23 @@
 <?php
 
+$full_array = generate_matrix(3);
 
-function generate_matrix($size)
-{
-    return [
+function generate_matrix($size){
+    $matrix = [];
+    for ($row_index = 0; $row_index <= $size; $row_index++) {
+        $matrix[$row_index] = [];
 
-        array[$size x $size]:
-        row_count(
+        for ($col_index = 0; $col_index <= $size; $col_index++) {
 
-            $size = [1, 0, 0],
-            $size = [1, 0, 0],
-            $size = [1, 0, 0]
-        ),
-        column_count(
-            $size = [1, 0, 0],
-            $size = [1, 0, 0],
-            $size = [1, 0, 0]
-        )
-    ];
+            $matrix[$row_index][$col_index] = rand(0, 1);
+        }
+    }
+    return $matrix;
 }
 
 
+
+var_dump($full_array);
 ?>
 
 
@@ -28,10 +25,21 @@ function generate_matrix($size)
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css">
-    <title>Cars</title>
+    <title>Matrix</title>
 </head>
 <body>
-<p><?php print $array ?></p>
-
+<div class="matrix_container">
+    <?php foreach ($full_array as $row): ?>
+        <div class="row_container">
+            <?php foreach ($row as $col): ?>
+                <?php if ($col == 0): ?>
+                    <div class="blue_square"></div>
+                 <?php else: ?>
+                     <div class="red_square"></div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endforeach; ?>
+</div>
 </body>
 </html>
