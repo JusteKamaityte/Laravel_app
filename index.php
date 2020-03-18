@@ -1,62 +1,39 @@
 <?php
 
 
-function pirminis($x)
+function cars($name, $year, $fuel, $price)
 {
-    for ($i = 2; $i <= $x / 2; $i++) {
-        if ($x % $i == 0) {
-            return false;
+    return [
+        'name' => $name,
+        'fuel' => $fuel,
+        'price' => $price,
+        'year' => $year
+    ];
+}
+
+function price_range($cars){
+    $results = [];
+    foreach ($cars as $car){
+        if ($car['price'] > $min  &&  $car['price'] < $max ) {
+            $results['over_1000'];
         }
     }
-    return true;
+    return $results;
 }
+$cars = [
+    car(name: 'Prius', year: 2000, fuel: 'petrol', price: 1000),
+    car(name: 'Toyota', year: 2005, fuel: 'gasoline', price: 3000),
+    car(name: 'Honda', year: 2010, fuel: 'petrol', price: 1000),
+];
 
-/**
- *  funkcija sumuojanti tik pirminius skaicius
- * @param $x pirmas skaicius
- * @param $y antras skaicius
- * @return mixed
- */
-function sum($x, $y)
-{
-    $sum = $x + $y;
-    return $sum;
+function magic_rabit($x) {
+    $x = 4;
+    return $x;
+
 }
-
-/**
- * @param $x pirmas skaicius
- * @param $y antras skaicius
- * @return bool|mixed
- */
-function sum_if_prime($x, $y)
-{
-    if (pirminis($x) && pirminis($y)) {
-        return sum(pirminis($x), $y);
-    } else {
-        return false;
-    }
-}
-
-$x = rand(1, 100);
-$y = rand(1, 100);
-$sum = sum_if_prime($x, $y);
-
-if(sum_if_prime($x, $y)){
-    $p3 = 'Pirm. sk. suma: ' . sum_if_prime($x, $y);
-} else {
-    $p3 = 'Pirm. sk. suma negalima';
-}
-
-$p1 = strtr('@skaicius @yra pirminis skaicius',[
-    '@skaicius' => $x,
-    '@yra' => (pirminis($x)) ? 'yra' : 'nera'
-]);
-
-$p2 = strtr('@skaicius @yra pirminis skaicius',[
-    '@skaicius' => $y,
-    '@yra' => (pirminis($y)) ? 'yra' : 'nera'
-]);
-
+print magic_rabit(2);
+var_dump($magic_rabit);
+//var_dump($price(min:1000, max:2000, $cars));
 ?>
 
 
@@ -64,7 +41,7 @@ $p2 = strtr('@skaicius @yra pirminis skaicius',[
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css">
-    <title>Pirminiai skaiciai</title>
+    <title>Cars</title>
 </head>
 <body>
 <p><?php print $p1 ?></p>
