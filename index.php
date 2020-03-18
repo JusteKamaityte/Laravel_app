@@ -1,23 +1,38 @@
 <?php
 
-$full_array = generate_matrix(3);
-
-function generate_matrix($size){
+/**
+ * funkcija generuojanti kvadratine matrica
+ * @param $size
+ * @return array
+ */
+function generate_matrix($size)
+{
     $matrix = [];
-    for ($row_index = 0; $row_index <= $size; $row_index++) {
-        $matrix[$row_index] = [];
 
-        for ($col_index = 0; $col_index <= $size; $col_index++) {
-
-            $matrix[$row_index][$col_index] = rand(0, 1);
+    for ($x = 0; $x < $size; $x++) {
+        for ($y = 0; $y < $size; $y++) {
+            $matrix[$x][$y] = rand(0, 1);
         }
     }
     return $matrix;
 }
 
+function get_winning_rows($matrix){
+    $winnings = [];
+
+    foreach($matrix as $row_id => $columns)
+        if(array_sum($columns) === count($columns)) {
+            $winnings[] = $row_id;
+        }
+    }
+    return $winnings;
+}
+
+$winning_row_indexes= get_winning_rows($matrix);
 
 
-var_dump($full_array);
+$matrix = generate_matrix(3);
+var_dump($matrix);
 ?>
 
 
@@ -28,15 +43,11 @@ var_dump($full_array);
     <title>Matrix</title>
 </head>
 <body>
-<div class="matrix_container">
-    <?php foreach ($full_array as $row): ?>
-        <div class="row_container">
-            <?php foreach ($row as $col): ?>
-                <?php if ($col == 0): ?>
-                    <div class="blue_square"></div>
-                 <?php else: ?>
-                     <div class="red_square"></div>
-                <?php endif; ?>
+<div class="matrix">
+    <?php foreach ($matrix as $row_id => $col): ?>
+        <div class="col <?php print in_array($row_id, $winning_row_indexes) ; ?> ">
+            <?php foreach ($row_id as $col): ?>
+                <div class="<?php print ($col ? 'blue_square' : 'red_square'); ?>"></div>
             <?php endforeach; ?>
         </div>
     <?php endforeach; ?>

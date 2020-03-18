@@ -1,19 +1,49 @@
-body{
-    display: grid;
+.matrix{
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 300px;
+    margin: 400px auto;
 }
 
-.red_square{
-    display: inline-block;
-    flex-direction: row;
-    height: 50px;
-    width: 50px;
-    background-color: red;
+.row_id{
+    display: flex;
+    flex-flow: row;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+
+.winning_row{
+    border: 2px solid black;
+}
+
+.win{
+    height: 100px;
+    width: 100px;
+    background: darkgreen;
+    margin-right: 10px;
+}
+
+
+ .loose{
+    height: 100px;
+    width: 100px;
+    background: darkred;
+    margin-right: 10px;
 }
 
 .blue_square{
+     display: inline-block;
+     flex-direction: row;
+     height: 50px;
+     width: 50px;
+     background-color: blue;
+ }
+
+.red_square{
     display: inline-block;
     flex-direction: column;
     height: 50px;
     width: 50px;
-    background-color: blue;
+    background-color: darkred;
 }
