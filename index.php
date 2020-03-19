@@ -92,22 +92,61 @@ function filter_array(array $array, $col, $value): array
 
 var_dump(filter_array($panos, 'graži', true));
 
-function filter_array(array $array, $conditions){
-    $results = [];
+/**
+ * funkcija išfiltruojanti iš masyvo pagal griežtus parametrus
+ * @param array $array
+ * @param $conditions
+ * @return array
+ */
+function filter(array $array, $conditions): array{
 
-    foreach ($array as $pana) {
-        if($pana[$conditions] === true ){
-            $results[] = $pana;
+    /**
+     * Condition masyvas
+     *
+     * 'graži' => true,
+     * 'protinga' => true
+     */
+    $conditions_results = [];
+
+    foreach ($array as $item) {
+        $match = true;
+        /**
+         * $item = [
+         * 'vardas' => 'Monika',
+         * 'graži' => true,
+         * 'protinga' => false
+         * ],
+         */
+
+        foreach($conditions as $condition_key => $condition_value){
+            /**
+             * $condition_key = 'grazi'
+             * $condition_value = true
+             */
+            var_dump("tikrinam indeksą $condition_key, verte $condition_value");
+            var_dump($item[$condition_key] . '!==' .$condition_value);
+            //$item['grazi'] ar nelygu true?
+            if($item[$condition_key] !== $condition_value){
+               // suveikia, nes $item['grazi'] = false;
+
+                $match = false;
+                var_dump('neatitinka');
+                break;//nebera prasmes tikrinti conditions nes vienas netiko
+                }
+            }
+            //jei visi conditions lygo lygus true, tai i resultus itraukiam i masyva
+            if($match){
+                $conditions_results[] = $item;
+                var_dump('isvada: itraukiam i rezultatus');
+            }
         }
-    }
-    return $results;
+    return $conditions_results;
 }
 
-$conditions = [
+var_dump(filter($panos, $conditions = [
     'graži' => true,
     'protinga' => true
-]
-var_dump(filter_array($panos, $conditions))
+    ]));
 ?>
 
 <html>
