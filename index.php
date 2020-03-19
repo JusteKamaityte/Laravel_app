@@ -55,19 +55,59 @@ function get_random_girl_name(array $panos): string
 $get_random = 'Atsitiktinė pana : ' . get_random_girl_name($panos);
 
 /**
+ * Funkcija apskaiciuoja normalių panų procentą
  * @param array $panos
  * @return float
  */
-function percentage_normal_panos(array $panos): float{
+function percentage_normal_panos(array $panos): float
+{
 
     $normal_panos = count(get_normal_panos($panos));
     $all_panos = count($panos);
-
     return round($normal_panos * 100 / $all_panos, 1);
 }
 
-$percentage = 'Normalių panų procentas: ' .percentage_normal_panos($panos) .'%';
+$percentage = 'Normalių panų procentas: ' . percentage_normal_panos($panos) . '%';
 var_dump(percentage_normal_panos($panos));
+
+/**
+ * gauti ko ieskai is array panos filtruojant ir naudojant globalia funkcija
+ * @param $array
+ * @param $col
+ * @param $value
+ * @return array
+ */
+function filter_array(array $array, $col, $value): array
+{
+    $results = [];
+
+    foreach ($array as $pana) {
+        if($pana[$col] === $value){
+            $results[] = $pana;
+        }
+    }
+
+    return $results;
+}
+
+var_dump(filter_array($panos, 'graži', true));
+
+function filter_array(array $array, $conditions){
+    $results = [];
+
+    foreach ($array as $pana) {
+        if($pana[$conditions] === true ){
+            $results[] = $pana;
+        }
+    }
+    return $results;
+}
+
+$conditions = [
+    'graži' => true,
+    'protinga' => true
+]
+var_dump(filter_array($panos, $conditions))
 ?>
 
 <html>
@@ -78,7 +118,7 @@ var_dump(percentage_normal_panos($panos));
     </style>
 </head>
 <body>
-<h1><?php print $percentage ;?></h1>
+<h1><?php print $percentage; ?></h1>
 <ul>
     <?php foreach ($normali as $pana): ?>
         <li><?php print $result . $pana['vardas']; ?></li>
