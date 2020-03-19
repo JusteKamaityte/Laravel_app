@@ -12,7 +12,7 @@ $panos = [
     ],
     [
         'vardas' => 'Aistė',
-        'graži' => false,
+        'graži' => true,
         'protinga' => true
     ],
     [
@@ -25,19 +25,34 @@ $panos = [
  * @param $panos
  * @return array
  */
-function normali_pana(array $panos): array
+function gauti_normalias_panas(array $panos): array
 {
     $results = [];
+
     foreach ($panos as $pana) {
         if ($pana['graži'] && $pana['protinga']) {
             $results[] = $pana;
         }
     }
+
     return $results;
 }
 
-$normali = normali_pana($panos);
+$normali = gauti_normalias_panas($panos);
 $result = 'Graži ir protinga: ';
+
+/**
+ * funkcija grazina random varda is array
+ * @param array $panos
+ * @return string
+ */
+function get_random_girl_name(array $panos): string
+{
+    $index = array_rand($panos);
+    return $panos[$index]['vardas'];
+}
+
+$get_random = 'Atsitiktinė pana : ' . get_random_girl_name($panos);
 ?>
 
 <html>
@@ -49,8 +64,10 @@ $result = 'Graži ir protinga: ';
 </head>
 <body>
 <ul>
-    <?php foreach($normali as $pana): ?>
-        <li><?php print $result;?><?php print $pana['vardas']?></li>
+    <?php foreach ($normali as $pana): ?>
+        <li><?php print $result . $pana['vardas']; ?></li>
+    <?php endforeach; ?>
+    <li><?php print $get_random; ?> </li>
 </ul>
 </body>
 </html>
