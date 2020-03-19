@@ -12,7 +12,7 @@ $panos = [
     ],
     [
         'vardas' => 'Aistė',
-        'graži' => true,
+        'graži' => false,
         'protinga' => true
     ],
     [
@@ -25,7 +25,7 @@ $panos = [
  * @param $panos
  * @return array
  */
-function gauti_normalias_panas(array $panos): array
+function get_normal_panos(array $panos): array
 {
     $results = [];
 
@@ -38,7 +38,7 @@ function gauti_normalias_panas(array $panos): array
     return $results;
 }
 
-$normali = gauti_normalias_panas($panos);
+$normali = get_normal_panos($panos);
 $result = 'Graži ir protinga: ';
 
 /**
@@ -53,6 +53,21 @@ function get_random_girl_name(array $panos): string
 }
 
 $get_random = 'Atsitiktinė pana : ' . get_random_girl_name($panos);
+
+/**
+ * @param array $panos
+ * @return float
+ */
+function percentage_normal_panos(array $panos): float{
+
+    $normal_panos = count(get_normal_panos($panos));
+    $all_panos = count($panos);
+
+    return round($normal_panos * 100 / $all_panos, 1);
+}
+
+$percentage = 'Normalių panų procentas: ' .percentage_normal_panos($panos) .'%';
+var_dump(percentage_normal_panos($panos));
 ?>
 
 <html>
@@ -63,6 +78,7 @@ $get_random = 'Atsitiktinė pana : ' . get_random_girl_name($panos);
     </style>
 </head>
 <body>
+<h1><?php print $percentage ;?></h1>
 <ul>
     <?php foreach ($normali as $pana): ?>
         <li><?php print $result . $pana['vardas']; ?></li>
