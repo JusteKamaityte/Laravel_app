@@ -1,7 +1,8 @@
 <?php
 
 /**
- * funkcija generuojanti kvadratine matrica
+ * funkcija, generuojanti kvadratinę matricą
+ *
  * @param $size
  * @return array
  */
@@ -14,40 +15,81 @@ function generate_matrix($size)
             $matrix[$x][$y] = rand(0, 1);
         }
     }
+
     return $matrix;
 }
+/**
+* @param $matrix
+ */
+function get_winning_rows(array $matrix): ?array
+{
 
-function get_winning_rows($matrix){
-    $winnings = [];
+    $winners = [];
 
-    foreach($matrix as $row_id => $columns)
-        if(array_sum($columns) === count($columns)) {
-            $winnings[] = $row_id;
+    foreach($matrix as $row_key=> $row){
+        $comparison = $row[0];
+        $is_winner = true;
+
+        foreach ($row as $col) {
+            if ($col != $comparison) {
+                $is_winner = false;
+                break;
+            }
+        }
+
+        // Jeigu eilutė laiminga, įtraukiame
+        // jos raktą į laimingų eilučių masyvą
+        if ($is_winner) {
+            $winners[] = $row_key;
         }
     }
-    return $winnings;
+
+    return empty(!$winners) ? $winners : null;
 }
 
-$winning_row_indexes= get_winning_rows($matrix);
+$array = generate_matrix(3);
+$winners = get_winning_rows($array);
 
-
-$matrix = generate_matrix(3);
-var_dump($matrix);
 ?>
 
-
-<html lang="en" dir="ltr">
+<html>
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/main.css">
-    <title>Matrix</title>
+    <title>Matrica</title>
+    <style>
+        .matrix {
+            width: 350px;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .row div {
+            height: 100px;
+            width: 100px;
+            margin: 10px;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .green{
+            background-color: green;
+        }
+
+        .win {
+            border: solid 2px red;
+        }
+    </style>
 </head>
 <body>
 <div class="matrix">
-    <?php foreach ($matrix as $row_id => $col): ?>
-        <div class="col <?php print in_array($row_id, $winning_row_indexes) ; ?> ">
-            <?php foreach ($row_id as $col): ?>
-                <div class="<?php print ($col ? 'blue_square' : 'red_square'); ?>"></div>
+    <?php foreach ($array as $key => $row): ?>
+        <div class="row <?php print in_array($key, $winners) ? 'win' : ''; ?>">
+            <?php foreach ($row as $item): ?>
+                <div class="<?php print $item ? 'blue' : 'green'; ?>"></div>
             <?php endforeach; ?>
         </div>
     <?php endforeach; ?>
