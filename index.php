@@ -6,14 +6,20 @@ for ($x = 0; $x < 5; $x++) {
 
     if ($x === 0) {
         $avys[0] = 'blee';
+
     } else {
         $avys[$x] = &$avys[$x - 1];
     }
 }
 
+foreach ($avys as $key => $avis) {
+    unset($avys[$key]);
+    $avys[$key] = $avis;
+
+}
 
 var_dump($avys);
-$result = 'avys sako : ' .$avys[0];
+
 ?>
 
 <html>
@@ -24,7 +30,6 @@ $result = 'avys sako : ' .$avys[0];
     </style>
 </head>
 <body>
-<p><?php print $result; ?></p>
 
 </body>
 </html>
