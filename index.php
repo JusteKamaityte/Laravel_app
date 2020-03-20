@@ -1,18 +1,18 @@
 <?php
 
-/**
- * @param $x
- */
-function change_x(&$x)
-{
-    $x = 1;
+$avys = [];
+
+for ($x = 0; $x < 5; $x++) {
+
+    if ($x === 0) {
+        $avys[0] = 'blee';
+    } else {
+        $avys[$x] = &$avys[$x - 1];
+    }
 }
 
-$x = 0;
 
-change_x($x);
-
-
+var_dump($avys);
 ?>
 
 <html>
@@ -23,6 +23,7 @@ change_x($x);
     </style>
 </head>
 <body>
-<h1><?php print $x; ?></h1>
+<p><?php print $avys; ?></p>
+
 </body>
 </html>
