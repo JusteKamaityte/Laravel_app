@@ -13,6 +13,7 @@ for ($x = 0; $x < 5; $x++) {
 
 
 var_dump($avys);
+$result = 'avys sako : ' .$avys[0];
 ?>
 
 <html>
@@ -23,7 +24,7 @@ var_dump($avys);
     </style>
 </head>
 <body>
-<p><?php print $avys; ?></p>
+<p><?php print $result; ?></p>
 
 </body>
 </html>
