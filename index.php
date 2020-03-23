@@ -1,12 +1,16 @@
 <?php
-//variable address does not change
-$roll_joints = true;
+$avys = [];
 
-$joint1 = &$roll_joints;
-$joint2 = &$joint1;
-$joint3 = &$joint2;
+for($i = 0; $i < 5; $i++){
+    if($i == 0){
+        $avys[$i]= 'bleee';
+    }else {
+        $avys[$i] = &$avis[$i - 1];
+    }
+}
 
- var_dump($joint1);
+var_dump($avys);
+
  ?>
 
 <html>
@@ -17,8 +21,5 @@ $joint3 = &$joint2;
     </style>
 </head>
 <body>
-<p><?php print $joint1; ?></p>
-<p><?php print $joint2; ?></p>
-<p><?php print $joint3; ?></p>
 </body>
 </html>
