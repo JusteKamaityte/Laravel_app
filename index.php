@@ -1,19 +1,11 @@
 <?php
-
-/**
- * @param $x
- */
-function change_x(&$x){
-    $x = 1;
-}
-
 $x = 0;
-//funkcijos reikšmės rašomos po funkcijos deklaracijos
+$b = &$x;
 
-change_x($x);
+unset($b);
 
+$b = 1;
 var_dump($x);
-
 ?>
 
 <html>
