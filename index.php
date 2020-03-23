@@ -17,6 +17,6 @@ var_dump($x);
     </style>
 </head>
 <body>
-
+<h1><?php print $x; ?></h1>
 </body>
 </html>
