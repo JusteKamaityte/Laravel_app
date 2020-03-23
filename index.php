@@ -1,16 +1,14 @@
 <?php
-$default_size = 300;
+$default_size = 200;
 $object_size = $default_size;
-//
-//function size(float $x): float{
-//
-//}
-//
-//$atsakymas = ''
+
 
 if (isset($_POST['object'])) {
     $object_size = $default_size * (($_POST['object'] / 100) * 2);
-
+    $slider = $_POST['object'];
+}else{
+    $object_size = 50 . 'px';
+    $slider = 50;
 }
 
 
@@ -27,7 +25,6 @@ var_dump($_POST);
             background: salmon;
         }
 
-
     </style>
 </head>
 <body>
@@ -37,12 +34,10 @@ var_dump($_POST);
     </label>
     <button name="action" >Pasirinkite dydį</button>
 </form>
-
 <div class="object" >
     <div class="object_2"  style="height:<?php print $object_size; ?>;px; width:<?php print $object_size; ?>;px;"> </div>
     <div class="object_1"  style="height:<?php print $object_size; ?>;px; width:<?php print $object_size; ?>;px;"> </div>
-
 </div>
-
+<p><?php print $slider ?></p>
 </body>
 </html>
