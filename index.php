@@ -1,12 +1,12 @@
 <?php
-$x = 0;
-$b = &$x;
+$roll_joints = true;
 
-unset($b);
+$joint1 = &$roll_joints;
+$joint2 = &$joint1;
+$joint3 = &$joint2;
 
-$b = 1;
-var_dump($x);
-?>
+ var_dump($joint1);
+ ?>
 
 <html>
 <head>
@@ -16,6 +16,8 @@ var_dump($x);
     </style>
 </head>
 <body>
-<h1><?php print $x; ?></h1>
+<p><?php print $joint1; ?></p>
+<p><?php print $joint2; ?></p>
+<p><?php print $joint3; ?></p>
 </body>
 </html>
