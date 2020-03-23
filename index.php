@@ -1,17 +1,29 @@
 <?php
-$avys = [];
+/**
+ *funkcija skaičiuojanti kvadratini laipsnį
+ * @param $x
+ * @return float|int
+ */
+function square(float $x): float
+{
 
-for($i = 0; $i < 5; $i++){
-    if($i == 0){
-        $avys[$i]= 'bleee';
-    }else {
-        $avys[$i] = &$avis[$i - 1];
-    }
+    return $x ** 2;
 }
 
-var_dump($avys);
+$h2 = 'please enter a number';
 
- ?>
+if (isset($_POST['number'])) {
+    $skaicius = $_POST['number'];
+
+    $square_function = square($skaicius);
+
+} else {
+    $square_function = 'įveskite skaičių';
+}
+
+
+var_dump($_POST);
+?>
 
 <html>
 <head>
@@ -21,5 +33,12 @@ var_dump($avys);
     </style>
 </head>
 <body>
+<form method="POST">
+    <label for="num">Ką pakelti kvadratu: </label>
+    <input id="num" name="number" type="number" min="1"  max="200" required/>
+    <input type="submit">
+    <p> <?php print $square_function ?></p>
+
+</form>
 </body>
 </html>
