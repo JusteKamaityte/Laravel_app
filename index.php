@@ -1,8 +1,15 @@
 <?php
-$x = 0;
+
+/**
+ * @param $x
+ */
 function change_x(&$x){
     $x = 1;
 }
+
+$x = 0;
+//funkcijos reikšmės rašomos po funkcijos deklaracijos
+
 change_x($x);
 
 var_dump($x);
