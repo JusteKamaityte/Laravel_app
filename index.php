@@ -36,9 +36,8 @@ var_dump($_POST);
 <form method="POST">
     <label for="num">Ką pakelti kvadratu: </label>
     <input id="num" name="number" type="number" min="1"  max="200" required/>
-    <input type="submit">
-    <p> <?php print $square_function ?></p>
-
+    <button name="action" value="square" >Kelti kvadratu</button>
 </form>
+    <h2> <?php print $square_function ?></h2>
 </body>
 </html>
