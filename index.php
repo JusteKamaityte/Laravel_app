@@ -1,4 +1,5 @@
 <?php
+//variable address does not change
 $roll_joints = true;
 
 $joint1 = &$roll_joints;
