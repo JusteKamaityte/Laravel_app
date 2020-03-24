@@ -1,9 +1,29 @@
 <?php
-$form =[
-    'action' => 'index.php',
-    'method' => 'POST',
-    'class' => 
-]
+/**
+ *
+ * @param array $attr
+ * @return array
+ */
+function html_attr(array $attr): array
+{
+    foreach ($attr as $key => $value) {
+
+        $attr = '';
+
+
+    }
+    return $attr;
+}
+
+$form = [
+    'attr' => [
+        'action' => 'index.php',
+        'method' => 'POST',
+        'class' => 'my-form',
+    ]
+];
+
+$attr = html_attr();
 
 ?>
 
