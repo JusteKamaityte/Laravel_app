@@ -4,15 +4,16 @@
  * @param array $attr
  * @return array
  */
-function html_attr(array $attr): array
+function html_attr(array $attr): string
 {
-    foreach ($attr as $key => $value) {
+    $attributes = '';
 
-        $attr = '';
+    foreach ($attr as $index => $value) {
+        $attributes .= "$index=\"$value\" ";
 
 
     }
-    return $attr;
+    return $attributes;
 }
 
 $form = [
@@ -23,8 +24,10 @@ $form = [
     ]
 ];
 
-$attr = html_attr();
 
+
+var_dump(html_attr($form['attr']));
+var_dump($form);
 ?>
 
 <html>
