@@ -1,16 +1,19 @@
 <?php
-$form = "templates/form.tpl.php"
+$form =[
+    'action' => 'index.php',
+    'method' => 'POST',
+    'class' => 
+]
+
 ?>
 
 <html>
 <head>
     <title>formų generavimas iš template</title>
     <style></style>
-    <link rel="stylesheet" href="template/form.tpl.php">
+
 </head>
 <body>
-    <form action="index.php" method="POST">
-
-    </form>
+<?php include 'templates/form.tpl.php'; ?>
 </body>
 </html>

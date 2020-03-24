@@ -1,14 +1,10 @@
-<?php
-?>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    <form>
+
+
+    <form
         action="<?php print $form['action']; ?>"
-        method="<?php print $form['method']; ?>">
+        method="<?php print $form['method']; ?>"
+        class="<?php print $form['class']; ?>"
+    >
     </form>
-</body>
-</html>
+
