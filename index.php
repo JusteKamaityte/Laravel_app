@@ -2,6 +2,7 @@
 //filtras apsaugantis nuo nereikalingų simbolių
 $input = filter_input_array(INPUT_POST,[
     'vardas' => FILTER_SANITIZE_SPECIAL_CHARS,
+    'pavarde' => FILTER_SANITIZE_SPECIAL_CHARS,
 ]);
 
 var_dump($input);
@@ -19,6 +20,7 @@ var_dump($input);
     <h2>Hack it</h2>
     <form method="POST" >
         <input type="text" name="vardas">
+        <input type="text" name="pavarde">
         <input type="submit">
     </form>
 </body>
