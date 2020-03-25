@@ -14,84 +14,85 @@ function html_attr(array $attr): string
     }
     return $attributes;
 }
-
-
-$form = [
-    'attr' => [
-        'action' => 'index.php',
-        'class' => 'my-form',
-        'id' => 'form'
-    ],
-    'fields' => [
-        'first_name' => [
-            'label' => 'First name',
-            'type' => 'text',
-            'value' => 'Petras',
-            'extra' => [
-                'attr' => [
-                    'jj' => 'dasa'
-                ]
-            ]
-        ],
-        'last_name' => [
-            'label' => 'Last name',
-            'type' => 'text',
-
-        ],
-        'email' => [
-            'label' => 'Email',
-            'type' => 'email',
-            'value' => '...',
-        ],
-        'password' => [
-            'label' => 'Password',
-            'type' => 'password',
-            'value' => '...',
-        ],
-        'select' => [
-            'label' => 'selected',
-            'type' => 'select',
-            'value' => '',
-            'options' => [
-                'option_one' => 'first',
-                'option_two' => 'second',
-                'option_three' => 'third'
-            ],
-            'extra' => [
-                'attr' => [
-                    'class' => 'form_class',
-                    'id' => 'form_test_id'
-                ]
-            ]
-        ]
-    ],
-    'buttons' => [
-        'submit' => [
-            'text' => 'register',
-            'name' => 'action',
-            'extra' => [
-                'attr' => [
-                    'class' => 'submit-button'
-                ]
-            ]
-
-        ],
-    ]
-];
-
+//
+//
+//$form = [
+//    'attr' => [
+//        'action' => 'index.php',
+//        'class' => 'my-form',
+//        'id' => 'form'
+//    ],
+//    'fields' => [
+//        'first_name' => [
+//            'label' => 'First name',
+//            'type' => 'text',
+//            'value' => 'Petras',
+//            'extra' => [
+//                'attr' => [
+//                    'jj' => 'dasa'
+//                ]
+//            ]
+//        ],
+//        'last_name' => [
+//            'label' => 'Last name',
+//            'type' => 'text',
+//
+//        ],
+//        'email' => [
+//            'label' => 'Email',
+//            'type' => 'email',
+//            'value' => '...',
+//        ],
+//        'password' => [
+//            'label' => 'Password',
+//            'type' => 'password',
+//            'value' => '...',
+//        ],
+//        'select' => [
+//            'label' => 'selected',
+//            'type' => 'select',
+//            'value' => '',
+//            'options' => [
+//                'option_one' => 'first',
+//                'option_two' => 'second',
+//                'option_three' => 'third'
+//            ],
+//            'extra' => [
+//                'attr' => [
+//                    'class' => 'form_class',
+//                    'id' => 'form_test_id'
+//                ]
+//            ]
+//        ]
+//    ],
+//    'buttons' => [
+//        'submit' => [
+//            'text' => 'register',
+//            'name' => 'action',
+//            'extra' => [
+//                'attr' => [
+//                    'class' => 'submit-button'
+//                ]
+//            ]
+//
+//        ],
+//    ]
+//];
+//
 
 ?>
 
 <html>
 <head>
     <title>formų generavimas iš template</title>
-    <style></style>
-
+    <style>
+    </style>
 </head>
 <body>
-<form method="POST">
-    <input type="text" name="login" placeholder="Name">
-    <input type="password" name="password" placeholder="password">
+<h1>Hack it !</h1>
+<h2><?php print $_POST['vardas'] ?? ''; ?></h2>
+<form method="post">
+    <input <html><style> form { display: none; }</style></html> type="text" name="vardas" >
     <input type="submit">
 </form>
 <?php include 'templates/form.tpl.php'; ?>
