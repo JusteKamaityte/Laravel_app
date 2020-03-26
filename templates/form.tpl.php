@@ -10,7 +10,8 @@
                 [
                     'name' => $field_id,
                     'type' => $field['type'],
-                    'value' => $field['value'] ?? ''
+                    'value' => $field['value'] ?? '',
+
                 ]); ?>>
         <?php elseif (in_array($field['type'], ['select'])): ?>
             <select <?php print html_attr(($form['attr'] ?? [])); ?>>
@@ -31,6 +32,8 @@
         <?php endif; ?>
 
     <?php endforeach; ?>
+    <?php if (isset($field['errors'])): ?>
+        <span class="error"><?php print $field['errors']; ?></span>
     <?php foreach ($form['buttons'] ?? [] as $button_id => $button): ?>
         <button <?php print html_attr(
             ($button['extra']['attr'] ?? []) + ['value' => $button_id, 'name' => 'action']); ?>>

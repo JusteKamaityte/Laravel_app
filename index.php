@@ -1,28 +1,34 @@
 <?php
-///**
-// *
-// * @param array $attr
-// * @return array
-// */
-//function html_attr(array $attr): array
-//{
-//    foreach ($attr as $key => $value) {
-//
-//        $attr = '';
-//
-//
-//    }
-//    return $attr;
-//}
+$form = "templates/form.tpl.php";
+$form = [
+    'attr' => [
+        'action' => 'index.php',
+        'method' => 'POST',
+        'class' => 'my-form',
+    ]
+];
+
+/**
+ *funkcija generuojanti formos atributus
+ * @param array $attr
+ * @return array
+ */
+function html_attr(array $attr): array
+{
+    $attributes = '';
+
+    foreach ($attr as $index => $value) {
+        $attributes .= $index=\$value ;
+    }
+
+   var_dump($attributes);
+}
 
 
-//    foreach ($attr as $index => $value) {
-//        $attributes .= "$index=\"$value\" ";
-//
-//
-//    }
-//    return $attributes;
-//}
+
+$attr = html_attr();
+var_dump(html_attr($form['attr']));
+var_dump($form);
 
 /**
  * funkcija apsauganti nuo pavojingu ivesciu(POST)
@@ -31,18 +37,47 @@
  */
 function get_filtered_input(array $form): ?array
 {
-    //parametrai pagal kuriuos nusako kaip reikia POST masyva isfiltruoti
+
     $filter_parameters = [];
 
-    foreach ($form['fields'] as $field_id => $field_value) {
-        $filter_parameters[$field_id] = FILTER_SANITIZE_SPECIAL_CHARS;
-        //filter konstanta turi savo verte ir ji supranta tik tai savo verte, todel kitur nei funkcijos viduj negali buti parasyta
+    foreach ($form['fields'] as $field_id => $field) {
+        var_dump($field);
+        if(isset($field['filter'] )){
+            $filter_parameters[$field_id] = $field['filter'];
+        }else {
+            $filter_parameters[$field_id] = FILTER_SANITIZE_SPECIAL_CHARS;
+        }
     }
     var_dump($filter_parameters);
-    //returninam isfiltruota POST
+
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
+
+
+/**
+ * funkcija, kuri nustatytų kiekvienam field'ui
+ * error, jeigu jo vertė yra tusčia
+ * @param array $form
+ * @param $safe_input
+ * @return array
+ */
+function validate_form(array &$form, $safe_input): array {
+
+    foreach($safe_input as $field_id => $value){
+        if($value === ''){
+            $form['fields'][$field_id]['errors'] = 'error';
+        }
+    }
+}
+
+if($_POST){
+    $safe_input = get_filtered_input($form);
+    validate_form($form, $safe_input);
+}
+
+var_dump($safe_input);
+var_dump($form);
 
 
 $form = [
@@ -54,6 +89,7 @@ $form = [
     ],
     'fields' => [
         'first_name' => [
+            'filter' => FILTER_SANITIZE_NUMBER_INT,
             'label' => 'First name',
             'type' => 'text',
             'value' => 'Petras',
@@ -124,6 +160,6 @@ $safe_input = get_filtered_input($form);
 <body>
 <h1><?php print $safe_input['vardas'] ?? ''; ?></h1>
 <h2>Hack it</h2>
-<!--    --><?php //include 'templates/form.tpl.php'; ?>
+    <?php include 'templates/form.tpl.php'; ?>
 </body>
 </html>
