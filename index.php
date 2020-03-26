@@ -1,4 +1,29 @@
 <?php
+///**
+// *
+// * @param array $attr
+// * @return array
+// */
+//function html_attr(array $attr): array
+//{
+//    foreach ($attr as $key => $value) {
+//
+//        $attr = '';
+//
+//
+//    }
+//    return $attr;
+//}
+//
+//
+//    foreach ($attr as $index => $value) {
+//        $attributes .= "$index=\"$value\" ";
+//
+//
+//    }
+//    return $attributes;
+//}
+
 /**
  * funkcija apsauganti nuo pavojingu ivesciu(POST)
  * @param $fields
@@ -18,6 +43,74 @@ function get_filtered_input(array $fields): ?array
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
+
+
+//$form = [
+//    'attr' => [
+//        'action' => 'index.php',
+//        'method' => 'POST',
+//        'class' => 'my-form',
+//        'id' => 'form'
+//    ],
+//    'fields' => [
+//        'first_name' => [
+//            'label' => 'First name',
+//            'type' => 'text',
+//            'value' => 'Petras',
+//            'extra' => [
+//                'attr' => [
+//                    'jj' => 'dasa'
+//                ]
+//            ]
+//        ],
+//        'last_name' => [
+//            'label' => 'Last name',
+//            'type' => 'text',
+//
+//        ],
+//        'email' => [
+//            'label' => 'Email',
+//            'type' => 'email',
+//            'value' => '...',
+//        ],
+//        'password' => [
+//            'label' => 'Password',
+//            'type' => 'password',
+//            'value' => '...',
+//        ],
+//        'select' => [
+//            'label' => 'selected',
+//            'type' => 'select',
+//            'value' => '',
+//            'options' => [
+//                'option_one' => 'first',
+//                'option_two' => 'second',
+//                'option_three' => 'third'
+//            ],
+//            'extra' => [
+//                'attr' => [
+//                    'class' => 'form_class',
+//                    'id' => 'form_test_id'
+//                ]
+//            ]
+//        ]
+//    ],
+//    'buttons' => [
+//        'submit' => [
+//            'text' => 'register',
+//            'name' => 'action',
+//            'extra' => [
+//                'attr' => [
+//                    'class' => 'submit-button'
+//                ]
+//            ]
+//
+//        ],
+//    ]
+//];
+
+
+
 var_dump(get_filtered_input($_POST));
 $safe_input = get_filtered_input($_POST);
 ?>
@@ -31,11 +124,6 @@ $safe_input = get_filtered_input($_POST);
 <body>
 <h1><?php print $safe_input['vardas'] ?? ''; ?></h1>
 <h2>Hack it</h2>
-<form method="POST">
-    <input type="text" name="vardas">
-    <input type="text" name="pavarde">
-    <input type="submit">
-</form>
-<!--    --><?php //include 'templates/form.tpl.php'; ?>
+    <?php include 'templates/form.tpl.php'; ?>
 </body>
 </html>
