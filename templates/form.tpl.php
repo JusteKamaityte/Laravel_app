@@ -3,7 +3,7 @@
     <?php foreach ($form['fields'] ?? [] as $field_id => $field): ?>
         <label><span><?php print $field['label']; ?></span> </label>
         <?php if (in_array($field['type'], ['text', 'password', 'email', 'number'])): ?>
-        <?php var_dump($field); ?>
+<!--        --><?php //var_dump($field); ?>
             <input <?php
             print html_attr(
                 ($field['extra']['attr'] ?? []) +
@@ -34,6 +34,7 @@
     <?php endforeach; ?>
     <?php if (isset($field['errors'])): ?>
         <span class="error"><?php print $field['errors']; ?></span>
+    <?php endif; ?>
     <?php foreach ($form['buttons'] ?? [] as $button_id => $button): ?>
         <button <?php print html_attr(
             ($button['extra']['attr'] ?? []) + ['value' => $button_id, 'name' => 'action']); ?>>

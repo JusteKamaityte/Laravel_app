@@ -1,5 +1,23 @@
 <?php
 $form = "templates/form.tpl.php";
+
+/**
+ *funkcija generuojanti formos atributus
+ * @param array $attr
+ * @return string
+ */
+function html_attr(array $attr): string
+{
+    $attributes = '';
+
+    foreach ($attr as $index => $value) {
+        $attributes .= "$index=\"$value\" ";
+    }
+
+//   var_dump($attributes);
+    return $attributes;
+}
+
 $form = [
     'attr' => [
         'action' => 'index.php',
@@ -8,27 +26,7 @@ $form = [
     ]
 ];
 
-/**
- *funkcija generuojanti formos atributus
- * @param array $attr
- * @return array
- */
-function html_attr(array $attr): array
-{
-    $attributes = '';
-
-    foreach ($attr as $index => $value) {
-        $attributes .= $index=\$value ;
-    }
-
-   var_dump($attributes);
-}
-
-
-
-$attr = html_attr();
-var_dump(html_attr($form['attr']));
-var_dump($form);
+//var_dump($form);
 
 /**
  * funkcija apsauganti nuo pavojingu ivesciu(POST)
@@ -41,43 +39,68 @@ function get_filtered_input(array $form): ?array
     $filter_parameters = [];
 
     foreach ($form['fields'] as $field_id => $field) {
-        var_dump($field);
-        if(isset($field['filter'] )){
+//        var_dump($field);
+        if (isset($field['filter'])) {
             $filter_parameters[$field_id] = $field['filter'];
-        }else {
+        } else {
             $filter_parameters[$field_id] = FILTER_SANITIZE_SPECIAL_CHARS;
         }
     }
-    var_dump($filter_parameters);
+//    var_dump($filter_parameters);
 
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
+//if($_POST){
+//    $safe_input = get_filtered_input($form);
+//    validate_form($form, $safe_input);
+//}
+
+
+//tikrina vieno field input
+
+/**
+ * funkcija grazina errora, jei laukelis tuscias
+ * @param $field_input
+ * @param $field
+ * @return mixed
+ */
+function validate_not_empty($field_input, &$field): bool
+{
+
+    if (empty($field_input)) {
+        $field['error'] = 'Laukelis tuščias';
+        return false;
+    }
+    
+    return true;
+}
 
 
 /**
- * funkcija, kuri nustatytų kiekvienam field'ui
- * error, jeigu jo vertė yra tusčia
+ *funkcija tikrinanti form masyvo outputo errorús tustiems laukams
  * @param array $form
  * @param $safe_input
- * @return array
+ * @return bool
  */
-function validate_form(array &$form, $safe_input): array {
+function validate_form(&$form, $safe_input)
+{
 
-    foreach($safe_input as $field_id => $value){
-        if($value === ''){
-            $form['fields'][$field_id]['errors'] = 'error';
+    foreach ($safe_input as $field_id => $value) {
+        $field = &$form['fields'][$field_id];
+
+    if(isset($safe_input[$field_id])){
+        $field['value'] = $safe_input[$field_id];
+    }
+
+//        validate_not_empty($value, $field);
+    }
+    if(isset($field['validate'])){
+        foreach($field['validate'] as $item){
+            $item($value, $field);
         }
     }
 }
-
-if($_POST){
-    $safe_input = get_filtered_input($form);
-    validate_form($form, $safe_input);
-}
-
-var_dump($safe_input);
-var_dump($form);
 
 
 $form = [
@@ -92,27 +115,40 @@ $form = [
             'filter' => FILTER_SANITIZE_NUMBER_INT,
             'label' => 'First name',
             'type' => 'text',
-            'value' => 'Petras',
+            'value' => 'Jonas',
             'extra' => [
                 'attr' => [
                     'jj' => 'dasa'
                 ]
-            ]
+            ],
+            'validate'=> [
+                'validate_not_empty'
+            ],
         ],
         'last_name' => [
             'label' => 'Last name',
+            'value' => 'Jonauskas',
             'type' => 'text',
+            'validate'=> [
+                'validate_not_empty'
+            ],
 
         ],
         'email' => [
             'label' => 'Email',
             'type' => 'email',
-            'value' => '...',
+            'value' => 'vardas@gmail.com',
+            'validate'=> [
+                'validate_not_empty'
+            ],
         ],
         'password' => [
             'label' => 'Password',
             'type' => 'password',
-            'value' => '...',
+            'value' => '.......',
+            'validate'=>[
+                'validate_not_empty'
+            ],
         ],
         'select' => [
             'label' => 'selected',
@@ -128,7 +164,10 @@ $form = [
                     'class' => 'form_class',
                     'id' => 'form_test_id'
                 ]
-            ]
+            ],
+             'validate'=> [
+                'validate_not_empty'
+            ],
         ]
     ],
     'buttons' => [
@@ -139,16 +178,17 @@ $form = [
                 'attr' => [
                     'class' => 'submit-button'
                 ]
-            ]
-
+            ],
+             'validate'=> [
+                'validate_not_empty'
+            ],
         ],
     ]
 ];
 
 
-
-var_dump($form);
 $safe_input = get_filtered_input($form);
+var_dump($form);
 ?>
 
 <html>
@@ -159,7 +199,7 @@ $safe_input = get_filtered_input($form);
 </head>
 <body>
 <h1><?php print $safe_input['vardas'] ?? ''; ?></h1>
-<h2>Hack it</h2>
-    <?php include 'templates/form.tpl.php'; ?>
+<h2>Formos generavimas</h2>
+<?php include 'templates/form.tpl.php'; ?>
 </body>
 </html>
