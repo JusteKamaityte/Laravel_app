@@ -5,9 +5,9 @@
  * @param $field
  * @return bool
  */
-function validate_max_100($safe_input, &$field){
+function validate_max_100($field_input, &$field){
 
-    if(strlen($field_input > 100)){
+    if(strlen($field_input) > 100){
         $field['error'] = 'Įvesta per daug simbolių';
         return false;
     }

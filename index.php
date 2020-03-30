@@ -1,17 +1,15 @@
 <?php
 require 'bootloader.php';
 
-
 function form_success($form, $safe_input)
 {
-    var_dump('success');
+    var_dump('Tu normalus');
 }
 
 function form_failed($form, $safe_input)
 {
-    var_dump('failed');
+    var_dump('Nenormalus');
 }
-
 
 $form = [
     'attr' => [
@@ -25,93 +23,65 @@ $form = [
         'failed' => 'form_failed'
     ],
     'fields' => [
-        'first_name' => [
-            'filter' => FILTER_SANITIZE_NUMBER_INT,
-            'label' => 'First name',
+        'name' => [
+            'label' => '',
             'type' => 'text',
-            'value' => 'Jonas',
+            'validate' => [
+                'validate_not_empty',
+                'validate_has_space'
+            ],
             'extra' => [
                 'attr' => [
-                    'jj' => 'dasa'
+                    'class' => 'name',
+                    'id' => 'name',
+                    'placeholder' => 'Vardas ir pavardė'
                 ]
-            ],
-            'validate' => [
-                'validate_not_empty'
-            ],
-        ],
-        'last_name' => [
-            'label' => 'Last name',
-            'value' => 'Jonauskas',
-            'type' => 'text',
-            'validate' => [
-                'validate_not_empty'
-            ],
-
+            ]
         ],
         'age' => [
-            'label' => 'Age',
+            'label' => '',
             'type' => 'number',
-            'value' => '...',
-            'filter' => 'FILTER_SANTIZE_INT',
-            'validators' => [
+            'value' => '',
+            'validate' => [
                 'validate_not_empty',
                 'validate_is_number',
                 'validate_is_positive',
-                'validate_max_100'
-            ],
-        ],
-        'email' => [
-            'label' => 'Email',
-            'type' => 'email',
-            'value' => 'vardas@gmail.com',
-            'validate' => [
-                'validate_not_empty'
-            ],
-        ],
-        'password' => [
-            'label' => 'Password',
-            'type' => 'password',
-            'value' => '.......',
-            'validate' => [
-                'validate_not_empty'
-            ],
-        ],
-        'select' => [
-            'label' => 'selected',
-            'type' => 'select',
-            'value' => '',
-            'options' => [
-                'option_one' => 'first',
-                'option_two' => 'second',
-                'option_three' => 'third'
+                'validate_max_100',
+                'validate_field_range' => [
+                    'min' => 18,
+                    'max' => 100
+                ]
             ],
             'extra' => [
                 'attr' => [
-                    'class' => 'form_class',
-                    'id' => 'form_test_id'
+                    'class' => 'age',
+                    'placeholder' => 'Amžius'
                 ]
-            ],
-            'validate' => [
-                'validate_not_empty'
-            ],
-        ]
+            ]
+        ],
     ],
     'buttons' => [
         'submit' => [
             'text' => 'submit',
             'name' => 'action',
+            'validate' => [
+                'validate_not_empty'
+            ],
             'extra' => [
                 'attr' => [
                     'class' => 'submit-button'
                 ]
             ],
-            'validate' => [
-                'validate_not_empty'
-            ],
+
         ],
     ]
 ];
 
+if($_POST ){
+
+    $filtered_input = get_filtered_input($form);
+    $validation = validate_form($form, $filtered_input);
+}
 ?>
 
 <html>
@@ -121,8 +91,7 @@ $form = [
     </style>
 </head>
 <body>
-<h1></h1>
-<h2></h2>
+<h1>FORM</h1>
 <?php include 'core/templates/form.tpl.php'; ?>
 </body>
 </html>

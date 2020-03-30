@@ -2,8 +2,8 @@
     <?php print html_attr(($form['attr'] ?? []) + ['method' => 'POST']); ?>>
     <?php foreach ($form['fields'] ?? [] as $field_id => $field): ?>
         <label><span><?php print $field['label']; ?></span> </label>
-        <?php if (in_array($field['type'], ['text', 'password', 'email', 'number'])): ?>
-<!--        --><?php //var_dump($field); ?>
+        <?php if (in_array($field['type'], ['text','number'])): ?>
+        <?php var_dump($field); ?>
             <input <?php
             print html_attr(
                 ($field['extra']['attr'] ?? []) +
@@ -11,6 +11,7 @@
                     'name' => $field_id,
                     'type' => $field['type'],
                     'value' => $field['value'] ?? '',
+                    'placeholder' => $field_id
 
                 ]); ?>>
         <?php elseif (in_array($field['type'], ['select'])): ?>

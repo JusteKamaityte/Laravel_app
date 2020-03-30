@@ -18,7 +18,7 @@ function get_filtered_input(array $form): ?array
         }
     }
 
-    return get_filtered_input(INPUT_POST, $filter_parameters);
+    return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
 /**
@@ -35,19 +35,19 @@ function validate_form(array &$form, array $safe_input): bool
         $field = &$form['fields'][$field_id];
         $field['value'] = $value;
 
-        foreach ($field['validate'] ?? [] as $item) {
-            $is_valid = $item($value, $field);
-
-            if (!$is_valid) {
-                $success = false;
-                break;
-            }
+        foreach ($field['validate'] ?? [] as $validation_key  => $validator) {
+           if(is_array($validator)){
+               $valid = $validation_key($value, $field, $validator);
+           }else{
+               $valid = $validator($value, $field);
+           }
         }
     }
     if (isset($form['callbacks']['success']) && $success) {
-        //iskviecia funkcija
+
         $form['callbacks']['success']($form, $safe_input);
     } elseif (isset($form['callbacks']['failed']) && !$success) {
+        var_dump('test');
         $form['callbacks']['failed']($form, $safe_input);
     }
 

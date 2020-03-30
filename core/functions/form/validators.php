@@ -49,4 +49,29 @@ function validate_is_positive($safe_input, &$field)
     return true;
 }
 
+function validate_has_space($field_input, array &$field): bool{
+    if(!strpos($field_input, ' ')){
+        $field['error'] = 'Turi įvesti ir VARDĄ ir PAVARDĘ';
+        return false;
+    }
+    return true;
+}
 
+/**
+ * @param $safe_input
+ * @param $field
+ * @param $parameters
+ * @return bool
+ */
+function validate_field_range($safe_input, array &$field, $parameters){
+
+    if($safe_input < $parameters['min'] || $safe_input > $parameters['max']){
+        $field['error'] = strtr('Skaicius turi buti daugiau nei @min ir maziau nei @max',[
+            '@min' => $parameters['min'],
+            '@max' => $parameters['max']
+            ]);
+
+        return false;
+    }
+    return true;
+}
