@@ -1,130 +1,17 @@
 <?php
-$form = "templates/form.tpl.php";
+require 'bootloader.php';
 
-/**
- *funkcija generuojanti formos atributus
- * @param array $attr
- * @return string
- */
-function html_attr(array $attr): string
+
+function form_success($form, $safe_input)
 {
-    $attributes = '';
-
-    foreach ($attr as $index => $value) {
-        $attributes .= "$index=\"$value\" ";
-    }
-
-//   var_dump($attributes);
-    return $attributes;
+    var_dump('success');
 }
 
-$form = [
-    'attr' => [
-        'action' => 'index.php',
-        'method' => 'POST',
-        'class' => 'my-form',
-    ]
-];
-
-//var_dump($form);
-
-/**
- * funkcija apsauganti nuo pavojingu ivesciu(POST)
- * @param array $form
- * @return array|null
- */
-function get_filtered_input(array $form): ?array
+function form_failed($form, $safe_input)
 {
-
-    $filter_parameters = [];
-
-    foreach ($form['fields'] as $field_id => $field) {
-        var_dump($field);
-        if (isset($field['filter'])) {
-            $filter_parameters[$field_id] = $field['filter'];
-        } else {
-            $filter_parameters[$field_id] = FILTER_SANITIZE_SPECIAL_CHARS;
-        }
-    }
-    var_dump($filter_parameters);
-//is cia gaunam isfiltruotus
-    return get_filtered_input(INPUT_POST, $filter_parameters);
+    var_dump('failed');
 }
 
-////if($_POST){
-//    $safe_input = get_filtered_input($form);
-//    validate_form($form, $safe_input);
-////}
-
-
-//tikrina vieno field input
-
-/**
- * funkcija grazina errora, jei laukelis tuscias
- * @param $field_input
- * @param $field
- * @return mixed
- */
-function validate_not_empty($field_input, &$field): bool
-{
-
-    if (empty($field_input)) {
-        $field['error'] = 'Laukelis tuščias';
-        return false;
-    }
-
-    return true;
-}
-
-
-/**
- * apskritai patikrinti laukelio vertes funkcija turetu buti kuo labiau flexible
- *funkcija tikrinanti form masyvo outputo errorús tustiems laukams
- * @param array $form
- * @param $safe_input
- * @return bool
- */
-function validate_form(array &$form, array $safe_input): bool
-{
-    $success = true;
-
-    foreach ($safe_input as $field_id => $value) {
-        $field = &$form['fields'][$field_id];
-        $field['value'] = $value;
-
-        foreach ($field['validate'] ?? [] as $item) {
-            $is_valid = $item($value, $field);
-
-            if (!$is_valid) {
-                $success = false;
-            break;
-            }
-        }
-    }
-    return $success;
-}
-
-//sukurtus validatorius priskirti fieldui age
-
-function validate_is_number($safe_input, &$form){
-
-    foreach($safe_input as $field_id => $age){
-        $field = &$form['fields'][$field_id];
-        $field['age'] = $age;
-
-        if(is_integer($age)){
-            
-        }
-    }
-}
-
-function validate_is_positive($field_input, &$form){
-
-}
-
-function validate_max_100($field_input, &$form){
-
-}
 
 $form = [
     'attr' => [
@@ -132,6 +19,10 @@ $form = [
         'method' => 'POST',
         'class' => 'my-form',
         'id' => 'form'
+    ],
+    'callbacks' => [
+        'success' => 'form_success',
+        'failed' => 'form_failed'
     ],
     'fields' => [
         'first_name' => [
@@ -157,22 +48,16 @@ $form = [
             ],
 
         ],
-        'select_age' => [
-            'label' => 'select age',
-            'type' => 'select',
-            'value' => '',
-            'options' => [
-                'option_one' => 10,
-                'option_two' => 20,
-                'option_three' =>25,
-                'option_four' =>35,
-                'option_five' =>45,
-                'option_six' =>55,
-                'option_seven' =>65,
-                'option_seven' =>75,
-                'option_eight' =>85,
-                'option_nine' =>95,
-                'option_ten' =>105,
+        'age' => [
+            'label' => 'Age',
+            'type' => 'number',
+            'value' => '...',
+            'filter' => 'FILTER_SANTIZE_INT',
+            'validators' => [
+                'validate_not_empty',
+                'validate_is_number',
+                'validate_is_positive',
+                'validate_max_100'
             ],
         ],
         'email' => [
@@ -226,7 +111,7 @@ $form = [
         ],
     ]
 ];
-var_dump($form);
+
 ?>
 
 <html>
@@ -236,8 +121,8 @@ var_dump($form);
     </style>
 </head>
 <body>
-<!--<h1>--><?php //print var_dump($form['name']); ?><!--</h1>-->
-<h2>Formos generavimas</h2>
-<?php include 'templates/form.tpl.php'; ?>
+<h1></h1>
+<h2></h2>
+<?php include 'core/templates/form.tpl.php'; ?>
 </body>
 </html>
