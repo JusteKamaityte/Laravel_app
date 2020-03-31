@@ -54,8 +54,9 @@ function validate_is_positive($safe_input, &$field)
  * @param array $field
  * @return bool
  */
-function validate_has_space($field_input, array &$field): bool{
-    if(!strpos($field_input, ' ')){
+function validate_has_space($field_input, array &$field): bool
+{
+    if (!strpos($field_input, ' ')) {
         $field['error'] = 'Turi įvesti ir VARDĄ ir PAVARDĘ';
         return false;
     }
@@ -68,13 +69,14 @@ function validate_has_space($field_input, array &$field): bool{
  * @param $parameters
  * @return bool
  */
-function validate_field_range($safe_input, array &$field, $parameters){
+function validate_field_range($safe_input, array &$field, $parameters)
+{
 
-    if($safe_input < $parameters['min'] || $safe_input > $parameters['max']){
-        $field['error'] = strtr('Skaicius turi buti daugiau nei @min ir maziau nei @max',[
+    if ($safe_input < $parameters['min'] || $safe_input > $parameters['max']) {
+        $field['error'] = strtr('Skaicius turi buti daugiau nei @min ir maziau nei @max', [
             '@min' => $parameters['min'],
             '@max' => $parameters['max']
-            ]);
+        ]);
 
         return false;
     }
@@ -82,16 +84,36 @@ function validate_field_range($safe_input, array &$field, $parameters){
 }
 
 /**
- * funkcija patikrina ar pasirinkimas egzistuoja field masyve
+ * Patikrina ar pasirinkimas egzistuoja $field masyve
  * @param $field_input
  * @param $field
  * @return bool
  */
-function validate_select($field_input, array &$field): bool{
-    if(!isset($field['options'][$field_input])){
-          $field['error'] = 'Tokio pasirinkimo nėra';
-       return false;
+function validate_select($field_input, array &$field): bool
+{
+    if (!isset($field['options'][$field_input])) {
+        $field['error'] = 'Nera tokio pasirinkimo';
+        return false;
+    }
+    return true;
+}
 
+/**
+ * F-cija, patikrinanti ar fieldai sutampa
+ * @param array $filtered_input isfiltruotas post masyvas
+ * @param array $form
+ * @param array $params sutampanciu fieldu indeksu masyvas
+ * @return bool
+ */
+function validate_fields_match(array $filtered_input, array &$form, array $params): bool
+{
+    $comparison_field_id = $params[0];
+    $comparison = $filtered_input[$comparison_field_id];
+    foreach ($params as $field_id) {
+        if ($comparison != $filtered_input[$field_id]) {
+            $form['error'] = 'These fields do not match!';
+            return false;
+        }
     }
     return true;
 }

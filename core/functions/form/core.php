@@ -22,34 +22,62 @@ function get_filtered_input(array $form): ?array
 }
 
 /**
- *  Validates the form by checking for empty fields and saving previous input
+ * F-cija, kuri validuoja pacia forma
+ * (sukuria fieldams-formai errorus)
  * @param array $form
- * @param $safe_input
+ * @param array $safe_input isfiltruotas post masyvas
  * @return bool
  */
 function validate_form(array &$form, array $safe_input): bool
 {
     $success = true;
-
-    foreach ($safe_input as $field_id => $value) {
-        $field = &$form['fields'][$field_id];
-        $field['value'] = $value;
-
-        foreach ($field['validate'] ?? [] as $validation_key  => $validator) {
-           if(is_array($validator)){
-               $valid = $validation_key($value, $field, $validator);
-           }else{
-               $valid = $validator($value, $field);
-           }
+    foreach ($form['fields'] as $field_index => &$field) {
+        $field['value'] = $safe_input[$field_index];
+        foreach ($field['validate'] ?? [] as $validator_index => $field_validator) {
+            if (is_array($field_validator)) {
+                $validator_function = $validator_index;
+                $validator_params = $field_validator;
+                $is_valid = $validator_function($field['value'], $field, $validator_params);
+            } else {
+                $validator_function = $field_validator;
+                $is_valid = $validator_function($field['value'], $field);
+            }
+            if (!$is_valid) {
+                $success = false;
+                break;
+            }
         }
     }
-    if (isset($form['callbacks']['success']) && $success) {
-
-        $form['callbacks']['success']($form, $safe_input);
-    } elseif (isset($form['callbacks']['failed']) && !$success) {
-        var_dump('test');
-        $form['callbacks']['failed']($form, $safe_input);
+    //Dabar tikrinsim formos lygio validatorius
+    if ($success) {
+        foreach ($form['validators'] ?? [] as $validator_index => $form_validator) {
+            if (is_array($form_validator)) {
+                $validator_function = $validator_index;
+                $validator_params = $form_validator;
+                $is_valid = $validator_function($safe_input, $form, $validator_params);
+            } else {
+                $validator_function = $form_validator;
+                $is_valid = $validator_function($safe_input, $form);
+            }
+            if (!$is_valid) {
+                $success = false;
+                break;
+            }
+        }
     }
-
+    if ($success) {
+        if (isset($form['callbacks']['success'])) {
+            $form['callbacks']['success']($safe_input, $form);
+        }
+    } else {
+        if (isset($form['callbacks']['fail'])) {
+            $form['callbacks']['fail']($safe_input, $form);
+        }
+    }
     return $success;
 }
+
+
+
+
+

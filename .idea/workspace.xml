@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d4b0cac2-3e4b-4f5a-88cc-7bd74342f39b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/functions/form/validators.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/functions/form/validators.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/functions/form/core.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/functions/form/core.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/functions/form/validators.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/functions/form/validators.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/templates/form.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/templates/form.tpl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
@@ -92,7 +92,7 @@
       <workItem from="1585208399694" duration="11725000" />
       <workItem from="1585290558114" duration="14862000" />
       <workItem from="1585507054240" duration="17501000" />
-      <workItem from="1585635939501" duration="7913000" />
+      <workItem from="1585635939501" duration="17582000" />
     </task>
     <servers />
   </component>
