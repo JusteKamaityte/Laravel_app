@@ -1,7 +1,7 @@
 <?php
 /**
  * validator max_100
- * @param $safe_input
+ * @param $field_input
  * @param $field
  * @return bool
  */
@@ -13,3 +13,7 @@ function validate_max_100($field_input, &$field){
     }
     return true;
 }
+
+
+
+

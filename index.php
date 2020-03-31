@@ -1,15 +1,36 @@
 <?php
 require 'bootloader.php';
 
+/**
+ * @param $form
+ * @param $safe_input
+ */
 function form_success($form, $safe_input)
 {
-    var_dump('Tu normalus');
+    //switch yra tas pats kaip if
+  switch($safe_input['select']){
+      case 'atimtis':
+          $answer = $safe_input['X'] - $safe_input['Y'];
+          break;
+      case 'sudėtis':
+          $answer = $safe_input['X'] + $safe_input['Y'];
+          break;
+      default:
+          $answer = 0;
+  }
+  var_dump($answer);
 }
 
+/**
+ * @param $form
+ * @param $safe_input
+ */
 function form_failed($form, $safe_input)
 {
-    var_dump('Nenormalus');
+    var_dump('Klaida');
 }
+
+
 
 $form = [
     'attr' => [
@@ -23,46 +44,59 @@ $form = [
         'failed' => 'form_failed'
     ],
     'fields' => [
-        'name' => [
-            'label' => '',
-            'type' => 'text',
-            'validate' => [
-                'validate_not_empty',
-                'validate_has_space'
-            ],
-            'extra' => [
-                'attr' => [
-                    'class' => 'name',
-                    'id' => 'name',
-                    'placeholder' => 'Vardas ir pavardė'
-                ]
-            ]
-        ],
-        'age' => [
-            'label' => '',
+        'X' => [
+            'label' => 'X',
             'type' => 'number',
             'value' => '',
             'validate' => [
                 'validate_not_empty',
                 'validate_is_number',
-                'validate_is_positive',
-                'validate_max_100',
-                'validate_field_range' => [
-                    'min' => 18,
-                    'max' => 100
-                ]
             ],
             'extra' => [
                 'attr' => [
-                    'class' => 'age',
-                    'placeholder' => 'Amžius'
+                    'class' => 'number_x',
+                    'placeholder' => 'Įveskite skaičių'
                 ]
             ]
         ],
+        'Y' => [
+            'label' => 'Y',
+            'type' => 'number',
+            'value' => '',
+            'validate' => [
+                'validate_not_empty',
+                'validate_is_number',
+
+            ],
+            'extra' => [
+                'attr' => [
+                    'class' => 'number_y',
+                    'placeholder' => 'Įveskite skaičių'
+                ]
+            ]
+        ],
+        'select' => [
+            'label' => 'veiksmas',
+            'type' => 'select',
+            'value' => '',
+            'options' => [
+                'sudėtis' => 'Sudėtis',
+                'atimtis' => 'Atimtis'
+            ],
+            'validate' => [
+                'validate_not_empty',
+                'validate_select'
+            ],
+            'extra' => [
+                'attr' => [
+                    'class' => ' ',
+                ]
+            ]
+        ]
     ],
     'buttons' => [
         'submit' => [
-            'text' => 'submit',
+            'text' => 'Važiuojam',
             'name' => 'action',
             'validate' => [
                 'validate_not_empty'
@@ -71,17 +105,21 @@ $form = [
                 'attr' => [
                     'class' => 'submit-button'
                 ]
-            ],
+            ]
 
-        ],
+        ]
     ]
 ];
 
-if($_POST ){
+if ($_POST) {
 
     $filtered_input = get_filtered_input($form);
     $validation = validate_form($form, $filtered_input);
 }
+
+
+
+
 ?>
 
 <html>
@@ -91,7 +129,7 @@ if($_POST ){
     </style>
 </head>
 <body>
-<h1>FORM</h1>
+<h1></h1>
 <?php include 'core/templates/form.tpl.php'; ?>
 </body>
 </html>

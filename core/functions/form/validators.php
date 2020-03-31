@@ -49,6 +49,11 @@ function validate_is_positive($safe_input, &$field)
     return true;
 }
 
+/**
+ * @param $field_input
+ * @param array $field
+ * @return bool
+ */
 function validate_has_space($field_input, array &$field): bool{
     if(!strpos($field_input, ' ')){
         $field['error'] = 'Turi įvesti ir VARDĄ ir PAVARDĘ';
@@ -72,6 +77,21 @@ function validate_field_range($safe_input, array &$field, $parameters){
             ]);
 
         return false;
+    }
+    return true;
+}
+
+/**
+ * funkcija patikrina ar pasirinkimas egzistuoja field masyve
+ * @param $field_input
+ * @param $field
+ * @return bool
+ */
+function validate_select($field_input, array &$field): bool{
+    if(!isset($field['options'][$field_input])){
+          $field['error'] = 'Tokio pasirinkimo nėra';
+       return false;
+
     }
     return true;
 }

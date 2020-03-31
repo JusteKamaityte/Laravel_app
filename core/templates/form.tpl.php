@@ -3,7 +3,7 @@
     <?php foreach ($form['fields'] ?? [] as $field_id => $field): ?>
         <label><span><?php print $field['label']; ?></span> </label>
         <?php if (in_array($field['type'], ['text','number'])): ?>
-        <?php var_dump($field); ?>
+<!--        --><?php //var_dump($field); ?>
             <input <?php
             print html_attr(
                 ($field['extra']['attr'] ?? []) +
@@ -18,7 +18,7 @@
             <select <?php print html_attr(($form['attr'] ?? [])); ?>>
                 <?php foreach ($field['options'] as $option_id => $option): ?>
                     <option value="<?php print $option_id; ?>">
-                        <?php print ($field['value'] == $option_id) ? 'selected' : ''; ?>
+                        <?php print ($field['value'] == $option_id) ? : ''; ?>
                         <?php print $option; ?>
                     </option>
                 <?php endforeach; ?>
