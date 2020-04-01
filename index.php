@@ -17,7 +17,7 @@ function form_success($form, $safe_input)
  * @param $form
  * @param $safe_input
  */
-function form_ok($form, $safe_input)
+function form_fail($form, $safe_input)
 {
     var_dump('Klaida');
 }
@@ -32,37 +32,95 @@ $form = [
     ],
     'callbacks' => [
         'success' => 'form_success',
-        'fail' => 'form_ok'
+        'fail' => 'form_fail'
     ],
     'fields' => [
-        'laukelis_1' => [
-            'label' => 'tavo mintis',
+        'username' => [
+            'label' => 'Username',
             'type' => 'text',
             'validate' => [
                 'validate_not_empty',
+                'validate_text_lenght' => [
+                    'min' => 0,
+                    'max' => 6
+                ],
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Įveskite minti'
-                ]
-            ]
+                    'class' => 'red',
+                    'placeholder' => ' '
+                ],
+            ],
         ],
-        'laukelis_2' => [
-            'label' => 'pakartok minti',
+        'email' => [
+            'label' => 'Email',
             'type' => 'text',
             'validate' => [
                 'validate_not_empty',
+                'validate_text_lenght' => [
+                    'min' => 0,
+                    'max' => 6
+                ],
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Pakartokite minti'
-                ]
-            ]
+                    'class' => 'red',
+                    'placeholder' => 'name@gmail.com '
+                ],
+            ],
+        ],
+        'password' => [
+            'label' => 'Password',
+            'type' => 'password',
+            'validate' => [
+                'validate_not_empty',
+                'validate_text_lenght' => [
+                    'min' => 0,
+                    'max' => 6
+                ],
+            ],
+            'extra' => [
+                'attr' => [
+                    'class' => 'red',
+                    'placeholder' => '*********'
+                ],
+            ],
+        ],
+        'password_repeat' => [
+            'label' => 'Repeat password',
+            'type' => 'password',
+            'validate' => [
+                'validate_not_empty',
+                'validate_text_lenght' => [
+                    'min' => 0,
+                    'max' => 100
+                ],
+            ],
+            'extra' => [
+                'attr' => [
+                        'class' => 'red',
+                    'placeholder' => '*********'
+                ],
+            ],
+        ],
+        'phone_number' => [
+            'label' => 'Phone number',
+            'type' => 'number',
+            'validate' => [
+                'validate_not_empty',
+                'validate_is_number',
+
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'validate_phone'
+                ],
+            ],
         ],
     ],
     'buttons' => [
         'submit' => [
-            'text' => 'Važiuojam',
+            'text' => 'Register',
             'name' => 'action',
             'validate' => [
                 'validate_not_empty'
@@ -71,8 +129,8 @@ $form = [
     ],
     'validators' => [
         'validate_fields_match' => [
-            'laukelis_1',
-            'laukelis_2'
+            'password',
+            'password_repeat'
         ],
     ],
 ];
