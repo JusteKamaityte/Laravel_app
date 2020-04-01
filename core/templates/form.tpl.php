@@ -11,7 +11,6 @@
                     'name' => $field_id,
                     'type' => $field['type'],
                     'value' => $field['value'] ?? '',
-                    'placeholder' => $field_id
 
                 ]); ?>>
         <?php elseif (in_array($field['type'], ['select'])): ?>

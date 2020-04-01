@@ -1,26 +1,7 @@
 <?php
 require 'bootloader.php';
 
-/**
- *
- * @param $form
- * @param $safe_input
- */
-function form_success($form, $safe_input)
-{
-    var_dump('Success');
-}
 
-
-/**
- *
- * @param $form
- * @param $safe_input
- */
-function form_fail($form, $safe_input)
-{
-    var_dump('Klaida');
-}
 
 
 $form = [
@@ -35,105 +16,76 @@ $form = [
         'fail' => 'form_fail'
     ],
     'fields' => [
-        'username' => [
-            'label' => 'Username',
+        'guess' => [
+            'label' => 'Spėk, kokia bus šaknis iš',
             'type' => 'text',
-            'validate' => [
-                'validate_not_empty',
-                'validate_text_lenght' => [
-                    'min' => 0,
-                    'max' => 6
-                ],
-            ],
-            'extra' => [
-                'attr' => [
-                    'class' => 'red',
-                    'placeholder' => ' '
-                ],
-            ],
-        ],
-        'email' => [
-            'label' => 'Email',
-            'type' => 'text',
-            'validate' => [
-                'validate_not_empty',
-                'validate_text_lenght' => [
-                    'min' => 0,
-                    'max' => 6
-                ],
-            ],
-            'extra' => [
-                'attr' => [
-                    'class' => 'red',
-                    'placeholder' => 'name@gmail.com '
-                ],
-            ],
-        ],
-        'password' => [
-            'label' => 'Password',
-            'type' => 'password',
-            'validate' => [
-                'validate_not_empty',
-                'validate_text_lenght' => [
-                    'min' => 0,
-                    'max' => 6
-                ],
-            ],
-            'extra' => [
-                'attr' => [
-                    'class' => 'red',
-                    'placeholder' => '*********'
-                ],
-            ],
-        ],
-        'password_repeat' => [
-            'label' => 'Repeat password',
-            'type' => 'password',
-            'validate' => [
-                'validate_not_empty',
-                'validate_text_lenght' => [
-                    'min' => 0,
-                    'max' => 100
-                ],
-            ],
-            'extra' => [
-                'attr' => [
-                        'class' => 'red',
-                    'placeholder' => '*********'
-                ],
-            ],
-        ],
-        'phone_number' => [
-            'label' => 'Phone number',
-            'type' => 'number',
+            'value' => rand(0, 1000),
             'validate' => [
                 'validate_not_empty',
                 'validate_is_number',
-
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'validate_phone'
+                    'readonly' => true,
+                ],
+            ],
+        ],
+        'answer' => [
+            'label' => 'Atsakymas:',
+            'type' => 'text',
+            'value' => '',
+            'validate' => [
+                'validate_not_empty',
+                'validate_is_number',
+            ],
+            'extra' => [
+                'attr' => [
+                    'class' => 'red',
+                    'placeholder' => 'Iveskite skaiciu'
                 ],
             ],
         ],
     ],
     'buttons' => [
         'submit' => [
-            'text' => 'Register',
+            'text' => 'SPĖTI',
             'name' => 'action',
             'validate' => [
                 'validate_not_empty'
             ],
         ],
     ],
-    'validators' => [
-        'validate_fields_match' => [
-            'password',
-            'password_repeat'
-        ],
-    ],
+//    'validators' => [
+//        'validate_fields_match' => [
+//            'x',
+//            'y'
+//        ],
+//    ],
 ];
+
+/**
+ *
+ * @param $form
+ * @param $safe_input
+ */
+function form_success($form, $safe_input)
+{
+    $target = $safe_input['guess'];
+    $answer = $safe_input['answer'];
+    $difference = sqrt((float)$target) - (float)$answer;
+    var_dump("Nuo tinkamo atsakymo nukrypai $difference");
+}
+
+
+/**
+ *
+ * @param $form
+ * @param $safe_input
+ */
+function form_fail($form, $safe_input)
+{
+    var_dump('Neivedei atsakymo');
+}
 
 if ($_POST) {
 
@@ -151,7 +103,8 @@ if ($_POST) {
     </style>
 </head>
 <body>
-<h1>FORM VALIDATORS</h1>
+<h1>QUIZ</h1>
+<h2>Matematikas?</h2>
 <?php include 'core/templates/form.tpl.php'; ?>
 </body>
 </html>
