@@ -1,7 +1,30 @@
 <?php
 require 'bootloader.php';
 
+/**
+ *
+ * @param $form
+ * @param $safe_input
+ */
+function form_success($form, $safe_input)
+{
+    $target = $safe_input['guess'];
+    $answer = $safe_input['answer'];
+    $difference = sqrt($target) - $answer;
+    var_dump("Nuo tinkamo atsakymo nukrypai $difference");
 
+}
+
+
+/**
+ *
+ * @param $form
+ * @param $safe_input
+ */
+function form_fail($form, $safe_input)
+{
+    var_dump('Neivedei atsakymo');
+}
 
 
 $form = [
@@ -38,12 +61,12 @@ $form = [
                 'validate_not_empty',
                 'validate_is_number',
             ],
-            'extra' => [
-                'attr' => [
-                    'class' => 'red',
-                    'placeholder' => 'Iveskite skaiciu'
-                ],
-            ],
+//            'extra' => [
+//                'attr' => [
+//                    'class' => 'red',
+//                    'placeholder' => 'Iveskite skaiciu'
+//                ],
+//            ],
         ],
     ],
     'buttons' => [
@@ -57,42 +80,19 @@ $form = [
     ],
 //    'validators' => [
 //        'validate_fields_match' => [
-//            'x',
-//            'y'
+//            'guess',
+//            'answer'
 //        ],
 //    ],
 ];
 
-/**
- *
- * @param $form
- * @param $safe_input
- */
-function form_success($form, $safe_input)
-{
-    $target = $safe_input['guess'];
-    $answer = $safe_input['answer'];
-    $difference = sqrt((float)$target) - (float)$answer;
-    var_dump("Nuo tinkamo atsakymo nukrypai $difference");
-}
 
-
-/**
- *
- * @param $form
- * @param $safe_input
- */
-function form_fail($form, $safe_input)
-{
-    var_dump('Neivedei atsakymo');
-}
 
 if ($_POST) {
 
     $filtered_input = get_filtered_input($form);
     $validation = validate_form($form, $filtered_input);
 }
-
 
 ?>
 
