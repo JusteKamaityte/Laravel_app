@@ -86,13 +86,6 @@ $form = [
 //    ],
 ];
 
-function add_field(&$form, $num){
-    $form['field'][$num] = [
-            'name' => "name{$num}",
-            'label' => "Laukelis{$num}",
-            'type' => 'text'
-    ];
-}
 
 if ($_POST) {
 
