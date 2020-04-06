@@ -56,20 +56,3 @@ function validate_phone($field_input, array &$field): bool{
     return true;
 }
 
-/**
- * @param $array
- * @param $file
- * @return bool
- */
-function array_to_file(array $array, string $file): bool{
-
-    $string = json_encode($array);
-
-    $bytes_written = file_put_contents($file, $string);
-    
-//var_dump($bytes_written);
-    if($bytes_written !== false){
-        return true;
-    }
-    return false;
-}

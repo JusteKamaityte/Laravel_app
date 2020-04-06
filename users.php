@@ -9,9 +9,9 @@ $table = [
     ]
 ];
 
-$table['rows'] [] = file_to_array(DB_FILE);
-var_dump(file_to_array(DB_FILE));
-var_dump($table['rows']);
+//$table['rows'] = file_to_array('db_file.txt');
+//var_dump(file_to_array(db_file));
+//var_dump($table['rows']);
 ?>
 
 

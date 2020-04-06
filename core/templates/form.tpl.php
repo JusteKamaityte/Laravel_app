@@ -1,4 +1,6 @@
+
 <form
+
     <?php print html_attr(($form['attr'] ?? []) + ['method' => 'POST']); ?>>
     <?php foreach ($form['fields'] ?? [] as $field_id => $field): ?>
         <label><span><?php print $field['label']; ?></span></label>

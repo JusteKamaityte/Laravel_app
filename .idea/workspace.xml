@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4b0cac2-3e4b-4f5a-88cc-7bd74342f39b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/core/functions/form/file.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/list.tpl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/data/db.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/data/login-info.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/functions/form/validators.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/functions/form/validators.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootloader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/templates/form.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/templates/form.tpl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/users.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +109,13 @@
       <workItem from="1585290558114" duration="14862000" />
       <workItem from="1585507054240" duration="17501000" />
       <workItem from="1585635939501" duration="36324000" />
-      <workItem from="1585808702547" duration="8574000" />
+      <workItem from="1585808702547" duration="16388000" />
+      <workItem from="1586104899171" duration="340000" />
+      <workItem from="1586105259785" duration="590000" />
+      <workItem from="1586105930136" duration="398000" />
+      <workItem from="1586107630341" duration="338000" />
+      <workItem from="1586107979715" duration="152000" />
+      <workItem from="1586108143159" duration="9784000" />
     </task>
     <servers />
   </component>
@@ -109,25 +123,32 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="474" y="344" key="NewPhpFileDialog" timestamp="1585811599706">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2513" y="434" key="NewPhpFileDialog" timestamp="1586123135813">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="474" y="344" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1585811599706" />
+    <state x="2513" y="434" key="NewPhpFileDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586123135813" />
+    <state x="474" y="344" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1585818855522" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1585220143447">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1585220143447" />
+    <state x="2536" y="169" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586112527147">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2536" y="169" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586112527147" />
     <state x="177" y="343" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584520639185">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="177" y="343" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1584520639185" />
-    <state x="461" y="5" width="713" height="819" key="find.popup" timestamp="1585780524143">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2496" y="6" width="892" height="1034" key="find.popup" timestamp="1586115484545">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="2496" y="6" width="892" height="1034" key="find.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586115484545" />
     <state x="461" y="5" width="713" height="819" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1585780524143" />
-    <state x="847" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1585555588365">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2979" y="183" width="840" height="856" key="search.everywhere.popup" timestamp="1586123784750">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="2979" y="183" width="840" height="856" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586123784750" />
     <state x="847" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1585555588365" />
   </component>
 </project>

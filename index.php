@@ -1,37 +1,49 @@
 <?php
 require 'bootloader.php';
 
-/**
- *
- * @param $form
- * @param $safe_input
- */
-function form_success($form, $safe_input)
-{
-    $target = $safe_input['guess'];
-    $answer = $safe_input['answer'];
-    $difference = sqrt($target) - $answer;
-    var_dump("Nuo tinkamo atsakymo nukrypai $difference");
+///**
+// *F-cija kuri  ivyks, kai forma atitiks visus validacijos reikalavimus
+// * @param $form
+// * @param $safe_input
+// */
+//function form_success($safe_input, $form)
+//{
+//    var_dump('registracija teisinga');
+//    if(file_exists(db_file.txt)){
+//        $username = file_to_array(db);
+//        $username[] = [
+//            'username' => $safe_input['username'],
+//            'password' => $safe_input['password']
+//        ];
+//        array_to_file($username, db);
+//    }else{
+//        $username = [
+//            'username' => $safe_input['username'],
+//            'password' => $safe_input['password']
+//        ];
+//        array_to_file($username, db);
+//    }
+//}
 
-}
 
-
-/**
- *
- * @param $form
- * @param $safe_input
- */
-function form_fail($form, $safe_input)
-{
-    var_dump('Neivedei atsakymo');
-}
-
+///**
+// *F-cija kuri  ivyks, kai forma neatitiks nors vieno validacijos reikalavimu
+// * @param $form
+// * @param $safe_input
+// */
+//function form_fail(array $form, array $safe_input)
+//{
+//    array_to_file(['tuscia'], 'app/data/db_file.txt');
+//}
+//
+//$test = array_to_file(db);
+//var_dump($test);
 
 $form = [
     'attr' => [
         'action' => 'index.php',
         'method' => 'POST',
-        'class' => 'my-form',
+        'class' => 'form',
         'id' => 'form'
     ],
     'callbacks' => [
@@ -39,39 +51,44 @@ $form = [
         'fail' => 'form_fail'
     ],
     'fields' => [
-        'guess' => [
-            'label' => 'Spėk, kokia bus šaknis iš',
+        'username' => [
+            'label' => 'Username',
             'type' => 'text',
-            'value' => rand(0, 1000),
             'validate' => [
                 'validate_not_empty',
-                'validate_is_number',
+                'validate_text_lenght' => [
+                    'min' => 0,
+                    'max' => 6
+                ],
             ],
             'extra' => [
                 'attr' => [
-                    'readonly' => true,
+                    'class' => 'input',
+                    'placeholder' => ' '
                 ],
             ],
         ],
-        'answer' => [
-            'label' => 'Atsakymas:',
-            'type' => 'text',
-            'value' => '',
+        'password' => [
+            'label' => 'Password',
+            'type' => 'password',
             'validate' => [
                 'validate_not_empty',
-                'validate_is_number',
+                'validate_text_lenght' => [
+                    'min' => 0,
+                    'max' => 6
+                ],
             ],
-//            'extra' => [
-//                'attr' => [
-//                    'class' => 'red',
-//                    'placeholder' => 'Iveskite skaiciu'
-//                ],
-//            ],
+            'extra' => [
+                'attr' => [
+                    'class' => 'input',
+                    'placeholder' => '*********'
+                ],
+            ],
         ],
     ],
     'buttons' => [
         'submit' => [
-            'text' => 'SPĖTI',
+            'text' => 'login',
             'name' => 'action',
             'validate' => [
                 'validate_not_empty'
@@ -87,6 +104,10 @@ $form = [
 ];
 
 
+$list =[
+
+];
+
 if ($_POST) {
 
     $filtered_input = get_filtered_input($form);
@@ -95,15 +116,16 @@ if ($_POST) {
 
 ?>
 
-<html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-    <title>Form security</title>
-    <style>
-    </style>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="app/assets/css/main.css">
+    <title></title>
 </head>
 <body>
-<h1>QUIZ</h1>
-<h2>Matematikas?</h2>
+
 <?php include 'core/templates/form.tpl.php'; ?>
+
 </body>
 </html>
