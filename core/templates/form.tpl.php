@@ -27,6 +27,8 @@
                 ?>>
             </label>
         <?php endforeach; ?>
+        <?php endif; ?>
+    
         <?php if (isset($field['error'])): ?>
             <span class="error"><?php print $field['error']; ?></span>
         <?php endif; ?>
@@ -37,10 +39,9 @@
                 <?php print $button['text']; ?>
             </button>
         <?php endforeach; ?>
+
         <?php if (isset($form['error'])): ?>
             <span><?php print  $form['error']; ?></span>
         <?php endif; ?>
 
-    <?php endif; ?>
-    <?php endforeach; ?>
 </form>
