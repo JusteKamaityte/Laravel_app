@@ -91,7 +91,7 @@ function validate_field_range($safe_input, array &$field, $parameters)
  */
 function validate_select($field_input, array &$field): bool
 {
-    if (!isset($field['options'][$field_input])) {
+    if (isset($field['value'][$field_input])) {
         $field['error'] = 'Nera tokio pasirinkimo';
         return false;
     }

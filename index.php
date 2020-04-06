@@ -1,6 +1,6 @@
 <?php
 require 'bootloader.php';
-
+//
 ///**
 // *F-cija kuri  ivyks, kai forma atitiks visus validacijos reikalavimus
 // * @param $form
@@ -9,23 +9,10 @@ require 'bootloader.php';
 //function form_success($safe_input, $form)
 //{
 //    var_dump('registracija teisinga');
-//    if(file_exists(db_file.txt)){
-//        $username = file_to_array(db);
-//        $username[] = [
-//            'username' => $safe_input['username'],
-//            'password' => $safe_input['password']
-//        ];
-//        array_to_file($username, db);
-//    }else{
-//        $username = [
-//            'username' => $safe_input['username'],
-//            'password' => $safe_input['password']
-//        ];
-//        array_to_file($username, db);
-//    }
+//
 //}
-
-
+//
+//
 ///**
 // *F-cija kuri  ivyks, kai forma neatitiks nors vieno validacijos reikalavimu
 // * @param $form
@@ -35,9 +22,9 @@ require 'bootloader.php';
 //{
 //    array_to_file(['tuscia'], 'app/data/db_file.txt');
 //}
-//
+
 //$test = array_to_file(db);
-//var_dump($test);
+
 
 $form = [
     'attr' => [
@@ -51,62 +38,52 @@ $form = [
         'fail' => 'form_fail'
     ],
     'fields' => [
-        'username' => [
-            'label' => 'Username',
-            'type' => 'text',
+        'question_1' => [
+            'label' => 'ar laikai kardana?',
+            'type' => 'radio',
             'validate' => [
                 'validate_not_empty',
-                'validate_text_lenght' => [
-                    'min' => 0,
-                    'max' => 6
-                ],
             ],
-            'extra' => [
-                'attr' => [
-                    'class' => 'input',
-                    'placeholder' => ' '
-                ],
+            'select' => [
+                'taip' => 'taip',
+                'ne' => 'ne'
             ],
         ],
-        'password' => [
-            'label' => 'Password',
-            'type' => 'password',
+        'question_2' => [
+            'label' => 'ar pili i baka?',
+            'type' => 'radio',
             'validate' => [
                 'validate_not_empty',
-                'validate_text_lenght' => [
-                    'min' => 0,
-                    'max' => 6
-                ],
             ],
-            'extra' => [
-                'attr' => [
-                    'class' => 'input',
-                    'placeholder' => '*********'
-                ],
+            'select' => [
+                'taip' => 'taip',
+                'ne' => 'ne'
+            ],
+        ],
+        'question_3' => [
+            'label' => 'ar rukai zoliu arbata?',
+            'type' => 'radio',
+            'validate' => [
+                'validate_not_empty',
+            ],
+            'select' => [
+                'taip' => 'taip',
+                'ne' => 'ne'
             ],
         ],
     ],
     'buttons' => [
         'submit' => [
-            'text' => 'login',
+            'text' => 'žiūrėti statistiką',
             'name' => 'action',
             'validate' => [
                 'validate_not_empty'
             ],
         ],
     ],
-//    'validators' => [
-//        'validate_fields_match' => [
-//            'guess',
-//            'answer'
-//        ],
-//    ],
-];
-
-
-$list =[
 
 ];
+
 
 if ($_POST) {
 
@@ -121,7 +98,7 @@ if ($_POST) {
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="app/assets/css/main.css">
-    <title></title>
+    <title>Apklausa</title>
 </head>
 <body>
 

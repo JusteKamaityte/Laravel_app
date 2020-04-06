@@ -4,9 +4,6 @@
 }
 
 body{
-    display: flex;
-    flex-direction: column;
-
     height: 100vh;
     /*background:linear-gradient(rgba(234,251,173,100) 0%, rgba(222,253,143,100) 45%, rgba(252,255,126,100) 100%);*/
     background: lightgrey;
@@ -25,21 +22,13 @@ form{
 input{
     align-items: center;
     border:1px solid black;
-    margin: 20px 0px;
+    margin: 20px 0;
     padding: 10px;
 }
 
-input:valid{
-    border: 1px solid green;
-}
-
-input:not([type="submit"]){
-    width: 100%;
-}
 
 button{
     font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
     outline: 0;
     background: #4CAF50;
     width: 100%;
@@ -67,6 +56,5 @@ textarea{
 }
 label{
     font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-}
 
+}
