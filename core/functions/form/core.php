@@ -77,7 +77,3 @@ function validate_form(array &$form, array $safe_input): bool
     return $success;
 }
 
-
-
-
-

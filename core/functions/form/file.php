@@ -17,3 +17,19 @@ function array_to_file(array $array, string $file): bool{
     }
     return false;
 }
+
+/**
+ * funkcija kuri atkuria masyva is failo
+ * @param $file
+ * @return bool|mixed
+ */
+function file_to_array(string $file)
+{
+    if (file_exists($file)) {
+        $data = file_get_contents($file);
+        if ($data !== false) {
+            return json_decode($data, true);
+        }
+    }
+    return false;
+}

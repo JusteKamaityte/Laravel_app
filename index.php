@@ -1,29 +1,32 @@
 <?php
 require 'bootloader.php';
-//
-///**
-// *F-cija kuri  ivyks, kai forma atitiks visus validacijos reikalavimus
-// * @param $form
-// * @param $safe_input
-// */
-//function form_success($safe_input, $form)
-//{
-//    var_dump('registracija teisinga');
-//
-//}
-//
-//
-///**
-// *F-cija kuri  ivyks, kai forma neatitiks nors vieno validacijos reikalavimu
-// * @param $form
-// * @param $safe_input
-// */
-//function form_fail(array $form, array $safe_input)
-//{
-//    array_to_file(['tuscia'], 'app/data/db_file.txt');
-//}
 
-//$test = array_to_file(db);
+/**
+ *F-cija kuri  ivyks, kai forma atitiks visus validacijos reikalavimus
+ * @param $form
+ * @param $safe_input
+ */
+function form_success($safe_input, $form)
+{
+    $data= file_to_array(DB_FILE) ?: [];
+
+    $data = $safe_input;
+    var_dump('duomenys įrašyti teisingai');
+
+}
+
+
+/**
+ *F-cija kuri  ivyks, kai forma neatitiks nors vieno validacijos reikalavimu
+ * @param $form
+ * @param $safe_input
+ */
+function form_fail(array $form, array $safe_input)
+{
+    array_to_file(['fail'], (DB_FILE));
+}
+
+
 
 
 $form = [
@@ -41,7 +44,7 @@ $form = [
             'label' => 'Ar laikai kardaną?',
             'type' => 'radio',
             'validate' => [
-                'validate_not_empty',
+
             ],
             'select' => [
                 'taip' => 'Taip',
@@ -52,7 +55,7 @@ $form = [
             'label' => 'Ar pili į baką?',
             'type' => 'radio',
             'validate' => [
-                'validate_not_empty',
+
             ],
             'select' => [
                 'taip' => 'Taip',
@@ -63,7 +66,7 @@ $form = [
             'label' => 'Ar rūkai žolių arbatą?',
             'type' => 'radio',
             'validate' => [
-                'validate_not_empty',
+
             ],
             'select' => [
                 'taip' => 'Taip',
@@ -76,7 +79,7 @@ $form = [
             'text' => 'žiūrėti statistiką',
             'name' => 'action',
             'validate' => [
-                'validate_not_empty',
+
             ],
         ],
     ],
