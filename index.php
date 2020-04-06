@@ -31,7 +31,6 @@ $form = [
         'action' => 'index.php',
         'method' => 'POST',
         'class' => 'form',
-        'id' => 'form'
     ],
     'callbacks' => [
         'success' => 'form_success',
@@ -39,36 +38,36 @@ $form = [
     ],
     'fields' => [
         'question_1' => [
-            'label' => 'ar laikai kardana?',
+            'label' => 'Ar laikai kardaną?',
             'type' => 'radio',
             'validate' => [
                 'validate_not_empty',
             ],
             'select' => [
-                'taip' => 'taip',
-                'ne' => 'ne'
+                'taip' => 'Taip',
+                'ne' => 'Ne',
             ],
         ],
         'question_2' => [
-            'label' => 'ar pili i baka?',
+            'label' => 'Ar pili į baką?',
             'type' => 'radio',
             'validate' => [
                 'validate_not_empty',
             ],
             'select' => [
-                'taip' => 'taip',
-                'ne' => 'ne'
+                'taip' => 'Taip',
+                'ne' => 'Ne',
             ],
         ],
         'question_3' => [
-            'label' => 'ar rukai zoliu arbata?',
+            'label' => 'Ar rūkai žolių arbatą?',
             'type' => 'radio',
             'validate' => [
                 'validate_not_empty',
             ],
             'select' => [
-                'taip' => 'taip',
-                'ne' => 'ne'
+                'taip' => 'Taip',
+                'ne' => 'Ne',
             ],
         ],
     ],
@@ -77,11 +76,10 @@ $form = [
             'text' => 'žiūrėti statistiką',
             'name' => 'action',
             'validate' => [
-                'validate_not_empty'
+                'validate_not_empty',
             ],
         ],
     ],
-
 ];
 
 
@@ -90,7 +88,7 @@ if ($_POST) {
     $filtered_input = get_filtered_input($form);
     $validation = validate_form($form, $filtered_input);
 }
-
+var_dump($form);
 ?>
 
 <!DOCTYPE html>
