@@ -9,13 +9,15 @@ $table = [
     ],
     'tbody' => [
         'question_1' => [
-            'Ar laikai kardaną?' => $data,
+            'Ar laikai kardaną?'
+        ],
         'question_2' => [
-            'Ar pili į baką ?' => $data,
+            'Ar pili į baką ?'
+        ],
         'question_3' => [
-            'Ar rūkai žolių arbatą?'=> $data,
+            'Ar rūkai žolių arbatą?'
+        ],
     ],
-
 ];
 
 
