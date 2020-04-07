@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4b0cac2-3e4b-4f5a-88cc-7bd74342f39b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/assets/css/table.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/form/form_array.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/functions/cookies.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/data/db.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootloader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/functions/form/core.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/functions/form/core.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/functions/html.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/functions/html.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/users.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,6 +59,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -106,7 +115,9 @@
       <workItem from="1586105930136" duration="398000" />
       <workItem from="1586107630341" duration="338000" />
       <workItem from="1586107979715" duration="152000" />
-      <workItem from="1586108143159" duration="43894000" />
+      <workItem from="1586108143159" duration="44000000" />
+      <workItem from="1586239202186" duration="12735000" />
+      <workItem from="1586268725056" duration="1751000" />
     </task>
     <servers />
   </component>
@@ -114,11 +125,11 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2513" y="434" key="NewPhpFileDialog" timestamp="1586123135813">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="474" y="344" key="NewPhpFileDialog" timestamp="1586245948933">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="2513" y="434" key="NewPhpFileDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586123135813" />
-    <state x="474" y="344" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1585818855522" />
+    <state x="474" y="344" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1586245948933" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1585220143447">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

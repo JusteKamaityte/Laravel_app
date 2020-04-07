@@ -8,11 +8,23 @@ require 'bootloader.php';
  */
 function form_success($safe_input, $form)
 {
-    $data= file_to_array(DB_FILE) ?: [];
+    $data = file_to_array(DB_FILE) ?: [];
 
-    $data = $safe_input;
+    $data[] = $safe_input;
+    $data[] =[
+        'question_1' => $safe_input['question_1'],
+        'question_2' => $safe_input['question_1'],
+        'question_3' => $safe_input['question_1'],
+    ];
+    array_to_file($data, DB_FILE);
+
     var_dump('duomenys įrašyti teisingai');
 
+    setcookie('submit', 1, time() + (3600), "/");
+    header("Location: /index.php");
+}
+if(isset($_COOKIE['submit'])){
+    header("Location: /users.php");
 }
 
 
@@ -23,10 +35,9 @@ function form_success($safe_input, $form)
  */
 function form_fail(array $form, array $safe_input)
 {
-    array_to_file(['fail'], (DB_FILE));
+    if(isset($_COOKIE['']))
+    var_dump('fail');
 }
-
-
 
 
 $form = [
@@ -91,7 +102,26 @@ if ($_POST) {
     $filtered_input = get_filtered_input($form);
     $validation = validate_form($form, $filtered_input);
 }
-var_dump($form);
+
+
+//setting cookies
+$cookie_value = 0;
+
+if(!isset($_COOKIE['user_id'])){
+    $user_id = rand(1,5);
+    setcookie('user_id', time() + 180);
+    var_dump('sukurtas useris' .$user_id);
+    setcookie('visits', 1, time() +180);
+}else{
+    var_dump('useris jau rastas' .$_COOKIE['user_id']);
+    setcookie('visits', $_COOKIE['visits'] +1, time() + 180);
+    var_dump($_COOKIE);
+}
+
+var_dump('user_id');
+
+
+
 ?>
 
 <!DOCTYPE html>

@@ -1,4 +1,6 @@
 <?php
+include 'core/functions/html.php';
+
 /**
  * funkcija apsauganti nuo pavojingu ivesciu(POST)
  * @param array $form
