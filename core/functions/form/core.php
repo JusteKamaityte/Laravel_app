@@ -1,5 +1,4 @@
 <?php
-include 'core/functions/html.php';
 
 /**
  * funkcija apsauganti nuo pavojingu ivesciu(POST)
@@ -79,3 +78,16 @@ function validate_form(array &$form, array $safe_input): bool
     return $success;
 }
 
+/**
+ * kodas kuris uzpildo forma is data masyvo
+ * @param array $form
+ * @param array $data
+ */
+function fill_form(array &$form, array $data): void{
+    foreach ($form['fields'] as $field_id => &$field){
+        //tikrinam ar isset data = field id
+        if(isset($data[$field_id]) ){
+            $field['value'] = $data[$field_id];
+        }
+    }
+}

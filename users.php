@@ -8,10 +8,15 @@ $table = [
         'Taip (%)'
     ],
     'tbody' => [
+
+
     ],
 ];
 
 var_dump($table);
+
+//ar reikia apsirasyti f-cija success table?
+
 
 //masyvas, tam ,kad galėtume pagal klausimo id gauti patį klausimo tekstą
 $questions = [
@@ -20,9 +25,10 @@ $questions = [
     'question_3' => 'Ar rūkai žolių arbatą?',
 ];
 
+
 $data = file_to_array(DB_FILE) ?: [];
 
-//$stats = [];
+$stats = [];
 
 foreach ($data as $response) {
     foreach ($response as $question_id => $answer) {
@@ -31,10 +37,10 @@ foreach ($data as $response) {
             if ($answer = 'taip') {
                 $stats[$question_id]++;
             }
-
         }
     }
-}
+};
+
 $visits = count($data);
 
 foreach ($stats as $question_id => $count) {
@@ -43,6 +49,7 @@ foreach ($stats as $question_id => $count) {
         round($count / $visits * 100)
     ];
 }
+
 
 $table['tbody'] = file_to_array(DB_FILE);
 
@@ -56,7 +63,7 @@ $table['tbody'] = file_to_array(DB_FILE);
     <title>Duomenų lentelė</title>
 </head>
 <body>
-<h1>Lentelė</h1>
+
 <?php include 'core/templates/table.tpl.php'; ?>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <h2>Apklausa</h2>
     <?php foreach ($form['fields'] ?? [] as $field_id => $field): ?>
 
-        <label><span><?php print $field['label']; ?></span></label>
+        <label><?php print $field['label']; ?></label>
         <?php if (in_array($field['type'], ['text', 'number', 'password'])): ?>
             <input <?php
             print html_attr(($field['extra']['attr'] ?? []) +
@@ -14,20 +14,13 @@
                     'value' => $field['value'] ?? '',
 
                 ]); ?>>
-
+<!--radio button generation-->
         <?php elseif (in_array($field['type'], ['radio'])): ?>
         <div class="form_field_select">
-        <?php foreach ($field['select'] as $radio_id => $radio_value): ?>
+        <?php foreach ($field['options'] as $option_id => $option_label): ?>
             <label>
-                <span><?php print $radio_value?></span>
-                <input <?php
-                print html_attr(($field['extra']['attr'] ?? []) +
-                    [
-                        'name' => $field_id,
-                        'type' => $field['type'],
-                        'value' => $radio_value['value'] ?? ''
-                    ]);
-                ?>>
+                <span><?php print $option_label?></span>
+                <input <?php print radio_attr($field, $field_id, $option_id) ?>>
             </label>
         <?php endforeach; ?>
         </div>
