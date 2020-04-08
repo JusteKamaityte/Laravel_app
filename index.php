@@ -14,11 +14,11 @@ function form_success($safe_input, $form)
 
 
     setcookie('submit', 1, time() + (3600), "/");
-//    header("Location: /index.php");
+    header("Location: /index.php");
 }
 
 if (isset($_COOKIE['submit'])) {
-//    header("Location: /users.php");
+    header("Location: /users.php");
 }
 
 
@@ -29,6 +29,15 @@ if (isset($_COOKIE['submit'])) {
  */
 function form_fail(array $form, array $safe_input)
 {
+    $valid_fields = [];
+    foreach ($form['fields'] as $field_id => $field){
+        if(!isset($field['error'])){
+            $valid_fields[$field_id] = $field['value'];
+        }
+    }
+    $data = json_encode($valid_fields);
+    setcookie('data', $data, time() + 3600);
+
     if (isset($_COOKIE['']))
         var_dump('fail');
     fill_form($form, $data);
@@ -50,25 +59,24 @@ $form = [
             'label' => 'Ar laikai kardaną?',
             'type' => 'radio',
             'options' => [
-                'taip' => 'Taip',
-                'ne' => 'Ne',
+                'taip' => 'taip',
+                'ne' => 'ne',
             ],
         ],
         'question_2' => [
             'label' => 'Ar pili į baką?',
             'type' => 'radio',
-
             'options' => [
-                'taip' => 'Taip',
-                'ne' => 'Ne',
+                'taip' => 'taip',
+                'ne' => 'ne',
             ],
         ],
         'question_3' => [
             'label' => 'Ar rūkai žolių arbatą?',
             'type' => 'radio',
             'options' => [
-                'taip' => 'Taip',
-                'ne' => 'Ne',
+                'taip' => 'taip',
+                'ne' => 'ne',
             ],
         ],
     ],

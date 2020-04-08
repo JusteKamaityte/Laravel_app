@@ -16,7 +16,13 @@ function html_attr(array $attr): string
     return $attributes;
 }
 
-function radio_attr(array $field, $field_id, $option_id){
+/**
+ * @param $field
+ * @param $field_id
+ * @param $option_id
+ * @return string
+ */
+function radio_attr(&$field, $field_id, $option_id){
 
     $attr = [
         'name' => $field_id,
@@ -24,7 +30,7 @@ function radio_attr(array $field, $field_id, $option_id){
         'type' => 'radio'
     ];
 
-    if($field['value'] == $option_id ){
+    if(($field['value'] ?? '') == $option_id ){
         $attr['checked'] = true;
     }
     return html_attr($attr);

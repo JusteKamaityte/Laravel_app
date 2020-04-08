@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d4b0cac2-3e4b-4f5a-88cc-7bd74342f39b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootloader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/functions/form/core.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/functions/form/core.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/functions/html.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/functions/html.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/templates/form.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/templates/form.tpl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/templates/table.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/templates/table.tpl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/users.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +110,7 @@
       <workItem from="1586107979715" duration="152000" />
       <workItem from="1586108143159" duration="44000000" />
       <workItem from="1586239202186" duration="12735000" />
-      <workItem from="1586268725056" duration="13066000" />
+      <workItem from="1586268725056" duration="14699000" />
     </task>
     <servers />
   </component>
@@ -128,10 +123,10 @@
     </state>
     <state x="2513" y="434" key="NewPhpFileDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586123135813" />
     <state x="474" y="344" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1586245948933" />
-    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1586277946737">
+    <state x="168" y="93" width="1274" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1586331371002">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1586277946737" />
+    <state x="168" y="93" width="1274" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1586331371002" />
     <state x="2536" y="169" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586112527147">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
