@@ -83,20 +83,20 @@ function validate_field_range($safe_input, array &$field, $parameters)
     return true;
 }
 
-/**
- * Patikrina ar pasirinkimas egzistuoja $field masyve
- * @param $field_input
- * @param $field
- * @return bool
- */
-function validate_select($field_input, array &$field): bool
-{
-    if (isset($field['value'][$field_input])) {
-        $field['error'] = 'Nera tokio pasirinkimo';
-        return false;
-    }
-    return true;
-}
+///**
+// * Patikrina ar pasirinkimas egzistuoja $field masyve
+// * @param $field_input
+// * @param $field
+// * @return bool
+// */
+//function validate_select($field_input, array &$field): bool
+//{
+//    if (isset($field['value'][$field_input])) {
+//        $field['error'] = 'Nera tokio pasirinkimo';
+//        return false;
+//    }
+//    return true;
+//}
 
 /**
  * F-cija, patikrinanti ar fieldai sutampa

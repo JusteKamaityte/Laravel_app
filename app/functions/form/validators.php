@@ -57,3 +57,70 @@ function validate_phone($field_input, array &$field): bool{
 }
 
 
+/**
+ * Patikrina ar pasirinkimas egzistuoja $field masyve
+ * @param $field_input
+ * @param $field
+ * @return bool
+ */
+function validate_select($field_input, array &$field): bool
+{
+    if (isset($field['value'][$field_input])) {
+        $field['error'] = 'Nera tokio pasirinkimo';
+        return false;
+    }
+    return true;
+}
+
+/**
+ *funkcija generuojanti formos atributus
+ * @param array $attr
+ * @return string
+ */
+function teams_attr(array $attr): string
+{
+    $attributes = '';
+
+    foreach ($attr as $index => $value) {
+        $attributes .= "$index=\"$value\" ";
+    }
+
+    return $attributes;
+}
+
+/**
+ * @param $safe_input
+ * @param $form
+ * @return bool
+ */
+function validate_player(array $safe_input, array &$form): bool{
+
+    $teams = file_to_array(TEAMS_FILE);
+    $team = $teams[$safe_input['team_id']];
+
+    foreach ($team['players'] as $player){
+        if($player['nickname'] == $safe_input['nickname']){
+            $form['error'] = 'Toks žaidėjas jau yra';
+            return false;
+        }
+    }
+    return true;
+}
+
+//patikrinti ar tokiu pavadinimu komanda jau nera registruota
+/**
+ * @param $field
+ * @param $safe_input
+ * @return bool
+ */
+function validate_team(array $field, array $safe_input): bool
+{
+    $data = file_to_array(TEAMS_FILE);
+    foreach ($data ?? []  as $team) {
+        if ($safe_input == $team['team_name']) {
+            $field['error'] = 'tokia komanda egzistuoja';
+            return false;
+        }
+    }
+    return true;
+}

@@ -1,4 +1,7 @@
 <?php
+
+define ('TEAMS_FILE', 'app/data/teams.json');
+define ('DB_FILE', 'app/data/db.json');
 //loadinam  pagrindines core funkcijas
 require'core/functions/form/core.php';
 require 'core/functions/form/validators.php';
@@ -12,5 +15,5 @@ require 'core/functions/table/validators.php';
 require 'app/functions/form/validators.php';
 require 'app/functions/table/validators.php';
 
-define ('DB_FILE', 'app/data/db.json');
+
 

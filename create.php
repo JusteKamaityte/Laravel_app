@@ -1,49 +1,20 @@
 <?php
-require 'core/functions/html.php';
-
-/**
- * // *F-cija kuri  ivyks, kai forma atitiks visus validacijos reikalavimus
- * // * @param $form
- * // * @param $safe_input
- * // */
-function form_success($safe_input, $form)
-{
-
-}
+require 'bootloader.php';
 
 
-/**
- *F-cija kuri  ivyks, kai forma neatitiks nors vieno validacijos reikalavimu
- * @param $form
- * @param $safe_input
- */
-function form_fail(array $form, array $safe_input)
-{
-
-}
+$title = 'Create';
 
 $form = [
-    'attr' => [
-        'action' => 'create.php',
-        'method' => 'POST',
-        'class' => 'form',
-    ],
-    'callbacks' => [
-        'success' => 'form_success',
-        'fail' => 'form_fail'
-    ],
     'fields' => [
-        'team' => [
-            'name' => ' ',
+        'team_name' => [
+            'label' => 'Team name',
             'type' => 'text',
             'validate' => [
                 'validate_not_empty',
-                'validate_team'
+//                'validate_team'
             ],
             'extra' => [
                 'attr' => [
-                    'class' => 'team',
-                    'placeholder' => 'Team name',
                 ],
             ],
         ],
@@ -51,65 +22,52 @@ $form = [
     'buttons' => [
         'submit' => [
             'text' => 'Create',
-            'name' => 'action',
         ],
+    ],
+    'callbacks' => [
+        'success' => 'form_success',
     ],
 ];
 
-//demo masyvas, kaip turėtų atrodyti, kai įrašysim į failą
-//$teams = [
-//    [
-//        'team_name' => 'Raganosiai',
-//        'players' => [
-//            [
-//                'name' => 'Pepper',
-//                'score' => 5
-//            ],
-//            [
-//                'name' => 'Dinosaur',
-//                'score' => 7,
-//            ],
-//            [
-//                'name' => 'Lama',
-//                'score' => 2,
-//            ],
-//        ],
-//    ],
-//    [
-//        'team_name' => 'Katės',
-//        'players' => [
-//            [
-//                'name' => 'Tiger',
-//                'score' => 3
-//            ],
-//            [
-//                'name' => 'Wolf',
-//                'score' => 1,
-//            ],
-//            [
-//                'name' => 'Hiena',
-//                'score' => 8,
-//            ],
-//        ],
-//    ],
-//];
+/**
+ * @param $safe_input
+ * @param $form
+ */
+function form_success($safe_input, $form)
+{
+    $data = file_to_array(TEAMS_FILE) ?: [];
+    $data[] = [
+        'team_name' => $safe_input['team_name'],
+        'players' => []
+    ];
 
-var_dump($teams);
-var_dump($teams[0]['players']);
+    array_to_file($data, TEAMS_FILE);
+
+    setcookie('submit', 1, time() + (3600), "/");
+    header("Location: /join.php");
+}
+
+if (isset($_COOKIE['submit'])) {
+    header("Location: /join.php");
+}
+
+if ($_POST) {
+    $safe_input = get_filtered_input($form);
+   validate_form($form, $safe_input);
+}
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="app/assets/css/main.css">
-    <title>Teams</title>
+    <title><?php print $title ;?></title>
 </head>
 <body>
-
-<?php include 'core/templates/team_form.tpl.php'; ?>
+<section>
+        <?php include 'core/templates/form.tpl.php'; ?>
+</section>
 
 </body>
 </html>

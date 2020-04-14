@@ -26,7 +26,7 @@ function get_filtered_input(array $form): ?array
  * F-cija, kuri validuoja pacia forma
  * (sukuria fieldams-formai errorus)
  * @param array $form
- * @param array $safe_input isfiltruotas post masyvas
+ * @param array $safe_input
  * @return bool
  */
 function validate_form(array &$form, array $safe_input): bool
@@ -70,10 +70,7 @@ function validate_form(array &$form, array $safe_input): bool
         if (isset($form['callbacks']['success'])) {
             $form['callbacks']['success']($safe_input, $form);
         }
-    } else {
-        if (isset($form['callbacks']['fail'])) {
-            $form['callbacks']['fail']($safe_input, $form);
-        }
+
     }
     return $success;
 }
@@ -88,6 +85,7 @@ function fill_form(array &$form, array $data): void{
         //tikrinam ar isset data = field id
         if(isset($data[$field_id]) ){
             $field['value'] = $data[$field_id];
+
         }
     }
 }

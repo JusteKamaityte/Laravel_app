@@ -6,7 +6,7 @@
  * @return bool
  */
 function array_to_file(array $array, string $file): bool{
-
+//kadangi negali array irasyt i file tiesiogiai, tai butina konvertuot i stringa
     $string = json_encode($array);
 
     $bytes_written = file_put_contents($file, $string);
