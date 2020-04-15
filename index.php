@@ -1,17 +1,41 @@
 <?php
+require 'core/functions/auth.php';
+$nav = [
+    [
+    'link' => '/index.php',
+    'name' => 'Home'
+    ],
+    [
+        'link' => '/register.php',
+        'name' => 'Register'
+    ],
+    [
+        'link' => '/login.php',
+        'name' => 'Login'
+    ],
+    [
+        'link' => '/logout.php',
+        'name' => 'Logout'
+    ]
+];
 
-$h1 = 'You are not logged in ';
+$logged = is_logged_in();
 
-if(isset( $_SESSION['email'])){
+if($logged){
+    unset($nav[1]);
+    unset($nav[2]);
     $data = file_to_array(USER);
-    foreach($data as $user_key){
-        if($user_key['email'] == $_SESSION['email']){
-            $h1 = 'Welcome back , ' .$user_key['username'];
-            return true;
+
+    foreach($data as $user){
+        if($user['email'] == $_SESSION['email']){
+            $h1 = 'Sveiki sugrįžę' .$user['username'];
         }
-        return false;
     }
+}else{
+    $h1 = 'Jūs neprisijungęs';
+    unset($nav[3]);
 }
+
 ?>
 
 <html>
@@ -23,10 +47,11 @@ if(isset( $_SESSION['email'])){
 <body>
 <main>
     <section class="nav_bar">
-        <?php include 'core/templates/nav.tpl.php'; ?>
+        <?php include 'app/templates/nav.tpl.php'; ?>
     </section>
-
-    <h1> <?php print $h1; ?></h1>
+    <span>
+        <?php print $h1 ;?>
+    </span>
 </main>
 </body>
 </html>

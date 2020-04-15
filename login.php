@@ -3,6 +3,30 @@ require 'bootloader.php';
 
 $title = 'Login';
 
+/**
+ * @param $safe_input
+ * @param $form
+ */
+function form_success($safe_input, $form)
+{
+    var_dump('useris yra');
+
+    $_SESSION['email'] = $safe_input['email'];
+    $_SESSION['password'] = $safe_input['password'];
+
+    header("Location: /index.php");
+
+}
+
+/**
+ * @param $safe_input
+ * @param $form
+ */
+function form_fail($safe_input, $form)
+{
+    var_dump('fail');
+}
+
 $form = [
     'fields' => [
         'email' => [
@@ -45,26 +69,10 @@ $form = [
 
 if ($_POST) {
     $safe_input = get_filtered_input($form);
-    $is_valid = validate_form($form, $safe_input);
-}
-
-function form_success($safe_input, $form)
-{
-    var_dump('login success');
-
-    $_SESSION['email'] = $safe_input['email'];
-
-    var_dump($_SESSION);
-
-    header("Location: /index.php");
-
+   validate_form($form, $safe_input);
 }
 
 
-function form_fail($safe_input, $form)
-{
-    var_dump('login fail');
-}
 
 
 ?>
@@ -78,7 +86,7 @@ function form_fail($safe_input, $form)
     </head>
     <body>
         <section class="nav_bar">
-            <?php include 'core/templates/nav.tpl.php'; ?>
+            <?php include 'app/templates/nav.tpl.php'; ?>
         </section>
 
         <h1><?php print $title; ?></h1>

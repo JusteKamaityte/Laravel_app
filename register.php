@@ -93,7 +93,7 @@ function form_success($safe_input, $form)
 
 function form_fail($safe_input, $form)
 {
-    var_dump('fail');
+    var_dump('toks useris jau egzistuoja');
 }
 
 ?>
@@ -107,11 +107,11 @@ function form_fail($safe_input, $form)
     <body>
 
     <section class="nav_bar">
-        <?php include 'core/templates/nav.tpl.php'; ?>
+        <?php include 'app/templates/nav.tpl.php'; ?>
     </section>
     <h1>Registration</h1>
-        <main>
-            <?php include 'core/templates/form.tpl.php'; ?>
-        </main>
+    <main>
+        <?php include 'core/templates/form.tpl.php'; ?>
+    </main>
     </body>
 </html>
