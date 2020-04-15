@@ -1,7 +1,5 @@
 <?php
+require 'bootloader.php';
 
+logout(true);
 
-$_SESSION = [];
-header("Location: /login.php");
-
-?>

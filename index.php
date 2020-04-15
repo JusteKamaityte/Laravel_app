@@ -1,5 +1,6 @@
 <?php
-require 'core/functions/auth.php';
+require 'bootloader.php';
+
 $nav = [
     [
     'link' => '/index.php',
@@ -46,9 +47,11 @@ if($logged){
 </head>
 <body>
 <main>
+
     <section class="nav_bar">
         <?php include 'app/templates/nav.tpl.php'; ?>
     </section>
+    <h1>Home</h1>
     <span>
         <?php print $h1 ;?>
     </span>

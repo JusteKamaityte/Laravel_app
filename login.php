@@ -15,7 +15,6 @@ function form_success($safe_input, $form)
     $_SESSION['password'] = $safe_input['password'];
 
     header("Location: /index.php");
-
 }
 
 /**
@@ -71,9 +70,6 @@ if ($_POST) {
     $safe_input = get_filtered_input($form);
    validate_form($form, $safe_input);
 }
-
-
-
 
 ?>
 

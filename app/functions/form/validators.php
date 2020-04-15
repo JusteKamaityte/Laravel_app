@@ -159,16 +159,14 @@ function validate_login($safe_input, &$form){
 
     $data = file_to_array(USER) ?: [];
 
-    $found = true;
+
     foreach($data as $data_id){
         if ($data_id['email'] == $safe_input['email'] && $data_id['password'] == $safe_input['password']){
-            $found = false;
-            break;
+          return true;
         }
     }
     if(!$found){
         $form['error'] = 'neteisingi duomenys';
-        return true;
+        return false;
     }
-    return true;
 }

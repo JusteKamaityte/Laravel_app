@@ -1,5 +1,4 @@
 <?php
-require 'bootloader.php';
 
 /**
  * @param bool $redirect
