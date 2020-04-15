@@ -11,7 +11,7 @@ function array_to_file(array $array, string $file): bool{
 
     $bytes_written = file_put_contents($file, $string);
 
-//var_dump($bytes_written);
+
     if($bytes_written !== false){
         return true;
     }

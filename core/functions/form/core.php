@@ -32,13 +32,16 @@ function get_filtered_input(array $form): ?array
 function validate_form(array &$form, array $safe_input): bool
 {
     $success = true;
+
+    //tikrinam field lygio validatorius
     foreach ($form['fields'] as $field_index => &$field) {
         $field['value'] = $safe_input[$field_index];
         foreach ($field['validate'] ?? [] as $validator_index => $field_validator) {
             if (is_array($field_validator)) {
                 $validator_function = $validator_index;
                 $validator_params = $field_validator;
-                $is_valid = $validator_function($field['value'], $field, $validator_params);
+
+                $is_valid = $validator_function($field['value'],  $field, $validator_params);
             } else {
                 $validator_function = $field_validator;
                 $is_valid = $validator_function($field['value'], $field);
@@ -70,7 +73,6 @@ function validate_form(array &$form, array $safe_input): bool
         if (isset($form['callbacks']['success'])) {
             $form['callbacks']['success']($safe_input, $form);
         }
-
     }
     return $success;
 }

@@ -83,34 +83,34 @@ function validate_field_range($safe_input, array &$field, $parameters)
     return true;
 }
 
-///**
-// * Patikrina ar pasirinkimas egzistuoja $field masyve
-// * @param $field_input
-// * @param $field
-// * @return bool
-// */
-//function validate_select($field_input, array &$field): bool
-//{
-//    if (isset($field['value'][$field_input])) {
-//        $field['error'] = 'Nera tokio pasirinkimo';
-//        return false;
-//    }
-//    return true;
-//}
+/**
+ * Patikrina ar pasirinkimas egzistuoja $field masyve
+ * @param $field_input
+ * @param $field
+ * @return bool
+ */
+function validate_select($field_input, array &$field): bool
+{
+    if (isset($field['value'][$field_input])) {
+        $field['error'] = 'Nera tokio pasirinkimo';
+        return false;
+    }
+    return true;
+}
 
 /**
  * F-cija, patikrinanti ar fieldai sutampa
- * @param array $filtered_input isfiltruotas post masyvas
+ * @param $safe_input
  * @param array $form
  * @param array $params sutampanciu fieldu indeksu masyvas
  * @return bool
  */
-function validate_fields_match(array $filtered_input, array &$form, array $params): bool
+function validate_fields_match($safe_input,  &$form, $params): bool
 {
     $comparison_field_id = $params[0];
-    $comparison = $filtered_input[$comparison_field_id];
+    $comparison = $safe_input[$comparison_field_id];
     foreach ($params as $field_id) {
-        if ($comparison != $filtered_input[$field_id]) {
+        if ($comparison != $safe_input[$field_id]) {
             $form['error'] = 'These fields do not match!';
             return false;
         }

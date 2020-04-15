@@ -1,4 +1,5 @@
-<table  <?php print html_attr($table['attr'] ?? []) + ['method' => 'POST']); ?>>
+<?php require 'bootloader.php'; ?>
+<table  <?php print html_attr(($table['attr'] ?? []) + ['method' => 'POST']); ?>>
 
     <thead>
     <?php foreach ($table['thead'] ?? [] as $thead => $thead_value) : ?>

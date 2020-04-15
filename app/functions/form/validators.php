@@ -38,39 +38,26 @@ function validate_text_lenght($field_input, &$field, $parameters)
     return true;
 }
 
-/**
- * validatorius turi patikrinti ar telefonas
- * atitinka +3706XXXXXXX formata
- * @param $field_input
- * @param $field
- */
-function validate_phone($field_input, array &$field): bool{
+///**
+// * validatorius turi patikrinti ar telefonas
+// * atitinka +3706XXXXXXX formata
+// * @param $field_input
+// * @param $field
+// * @return bool
+// */
+//function validate_phone($field_input, array &$field): bool
+//{
+//
+//    $pattern = '/\+3706[0-9]{7}/';
+//
+//    if (!preg_match_all($pattern, $field_input)) {
+//        $field['error'] = 'blogai nurodytas numeris';
+//
+//        return false;
+//    }
+//    return true;
+//}
 
-    $pattern ='/\+3706[0-9]{7}/';
-
-    if(!preg_match_all($pattern, $field_input)){
-        $field['error'] = 'blogai nurodytas numeris';
-
-        return false;
-    }
-    return true;
-}
-
-
-/**
- * Patikrina ar pasirinkimas egzistuoja $field masyve
- * @param $field_input
- * @param $field
- * @return bool
- */
-function validate_select($field_input, array &$field): bool
-{
-    if (isset($field['value'][$field_input])) {
-        $field['error'] = 'Nera tokio pasirinkimo';
-        return false;
-    }
-    return true;
-}
 
 /**
  *funkcija generuojanti formos atributus
@@ -93,13 +80,14 @@ function teams_attr(array $attr): string
  * @param $form
  * @return bool
  */
-function validate_player(array $safe_input, array &$form): bool{
+function validate_player(array $safe_input, array &$form): bool
+{
 
     $teams = file_to_array(TEAMS_FILE);
     $team = $teams[$safe_input['team_id']];
 
-    foreach ($team['players'] as $player){
-        if($player['nickname'] == $safe_input['nickname']){
+    foreach ($team['players'] as $player) {
+        if ($player['nickname'] == $safe_input['nickname']) {
             $form['error'] = 'Toks žaidėjas jau yra';
             return false;
         }
@@ -116,11 +104,71 @@ function validate_player(array $safe_input, array &$form): bool{
 function validate_team(array $field, array $safe_input): bool
 {
     $data = file_to_array(TEAMS_FILE);
-    foreach ($data ?? []  as $team) {
+    foreach ($data ?? [] as $team) {
         if ($safe_input == $team['team_name']) {
             $field['error'] = 'tokia komanda egzistuoja';
             return false;
         }
+    }
+    return true;
+}
+
+/**
+ * @param $field_input
+ * @param $field
+ * @return bool
+ */
+function validate_email($field_input, array &$field): bool
+{
+
+    $pattern = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";;
+
+    if (!preg_match_all($pattern, $field_input)) {
+        $field['error'] = 'neteisingas email';
+        return false;
+    }
+    return true;
+}
+
+
+/**
+ * @param $safe_input
+ * @param $form
+ * @return bool
+ */
+function validate_email_unique($safe_input, &$form){
+    $data = file_to_array(USER) ?: [];
+    $found = false;
+
+    if(!isset($safe_input['email'])){
+        foreach($data as $data_id){
+            if($data_id == $safe_input){
+                $found = true;
+                break;
+            }
+        }
+    }
+    if($found){
+        $form['error'] = 'tokiu vardu vartotojas jau egzistuoja';
+        return false;
+    }
+    return true;
+}
+
+function validate_login($safe_input, &$form){
+
+    $data = file_to_array(USER) ?: [];
+
+    $found = true;
+    foreach($data as $data_id){
+        if ($data_id['email'] == $safe_input['email'] && $data_id['password'] == $safe_input['password']){
+            $found = false;
+            break;
+        }
+    }
+    if(!$found){
+        $form['error'] = 'neteisingi duomenys';
+        return true;
     }
     return true;
 }

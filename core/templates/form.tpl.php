@@ -4,8 +4,8 @@
 
     <?php foreach ($form['fields'] ?? [] as $field_id => $field): ?>
 
-        <label><?php print $field['label']; ?></label>
-        <?php if (in_array($field['type'], ['text', 'number', 'password'])): ?>
+        <label><br> <?php print $field['label']; ?><br></label>
+        <?php if (in_array($field['type'], ['text', 'number','email', 'password'])): ?>
             <input <?php
             print html_attr(($field['extra']['attr'] ?? []) +
                 [
@@ -29,7 +29,7 @@
         <?php endif; ?>
 
         <?php if (isset($form['error'])): ?>
-            <span><?php print  $form['error']; ?></span>
+            <span style="color:red"><?php print  $form['error']; ?></span>
         <?php endif; ?>
 
     <?php endforeach; ?>
@@ -40,4 +40,7 @@
             <?php print $button['text']; ?>
         </button>
     <?php endforeach; ?>
+    <?php if(isset($form['error'])): ?>
+        <span style="color:red"><?php print  $form['error'] ; ?></span>
+    <?php endif; ?>
 </form>
