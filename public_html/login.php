@@ -78,17 +78,17 @@ if ($_POST) {
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="media/css/main.css">
     <title><?php print $title; ?></title>
 </head>
 <body>
 <section class="nav_bar">
-    <?php include 'app/templates/nav.tpl.php'; ?>
+    <?php include '../app/templates/nav.tpl.php'; ?>
 </section>
 
 <h1><?php print $title; ?></h1>
 <main>
-    <?php include 'core/templates/form.tpl.php'; ?>
+    <?php include '../core/templates/form.tpl.php'; ?>
 </main>
 
 

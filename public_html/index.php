@@ -36,20 +36,29 @@ if($logged){
     $h1 = 'Jūs neprisijungęs';
     unset($nav[3]);
 }
+$new_item = new FileDB('krepšys');
+$new_item1 = new FileDB('dėžė');
+
+var_dump($new_item);
+var_dump($new_item1);
+
+$new_item->setData($nav);
+$new_item->save();
+
 
 ?>
 
 <html>
 <head>
     <meta>
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="media/css/main.css">
     <title>Home</title>
 </head>
 <body>
 <main>
 
     <section class="nav_bar">
-        <?php include 'app/templates/nav.tpl.php'; ?>
+        <?php include '../app/templates/nav.tpl.php'; ?>
     </section>
     <h1>Home</h1>
     <span>

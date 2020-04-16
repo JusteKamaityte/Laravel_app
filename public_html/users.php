@@ -64,7 +64,7 @@ $table['tbody'] = file_to_array(DB_FILE);
 </head>
 <body>
 
-<?php include 'core/templates/table.tpl.php'; ?>
+<?php include '../core/templates/table.tpl.php'; ?>
 </body>
 </html>
 
