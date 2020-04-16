@@ -42,7 +42,7 @@ if($logged){
 <html>
 <head>
     <meta>
-    <link rel="stylesheet" href="app/assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css">
     <title>Home</title>
 </head>
 <body>

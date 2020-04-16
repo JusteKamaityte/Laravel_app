@@ -101,7 +101,7 @@ if ($_POST) {
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="app/assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css">
     <title><?php print $title; ?></title>
 </head>
 <body>

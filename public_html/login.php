@@ -71,26 +71,27 @@ if ($_POST) {
    validate_form($form, $safe_input);
 }
 
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="app/assets/css/main.css">
-        <title><?php print $title; ?></title>
-    </head>
-    <body>
-        <section class="nav_bar">
-            <?php include 'app/templates/nav.tpl.php'; ?>
-        </section>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <title><?php print $title; ?></title>
+</head>
+<body>
+<section class="nav_bar">
+    <?php include 'app/templates/nav.tpl.php'; ?>
+</section>
 
-        <h1><?php print $title; ?></h1>
-        <main>
-            <?php include 'core/templates/form.tpl.php'; ?>
-        </main>
+<h1><?php print $title; ?></h1>
+<main>
+    <?php include 'core/templates/form.tpl.php'; ?>
+</main>
 
 
-    </body>
+</body>
 </html>
 
