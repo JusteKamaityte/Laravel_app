@@ -1,6 +1,7 @@
 <?php
 require 'bootloader.php';
 
+
 $nav = [
     [
     'link' => '/index.php',
@@ -20,6 +21,11 @@ $nav = [
     ]
 ];
 
+
+$array=[
+'oop' =>'!poo'
+];
+
 $logged = is_logged_in();
 
 if($logged){
@@ -29,22 +35,23 @@ if($logged){
 
     foreach($data as $user){
         if($user['email'] == $_SESSION['email']){
-            $h1 = 'Sveiki sugrįžę' .$user['username'];
+            $h1 = 'Sveika sugrįžusi ' .$user['username'];
         }
     }
 }else{
     $h1 = 'Jūs neprisijungęs';
     unset($nav[3]);
 }
-$new_item = new FileDB('krepšys');
-$new_item1 = new FileDB('dėžė');
 
-var_dump($new_item);
-var_dump($new_item1);
 
-$new_item->setData($nav);
-$new_item->save();
 
+$db = new FileDB(DB_FILE);
+
+
+$db->setData($array);
+$db->save($array);
+
+var_dump($db);
 
 ?>
 
@@ -62,7 +69,7 @@ $new_item->save();
     </section>
     <h1>Home</h1>
     <span>
-        <?php print $h1 ;?>
+       <h1><?php print $h1 ;?></h1>
     </span>
 </main>
 </body>

@@ -1,5 +1,7 @@
 <?php
 session_start();
+define ('ROOT', __DIR__);
+var_dump(ROOT);
 define('USER', '../app/data/user.json');
 define ('TEAMS_FILE', '../app/data/teams.json');
 define ('DB_FILE', '../app/data/db.json');
@@ -17,3 +19,5 @@ require '../app/functions/form/validators.php';
 require ('../core/classes/FileDB.php');
 
 
+
+// ROOT  C:\Users\Lenovo\Desktop\www\public_html

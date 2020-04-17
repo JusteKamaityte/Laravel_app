@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4b0cac2-3e4b-4f5a-88cc-7bd74342f39b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/core/classes/FileDB.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/media/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/media/css/table.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/team_form.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/media/css/team_form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/data/db.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/db.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/data/user.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/user.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/functions/form/validators.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/functions/form/validators.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/classes/FileDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/classes/FileDB.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/bootloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/bootloader.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/krepšys" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/krepšys" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/users.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +121,9 @@
       <workItem from="1586931941398" duration="201000" />
       <workItem from="1586932157411" duration="1825000" />
       <workItem from="1586934082884" duration="1802000" />
-      <workItem from="1586935983800" duration="24242000" />
+      <workItem from="1586935983800" duration="26884000" />
+      <workItem from="1587067421248" duration="3737000" />
+      <workItem from="1587105397396" duration="12721000" />
     </task>
     <servers />
   </component>
@@ -130,15 +131,19 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="290" y="215" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587114685357">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="290" y="215" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1587114685357" />
     <state x="474" y="344" key="NewPhpFileDialog" timestamp="1587030394987">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="2513" y="434" key="NewPhpFileDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586123135813" />
     <state x="474" y="344" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1587030394987" />
-    <state x="168" y="93" width="1274" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1586947785615">
+    <state x="168" y="93" width="1274" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587109597036">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="168" y="93" width="1274" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1586947785615" />
+    <state x="168" y="93" width="1274" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1587109597036" />
     <state x="2536" y="169" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586112527147">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

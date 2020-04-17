@@ -9,8 +9,6 @@ $title = 'Login';
  */
 function form_success($safe_input, $form)
 {
-    var_dump('useris yra');
-
     $_SESSION['email'] = $safe_input['email'];
     $_SESSION['password'] = $safe_input['password'];
 

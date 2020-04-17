@@ -165,7 +165,7 @@ function validate_login($safe_input, &$form){
           return true;
         }
     }
-    if(!$found){
+    if(!$data){
         $form['error'] = 'neteisingi duomenys';
         return false;
     }
