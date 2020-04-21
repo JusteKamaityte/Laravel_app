@@ -4,8 +4,8 @@ require 'bootloader.php';
 
 $nav = [
     [
-    'link' => '/index.php',
-    'name' => 'Home'
+        'link' => '/index.php',
+        'name' => 'Home'
     ],
     [
         'link' => '/register.php',
@@ -22,35 +22,47 @@ $nav = [
 ];
 
 
-$array=[
-'oop' =>'!poo'
+$conditions = [
+    'rows'=>[
+        'name' => 'Mantas',
+        'surname' => 'Samtis',
+    ],
+    [
+        'name' => 'Algis',
+        'surname' => 'Dalgis',
+    ],
+    [
+        'name' => 'Tomas',
+        'surname' => 'Stogas',
+    ]
+
 ];
+
 
 $logged = is_logged_in();
 
-if($logged){
+if ($logged) {
     unset($nav[1]);
     unset($nav[2]);
     $data = file_to_array(USER);
 
-    foreach($data as $user){
-        if($user['email'] == $_SESSION['email']){
-            $h1 = 'Sveika sugrįžusi ' .$user['username'];
+    foreach ($data as $user) {
+        if ($user['email'] == $_SESSION['email']) {
+            $h1 = 'Sveika sugrįžusi ' . $user['username'];
         }
     }
-}else{
+} else {
     $h1 = 'Jūs neprisijungęs';
     unset($nav[3]);
 }
 
 
-
 $db = new FileDB(DB_FILE);
 
-
-$db->setData($array);
-$db->save($array);
-
+$db->setData($conditions);
+$db->save($conditions);
+$db->getRowbyId('conditions', 1);
+var_dump($conditions);
 var_dump($db);
 
 ?>
@@ -69,7 +81,7 @@ var_dump($db);
     </section>
     <h1>Home</h1>
     <span>
-       <h1><?php print $h1 ;?></h1>
+       <h1><?php print $h1; ?></h1>
     </span>
 </main>
 </body>

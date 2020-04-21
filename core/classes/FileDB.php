@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class for getting and saving data to/from file
  */
@@ -8,6 +9,7 @@ class FileDB
     private $file_name;
     /** @var array Information to be saved */
     private $data;
+
 
     /**
      * FileDB constructor.
@@ -71,7 +73,7 @@ class FileDB
      */
     public function createTable($table_name)
     {
-        if(!$this->tableExists($table_name)){
+        if (!$this->tableExists($table_name)) {
             $this->data[$table_name] = [];
             return true;
         }
@@ -95,8 +97,9 @@ class FileDB
      * Funkcija ištrina nurodytą table kartu su indeksu
      * @param $table_name
      */
-    public function dropTable($table_name){
-       unset($this->data[$table_name]);
+    public function dropTable($table_name)
+    {
+        unset($this->data[$table_name]);
     }
 
     /**
@@ -104,34 +107,123 @@ class FileDB
      * @param $table_name
      * @return bool
      */
-    public function truncateTable($table_name){
-        if($this->tableExists($table_name)){
-           $this->data[$table_name] = [];
-           return true;
+    public function truncateTable($table_name)
+    {
+        if ($this->tableExists($table_name)) {
+            $this->data[$table_name] = [];
+            return true;
         }
         return false;
     }
 
     /**
-     * Funkcija įrašo eilutės masyvą į table
-     * @param $table_name
-     * @param $row
+     * F-ija pridedanti viena eilute su automatiniu indeksu arba musu parasytu
+     * @param string $table_name
+     * @param array $row
      * @param null $row_id
-     * @return bool|null
+     * @return bool|mixed|null
      */
-    public function insertRow($table_name, $row, $row_id=null){
-
-        if($row_id = null){
-            $this->data[$table_name][]=$row;
+    public function insertRow(string $table_name, array $row, $row_id = null)
+    {
+        if ($row_id == null) {
+            $this->data[$table_name][] = $row;
             return array_key_last($this->data[$table_name]);
-        }elseif (!isset ($this->data[$table_name][$row_id])){
-           $this->data[$table_name][$row_id] = $row;
-
-           return $row_id;
+        } elseif (!$this->rowExists($table_name, $row_id)) {
+            $this->data[$table_name][$row_id] = $row;
+            return $row_id;
+        }
+        return false;
+    }
+    /**
+     * Patikrina ar eilute egzistuoja
+     * @param string $table_name
+     * @param $row_id
+     * @return bool
+     */
+    public function rowExists(string $table_name, $row_id): bool
+    {
+        if (isset($this->data[$table_name][$row_id])) {
+            return true;
         }
         return false;
     }
 
+
+    /**
+     * Perrašo table esantį row_id indeksu eilutės masyvą į row
+     * @param $table_name
+     * @param $row_id
+     * @param $row
+     * @return bool
+     */
+    public function updateRow(string $table_name, $row_id, array $row): bool
+    {
+
+        if ($this->rowExists($table_name, $row_id)) {
+            $this->data[$table_name][$row_id] = $row;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * ištrina eilutę, jei tokia egzistuoja
+     * @param $table_name
+     * @param $row_id
+     * @return bool
+     */
+    public function deleteRow(string $table_name, $row_id): bool
+    {
+
+        if ($this->rowExists($table_name, $row_id)) {
+            unset($this->data[$table_name][$row_id]);
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    /**
+     * Function returns row according to row_id, reik pataisyt
+     * @param $table_name
+     * @param $row_id
+     * @return mixed
+     */
+    public function getRowById(string $table_name, $row_id)
+    {
+        if ($this->rowExists($table_name, $row_id)) {
+            $this->data[$table_name][$row_id]= $row;
+            return $row;
+        }
+        return false;
+    }
+
+
+    /**
+     * @param string $table_name
+     * @param array $conditions
+     * @return mixed
+     */
+    public function getRowsWhere(string $table_name, array $conditions)
+    {
+        $result = [];
+        foreach ($this->data[$table_name] as $row_id => $row) {
+            $match = true;
+            foreach ($conditions as $search_key => $search_value) {
+                if(!isset($row[$search_key]) || $row[$search_key] !=$search_value){
+                    $match = false;
+                }
+            }
+            if($match){
+                $result[$row_id] = $row;
+            }
+        }
+        return $result;
+    }
+
+//istrink ir dar karta parasyk
 }
+
 
 
