@@ -48,6 +48,7 @@ function validate_form(array &$form, array $safe_input): bool
             }
             if (!$is_valid) {
                 $success = false;
+                var_dump($validator_index,$field_validator);
                 break;
             }
         }
@@ -65,6 +66,7 @@ function validate_form(array &$form, array $safe_input): bool
             }
             if (!$is_valid) {
                 $success = false;
+                var_dump($validator_index,$form_validator);
                 break;
             }
         }

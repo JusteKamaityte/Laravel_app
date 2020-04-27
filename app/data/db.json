@@ -1,1 +1,1 @@
-{"name":"Mantas","surname":"Samtis"}
+{"users":[{"username":"test","email":"test@gmail.com","password":"test"},{"username":"test1","email":"test1@gmail.com","password":"test1"}],"pixels":[{"email":"test@gmail.com","x":"100","y":"100","color":"#008000"},{"email":"test@gmail.com","x":"50","y":"140","color":"#008000"}]}

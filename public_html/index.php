@@ -1,69 +1,48 @@
 <?php
-require 'bootloader.php';
+require '../bootloader.php';
 
 
 $nav = [
-    [
-        'link' => '/index.php',
-        'name' => 'Home'
-    ],
-    [
-        'link' => '/register.php',
-        'name' => 'Register'
-    ],
-    [
-        'link' => '/login.php',
-        'name' => 'Login'
-    ],
-    [
-        'link' => '/logout.php',
-        'name' => 'Logout'
-    ]
+    'home' =>
+        [
+            'link' => '/index.php',
+            'name' => 'Home'
+        ],
+    'register' =>
+        [
+            'link' => '/register.php',
+            'name' => 'Register'
+        ],
+    'login' =>
+        [
+            'link' => '/login.php',
+            'name' => 'Login'
+        ],
+    'logout' =>
+        [
+            'link' => '/logout.php',
+            'name' => 'Logout'
+        ]
 ];
 
 
-$conditions = [
-    'rows'=>[
-        'name' => 'Mantas',
-        'surname' => 'Samtis',
-    ],
-    [
-        'name' => 'Algis',
-        'surname' => 'Dalgis',
-    ],
-    [
-        'name' => 'Tomas',
-        'surname' => 'Stogas',
-    ]
+$user = App\App::$session->getUser();
 
-];
+if ($user) {
+    $h1 = 'Sveika sugrįžusi ' . $user['username'];
 
+    unset($nav['register']);
+    unset($nav['login']);
 
-$logged = is_logged_in();
-
-if ($logged) {
-    unset($nav[1]);
-    unset($nav[2]);
-    $data = file_to_array(USER);
-
-    foreach ($data as $user) {
-        if ($user['email'] == $_SESSION['email']) {
-            $h1 = 'Sveika sugrįžusi ' . $user['username'];
-        }
-    }
 } else {
     $h1 = 'Jūs neprisijungęs';
-    unset($nav[3]);
+    unset($nav['logout']);
 }
 
 
-$db = new FileDB(DB_FILE);
+//isitraukt pixelius
 
-$db->setData($conditions);
-$db->save($conditions);
-$db->getRowbyId('conditions', 1);
-var_dump($conditions);
-var_dump($db);
+$pixels = App\App::$db->getRowsWhere('pixels');
 
 ?>
 
@@ -75,14 +54,17 @@ var_dump($db);
 </head>
 <body>
 <main>
-
     <section class="nav_bar">
         <?php include '../app/templates/nav.tpl.php'; ?>
     </section>
-    <h1>Home</h1>
-    <span>
-       <h1><?php print $h1; ?></h1>
-    </span>
+    <div class="pixel-container">
+        <?php foreach ($pixels as $pixel): ?>
+            <span style="
+                    top: <?php print $pixel['x']; ?>px;
+                    left: <?php print $pixel['y']; ?>px;
+                    background: <?php print $pixel['color']; ?>"></span>
+        <?php endforeach; ?>
+    </div>
 </main>
 </body>
 </html>

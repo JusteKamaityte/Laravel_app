@@ -1,13 +1,9 @@
 <?php
-require 'bootloader.php';
+require '../bootloader.php';
 
 $title = 'register';
 
 $form = [
-    'attr' => [
-        'action' => 'register.php',
-        'method' => 'POST',
-    ],
     'fields' => [
         'username' => [
             'label' => 'Username',
@@ -61,37 +57,37 @@ $form = [
             'password',
             'password_repeat',
         ],
+
     ],
 ];
-
 
 /**
  * @param $safe_input
  * @param $form
  */
-function form_success($safe_input, $form)
-{
-    var_dump('pavyko');
-    $data = file_to_array(USER) ?: [];
-
-    $data[] = [
-        'username' => $safe_input['username'],
+function form_success($safe_input, array $form){
+    var_dump('veikia');
+    $id=    App\App::$db->insertRow('users', [
+        'username'=> $safe_input['username'],
         'email' => $safe_input['email'],
         'password' => $safe_input['password'],
-    ];
+    ]);
 
-    array_to_file($data, USER);
-
-    setcookie('submit', 1, time() + (3600), "/");
-    header("Location: /login.php");
+//    header("Location: /login.php");
+    var_dump([
+            'id'=> $id,
+            'form'=>$form,
+            'safe_input' => $safe_input
+    ]);
 }
 
 function form_fail($safe_input, $form)
 {
-    var_dump('toks useris jau egzistuoja');
+    var_dump('toks vartotojas jau egzistuoja');
 }
 
 if ($_POST) {
+    var_dump('validuojame forma');
     $safe_input = get_filtered_input($form);
     validate_form($form, $safe_input);
 }

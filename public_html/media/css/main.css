@@ -100,3 +100,18 @@ ul{
     flex-wrap: nowrap;
     align-items: center;
 }
+
+.pixel-container{
+    position:relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background-color: white;
+}
+.pixel-container>span{
+    position:absolute;
+    width:20px;
+    height:20px;
+}

@@ -1,5 +1,5 @@
 <?php
-
+namespace Core\Databases;
 /**
  * Class for getting and saving data to/from file
  */
@@ -27,7 +27,7 @@ class FileDB
      */
     public function setData(array $data_array): void
     {
-        $this->data = $data_array;
+         $this->data = $data_array;
     }
 
     /**
@@ -69,7 +69,7 @@ class FileDB
     /**
      * Funkcija $table_name indeksu sukuria tuščią masyvą
      * @param $table_name
-     * @return void
+     * @return bool
      */
     public function createTable($table_name)
     {
@@ -156,7 +156,7 @@ class FileDB
      * @param $row
      * @return bool
      */
-    public function updateRow(string $table_name, $row_id, array $row): bool
+    public function updateRow(string $table_name,array $row, $row_id): bool
     {
 
         if ($this->rowExists($table_name, $row_id)) {
@@ -193,19 +193,20 @@ class FileDB
     public function getRowById(string $table_name, $row_id)
     {
         if ($this->rowExists($table_name, $row_id)) {
-            $this->data[$table_name][$row_id]= $row;
-            return $row;
+            $this->data[$table_name][$row_id];
+            return true;
         }
         return false;
     }
 
 
     /**
+     * Returns a row array that meets the specified conditions
      * @param string $table_name
      * @param array $conditions
      * @return mixed
      */
-    public function getRowsWhere(string $table_name, array $conditions)
+    public function getRowsWhere(string $table_name, array $conditions = [])
     {
         $result = [];
         foreach ($this->data[$table_name] as $row_id => $row) {
@@ -222,7 +223,17 @@ class FileDB
         return $result;
     }
 
-//istrink ir dar karta parasyk
+
+    /**
+     * Returns one row that meets specified conditions
+     * @param $table_name
+     * @param $conditions
+     * @return mixed
+     */
+    public function getRowWhere($table_name, $conditions){
+        $rows= $this->getRowsWhere($table_name, $conditions);
+        return reset($rows);
+    }
 }
 
 

@@ -26,9 +26,9 @@ function array_to_file(array $array, string $file): bool{
 function file_to_array(string $file)
 {
     if (file_exists($file)) {
-        $data = file_get_contents($file);
-        if ($data !== false) {
-            return json_decode($data, true);
+        $db = file_get_contents($file);
+        if ($db !== false) {
+            return json_decode($db, true);
         }
     }
     return false;

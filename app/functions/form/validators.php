@@ -38,25 +38,25 @@ function validate_text_lenght($field_input, &$field, $parameters)
     return true;
 }
 
-///**
-// * validatorius turi patikrinti ar telefonas
-// * atitinka +3706XXXXXXX formata
-// * @param $field_input
-// * @param $field
-// * @return bool
-// */
-//function validate_phone($field_input, array &$field): bool
-//{
-//
-//    $pattern = '/\+3706[0-9]{7}/';
-//
-//    if (!preg_match_all($pattern, $field_input)) {
-//        $field['error'] = 'blogai nurodytas numeris';
-//
-//        return false;
-//    }
-//    return true;
-//}
+/**
+ * validatorius turi patikrinti ar telefonas
+ * atitinka +3706XXXXXXX formata
+ * @param $field_input
+ * @param $field
+ * @return bool
+ */
+function validate_phone($field_input, array &$field): bool
+{
+
+    $pattern = '/\+3706[0-9]{7}/';
+
+    if (!preg_match_all($pattern, $field_input)) {
+        $field['error'] = 'blogai nurodytas numeris';
+
+        return false;
+    }
+    return true;
+}
 
 
 /**
@@ -75,43 +75,43 @@ function teams_attr(array $attr): string
     return $attributes;
 }
 
-/**
- * @param $safe_input
- * @param $form
- * @return bool
- */
-function validate_player(array $safe_input, array &$form): bool
-{
-
-    $teams = file_to_array(TEAMS_FILE);
-    $team = $teams[$safe_input['team_id']];
-
-    foreach ($team['players'] as $player) {
-        if ($player['nickname'] == $safe_input['nickname']) {
-            $form['error'] = 'Toks žaidėjas jau yra';
-            return false;
-        }
-    }
-    return true;
-}
-
-//patikrinti ar tokiu pavadinimu komanda jau nera registruota
-/**
- * @param $field
- * @param $safe_input
- * @return bool
- */
-function validate_team(array $field, array $safe_input): bool
-{
-    $data = file_to_array(TEAMS_FILE);
-    foreach ($data ?? [] as $team) {
-        if ($safe_input == $team['team_name']) {
-            $field['error'] = 'tokia komanda egzistuoja';
-            return false;
-        }
-    }
-    return true;
-}
+///**
+// * @param $safe_input
+// * @param $form
+// * @return bool
+// */
+//function validate_player(array $safe_input, array &$form): bool
+//{
+//
+//    $teams = file_to_array(TEAMS_FILE);
+//    $team = $teams[$safe_input['team_id']];
+//
+//    foreach ($team['players'] as $player) {
+//        if ($player['nickname'] == $safe_input['nickname']) {
+//            $form['error'] = 'Toks žaidėjas jau yra';
+//            return false;
+//        }
+//    }
+//    return true;
+//}
+//
+////patikrinti ar tokiu pavadinimu komanda dar nera registruota
+///**
+// * @param $field
+// * @param $safe_input
+// * @return bool
+// */
+//function validate_team(array $field, array $safe_input): bool
+//{
+//    $data = file_to_array(TEAMS_FILE);
+//    foreach ($data ?? [] as $team) {
+//        if ($safe_input == $team['team_name']) {
+//            $field['error'] = 'tokia komanda egzistuoja';
+//            return false;
+//        }
+//    }
+//    return true;
+//}
 
 /**
  * @param $field_input
@@ -132,41 +132,65 @@ function validate_email($field_input, array &$field): bool
 
 
 /**
- * @param $safe_input
- * @param $form
+ *
+ * @param $field_input
+ * @param array $field
  * @return bool
  */
-function validate_email_unique($safe_input, &$form){
-    $data = file_to_array(USER) ?: [];
-    $found = false;
-
-    if(!isset($safe_input['email'])){
-        foreach($data as $data_id){
-            if($data_id == $safe_input){
-                $found = true;
-                break;
-            }
-        }
-    }
-    if($found){
-        $form['error'] = 'tokiu vardu vartotojas jau egzistuoja';
+function validate_email_unique($field_input, array &$field): bool
+{
+    if (App\App::$db->getRowsWhere('users', ['email' => $field_input])) {
+        $field['error'] = 'tokiu vardu vartotojas jau egzistuoja';
         return false;
     }
     return true;
 }
 
-function validate_login($safe_input, &$form){
 
-    $data = file_to_array(USER) ?: [];
-
-
-    foreach($data as $data_id){
-        if ($data_id['email'] == $safe_input['email'] && $data_id['password'] == $safe_input['password']){
-          return true;
-        }
-    }
-    if(!$data){
-        $form['error'] = 'neteisingi duomenys';
+/**
+ * @param $safe_input
+ * @param $form
+ * @return bool
+ */
+function validate_login($safe_input, array &$form): bool
+{
+    if (!App\App::$db->getRowsWhere('users', ['email' => $safe_input['email'], 'password' => $safe_input['password']])) {
+        $field['error'] = 'neteisingi prisijungimo duomenys';
         return false;
     }
+    return true;
+}
+
+/**
+ * sutvarkya
+ * @param array $safe_input
+ * @param array $form
+ * @return bool
+ */
+function validate_pixel(array $safe_input, array &$form): bool
+{
+
+    $conditions = [
+        'x' => $safe_input['x'],
+        'y' => $safe_input['y'],
+
+    ];
+
+    if ($pixels = App\App::$db->getRowsWhere('pixels', $conditions)) {
+        $pixel = reset($pixels);//issitraukiam is array pirma nari
+        if ($pixel['email'] != $_SESSION['email']) {
+            $form['error'] = 'cannot override other pixel';
+            return false;
+        }
+    }
+    return true;
+}
+
+function validate_is_logged_in($safe_input, &$form)
+{
+    if (App\App::$session->getUser()) {
+        return true;
+    }
+    $form['error'] = 'neprisijunges useris';
+    return false;
 }

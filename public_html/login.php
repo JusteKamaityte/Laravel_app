@@ -1,28 +1,7 @@
 <?php
-require 'bootloader.php';
+require '../bootloader.php';
 
 $title = 'Login';
-
-/**
- * @param $safe_input
- * @param $form
- */
-function form_success($safe_input, $form)
-{
-    $_SESSION['email'] = $safe_input['email'];
-    $_SESSION['password'] = $safe_input['password'];
-
-    header("Location: /index.php");
-}
-
-/**
- * @param $safe_input
- * @param $form
- */
-function form_fail($safe_input, $form)
-{
-    var_dump('fail');
-}
 
 $form = [
     'fields' => [
@@ -64,6 +43,28 @@ $form = [
     ],
 ];
 
+/**
+ * @param $safe_input
+ * @param $form
+ */
+function form_success($safe_input, $form)
+{
+    App\App::$session->login($safe_input['email'], $safe_input['password']);
+
+//
+//    header("Location: /index.php");
+    var_dump('veikia');
+}
+
+/**
+ * @param $safe_input
+ * @param $form
+ */
+function form_fail($safe_input, $form)
+{
+    var_dump('fail');
+}
+
 if ($_POST) {
     $safe_input = get_filtered_input($form);
    validate_form($form, $safe_input);
@@ -88,8 +89,6 @@ if ($_POST) {
 <main>
     <?php include '../core/templates/form.tpl.php'; ?>
 </main>
-
-
 </body>
 </html>
 

@@ -1,4 +1,4 @@
-<?php require 'bootloader.php'; ?>
+<?php require '../bootloader.php'; ?>
 <table  <?php print html_attr(($table['attr'] ?? []) + ['method' => 'POST']); ?>>
 
     <thead>
