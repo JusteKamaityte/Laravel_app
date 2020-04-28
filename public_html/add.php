@@ -1,4 +1,7 @@
 <?php
+
+use App\Pixels\Pixel;
+
 require '../bootloader.php';
 
 $form = [
@@ -69,13 +72,20 @@ $form = [
     ]
 ];
 
+//$properties =[
+//    'email'=> $_SESSION['email'],
+//    'x' => $safe_input['x'],
+//    'y' => $safe_input['y'],
+//    'color' => $safe_input['color']
+//];
 
 /**
- * tikrinam ar pikselis egzistuoja tomis koordinatemis ir jei egzistuoja updatin jri ne, tai
+ * tikrinam ar pikselis egzistuoja tomis koordinatemis ir jei egzistuoja updatin jei ne, tai
  * @param $form
  * @param $safe_input
+ * @throws Exception
  */
-function form_success($safe_input, $form)
+function form_success($safe_input, array $form)
 {
 
     $user = App\App::$session->getUser();
@@ -84,30 +94,33 @@ function form_success($safe_input, $form)
         'safe_input' => $safe_input,
         'user' => $user
     ]);
-    $pixel = [
-        'email'=> $user['email'],
-        'x' => $safe_input['x'],
-        'y' => $safe_input['y'],
-        'color' => $safe_input['color']
 
-    ];
+    $safe_input['email'] = $_SESSION['email'];
+    $pixel= new Pixel($safe_input);
 
+//    var_dump($pixel->getData());
+//    var_dump($pixel);
 
     if ($pixels = App\App::$db->getRowsWhere('pixels', ['x' => $pixel['x'], 'y' => $pixel['y']])) {
         $row_id = array_key_first($pixel);
         App\App::$db->updateRow('pixels', $pixel, $row_id);
     } else {
         App\App::$db->insertRow('pixels', $pixel);
-
     }
 
+//
+//    header("Location: /index.php");
 }
 
 
+//$test = new Pixel();
+//$test->x= 200;
+//var_dump($test);
 //isitraukt pixelius
 
-
 //$logged_in_user = App\App::$session->getUser();
+
+
 
 if ($_POST ) {
     $safe_input = get_filtered_input($form);
@@ -127,9 +140,9 @@ if ($_POST ) {
     <section class="nav_bar">
         <?php include '../app/templates/nav.tpl.php'; ?>
     </section>
-
     <?php include '../core/templates/form.tpl.php'; ?>
-
 </main>
 </body>
 </html>
+
+

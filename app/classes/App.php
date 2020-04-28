@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\Pixels\Pixel;
 use Core\Databases\FileDB;
 use Core\Session;
 /**
@@ -13,6 +14,7 @@ class App{
      */
     public static $db;
     public static $session;
+    public static $pixels;
     /**
      * App constructor.
      */
@@ -21,6 +23,8 @@ class App{
         self::$db->load();
 
         self::$session = new Session();
+
+//        self::$pixels= new Pixel();
     }
     public function __destruct()
     {

@@ -67,13 +67,14 @@ $form = [
  */
 function form_success($safe_input, array $form){
     var_dump('veikia');
-    $id=    App\App::$db->insertRow('users', [
+    $id=App\App::$db->insertRow('users', [
         'username'=> $safe_input['username'],
         'email' => $safe_input['email'],
         'password' => $safe_input['password'],
     ]);
 
-//    header("Location: /login.php");
+    header("Location: /login.php");
+
     var_dump([
             'id'=> $id,
             'form'=>$form,

@@ -47,12 +47,11 @@ $form = [
  * @param $safe_input
  * @param $form
  */
-function form_success($safe_input, $form)
+function form_success($safe_input, array&$form)
 {
     App\App::$session->login($safe_input['email'], $safe_input['password']);
 
-//
-//    header("Location: /index.php");
+    header("Location: /add.php");
     var_dump('veikia');
 }
 
