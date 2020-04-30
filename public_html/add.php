@@ -22,7 +22,7 @@ $form = [
                     'validate_not_empty',
                     'validate_field_range' => [
                         'min' => 40,
-                        'max' => 250
+                        'max' => 500
                     ],
                 ],
             ],
@@ -40,7 +40,7 @@ $form = [
                 'validate_not_empty',
                 'validate_field_range' => [
                     'min' => 40,
-                    'max' => 250
+                    'max' => 500
                 ],
             ],
         ],
@@ -89,17 +89,19 @@ function form_success($safe_input, array $form)
 {
 
     $user = App\App::$session->getUser();
+
     var_dump([
         'form'=> $form,
         'safe_input' => $safe_input,
         'user' => $user
     ]);
 
-    $safe_input['email'] = $_SESSION['email'];
-    $pixel= new Pixel($safe_input);
-
-//    var_dump($pixel->getData());
-//    var_dump($pixel);
+    $pixel=[
+        'email'=> $_SESSION['email'],
+        'x' => $safe_input['x'],
+        'y' => $safe_input['y'],
+        'color' => $safe_input['color']
+    ];
 
     if ($pixels = App\App::$db->getRowsWhere('pixels', ['x' => $pixel['x'], 'y' => $pixel['y']])) {
         $row_id = array_key_first($pixel);
@@ -108,20 +110,13 @@ function form_success($safe_input, array $form)
         App\App::$db->insertRow('pixels', $pixel);
     }
 
-//
 //    header("Location: /index.php");
 }
 
-
-//$test = new Pixel();
-//$test->x= 200;
-//var_dump($test);
-//isitraukt pixelius
-
-//$logged_in_user = App\App::$session->getUser();
-
-
-
+$test = new Pixel();
+$test->x = 200;
+var_dump(get_class_methods($test));
+var_dump($method);
 if ($_POST ) {
     $safe_input = get_filtered_input($form);
     validate_form($form, $safe_input);
