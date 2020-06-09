@@ -179,7 +179,7 @@ function validate_pixel(array $safe_input, array &$form): bool
     if ($pixels = App\App::$db->getRowsWhere('pixels', $conditions)) {
         $pixel = reset($pixels);//issitraukiam is array pirma nari
         if ($pixel['email'] != $_SESSION['email']) {
-            $form['error'] = 'cannot override other pixel';
+            $form['error'] = 'cannot override other pixels';
             return false;
         }
     }

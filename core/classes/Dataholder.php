@@ -1,92 +1,17 @@
 <?php
-/**
- * class that will work as data holder. Will give information about pixel
- */
+namespace Core;
 
-namespace App\Pixels;
-
-class Pixel
-{
-//
-    private $data = [];
-    private $properties = [
-        'x',
-        'y',
-        'color',
-        'email'
-    ];
-
+class DataHolder{
 
     /**
-     * Sets x if its int
-     * @param int $x
+     * Pixel constructor.
+     * @param array|null $data
      */
-    public function setX(int $x): void
+    public function __construct(array $data = null)
     {
-        $this->'x' = $x;
-    }
-
-    /**
-     * Returns set x
-     * @return int
-     */
-    public function getX(): ?int
-    {
-        return $this->'x' ?? null;
-    }
-
-    /**
-     * Sets y if its int
-     * @param int $y
-     */
-    public function setY(int $y): void
-    {
-        $this->'y' = $y;
-    }
-
-    /**
-     * Returns set y
-     * @return int
-     */
-    public function getY(): ?int
-    {
-        return $this->'y' ?? null;
-    }
-
-    /**
-     * Sets color if $color is hex
-     * @param string $color
-     */
-    public function setColor(string $color): void
-    {
-        $this->'color'= $color;
-    }
-
-    /**
-     * Returns set color
-     * @return string
-     */
-    public function getColor(): ?string
-    {
-        return $this->'color' ?? null;
-    }
-
-    /**
-     * Sets email if right format
-     * @param string $email
-     */
-    public function setEmail(string $email): void
-    {
-        $this->'email'= $email;
-    }
-
-    /**
-     * Returns set email
-     * @return string
-     */
-    public function getEmail(): ?string
-    {
-        return $this->'email' ?? null;
+        if ($data != null) {
+            $this->_setData($data);
+        }
     }
 
     /**
@@ -95,25 +20,11 @@ class Pixel
      */
     public function _setData(array $data): void
     {
-//        $data=[
-//          'x'=>100
-//        ];
         //per kiekviena data masyve esantį index ir value eina ciklas, iesko set metodų pagal
         //property key , ir if $method egzistuoja, tai iškviečia
         foreach ($data as $property_key => $value) {
-            //$property_key= x
-            //$value = 100
-            $method= $this->_getSetterMethod($property_key);
-            //$method = setX (string)
-            if ($method) {
-                //metodo iškvietimas
-                $this->{$method}($value);
-                //$this->setX($value);
-                //$value = 100
-            }
+            $this->__set($property_key, $value);
         }
-//        var_dump($data['z']);
-//        var_dump($data[100]);
     }
 
     /**
@@ -123,26 +34,12 @@ class Pixel
     public function _getData(): array
     {
         $results = [];
-        foreach ($this->properties as $property) {
-            $method = 'get' . str_replace('_', '', $property);
-            $method = $this->_getPropertyKeys();
-            return $this->{$method}[$property];
+        foreach ($this->_getPropertyKeys() as $property_key) {
+            $results[$property_key] = $this->__get($property_key);
         }
         return $results;
     }
 
-    /**
-     * Pixel constructor.
-     * @param array|null $data
-     */
-    public function __construct(array $data = null)
-    {
-        if ($data != null) {
-//            //sukuri pixelius prieš įrašant/panaudojant duomenis iš/į duombazę
-//            $this->data = [];
-            $this->_setData($data);
-        }
-    }
 
     /**
      * Calls out when property is set to some value.Automatiškai gražina seteri pgal property key(patikrina ar toks egzistuoja)
@@ -216,7 +113,7 @@ class Pixel
     {
         $s_case = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $method));
 
-        return ltrim($s_case, $prefix . '_');
+        return str_replace($prefix .'_', '', $s_case);
     }
 
     /**
@@ -233,11 +130,11 @@ class Pixel
             if (preg_match('/^get/', $method)) {
                 $keys[] = $this->_methodToKey('get', $method);
             }
-            var_dump($method);
+//            var_dump($method);
         }
         return($keys);
     }
 
+
+
 }
-
-

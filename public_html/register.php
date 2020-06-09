@@ -67,11 +67,9 @@ $form = [
  */
 function form_success($safe_input, array $form){
     var_dump('veikia');
-    $id=App\App::$db->insertRow('users', [
-        'username'=> $safe_input['username'],
-        'email' => $safe_input['email'],
-        'password' => $safe_input['password'],
-    ]);
+
+    $user = new App\Users\User($safe_input);
+    $id=App\App::$db->insertRow('users', $user->_getData());
 
     header("Location: /login.php");
 
@@ -93,6 +91,10 @@ if ($_POST) {
     validate_form($form, $safe_input);
 }
 
+$view = new \Core\View($form);
+$view->render('../app/templates/nav.tpl.php');
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -102,11 +104,10 @@ if ($_POST) {
     <title><?php print $title; ?></title>
 </head>
 <body>
-
-<section class="nav_bar">
-    <?php include '../app/templates/nav.tpl.php'; ?>
-</section>
-<h1>Registration</h1>
+    <section class="nav_bar">
+        <?php print $view->render('../app/templates/nav.tpl.php');?>
+    </section>
+    <h1>Registration</h1>
 <main>
     <?php include '../core/templates/form.tpl.php'; ?>
 </main>

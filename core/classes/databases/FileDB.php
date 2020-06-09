@@ -217,7 +217,10 @@ class FileDB
                 }
             }
             if($match){
+                $row['id'] = $row_id;
+
                 $result[$row_id] = $row;
+
             }
         }
         return $result;

@@ -1,4 +1,8 @@
 <?php
+
+use App\Views\Navigation;
+use Core\Views\Form;
+
 require '../bootloader.php';
 
 $title = 'Login';
@@ -69,6 +73,8 @@ if ($_POST) {
    validate_form($form, $safe_input);
 }
 
+$view = new \Core\View($form);
+$view->render('../app/templates/nav.tpl.php');
 
 ?>
 
@@ -80,11 +86,10 @@ if ($_POST) {
     <title><?php print $title; ?></title>
 </head>
 <body>
-<section class="nav_bar">
-    <?php include '../app/templates/nav.tpl.php'; ?>
-</section>
-
-<h1><?php print $title; ?></h1>
+    <section class="nav_bar">
+        <?php print $view->render('../app/templates/nav.tpl.php');?>
+    </section>
+    <h1><?php print $title; ?></h1>
 <main>
     <?php include '../core/templates/form.tpl.php'; ?>
 </main>

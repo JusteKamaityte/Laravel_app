@@ -4,6 +4,8 @@ namespace Core;
 
 use Core\Databases\FileDB;
 use App\App;
+use App\Users\User;
+
 
 class Session
 {
@@ -50,9 +52,12 @@ class Session
             'password' => $password
         ];
 
-        if ($this->user = App::$db->getRowWhere('users', $conditions)) {
+        $user= App::$db->getRowWhere('users', $conditions);
+
+           if($user){
             $_SESSION['email'] = $email;
             $_SESSION['password'] = $password;
+            $this->user= new User($user);
             return true;
         }
         return false;
@@ -62,7 +67,7 @@ class Session
      * Get property $user
      * @return mixed
      */
-    public function getUser()
+    public function getUser() : ?User
     {
         return $this->user;
     }

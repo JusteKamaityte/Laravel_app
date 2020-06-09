@@ -1,6 +1,7 @@
 <?php
 
 use App\Pixels\Pixel;
+use App\Pixels\Model;
 
 require '../bootloader.php';
 
@@ -47,13 +48,17 @@ $form = [
         'color' => [
             'label' => 'color',
             'type' => 'color',
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'select'
-                ],
-            ],
             'validate' => [
                 'validate_not_empty'
+            ],
+        ],
+        'option' => [
+            'label' => 'Choose',
+            'type' => 'select',
+            'value' => 1,
+            'options' => [
+                'vienas',
+                'du'
             ],
         ],
     ],
@@ -90,11 +95,11 @@ function form_success($safe_input, array $form)
 
     $user = App\App::$session->getUser();
 
-    var_dump([
-        'form'=> $form,
-        'safe_input' => $safe_input,
-        'user' => $user
-    ]);
+//    var_dump([
+//        'form'=> $form,
+//        'safe_input' => $safe_input,
+//        'user' => $user
+//    ]);
 
     $pixel=[
         'email'=> $_SESSION['email'],
@@ -107,21 +112,26 @@ function form_success($safe_input, array $form)
         $row_id = array_key_first($pixel);
         App\App::$db->updateRow('pixels', $pixel, $row_id);
     } else {
-        App\App::$db->insertRow('pixels', $pixel);
+        App\Pixels\Model::insert(new \App\Pixels\Pixel($safe_input));
     }
 
-//    header("Location: /index.php");
+    header("Location: /index.php");
 }
 
-$test = new Pixel();
-$test->x = 200;
-var_dump(get_class_methods($test));
-var_dump($method);
 if ($_POST ) {
     $safe_input = get_filtered_input($form);
     validate_form($form, $safe_input);
 }
 
+$test = new Pixel();
+$test->x = 200;
+
+//var_dump(get_class_methods($test));
+
+
+$view = new \Core\View($form);
+$view->render('../app/templates/nav.tpl.php');
+//var_dump($view);
 ?>
 
 <html>
@@ -133,7 +143,7 @@ if ($_POST ) {
 <body>
 <main>
     <section class="nav_bar">
-        <?php include '../app/templates/nav.tpl.php'; ?>
+        <?php print $view->render('../app/templates/nav.tpl.php');?>
     </section>
     <?php include '../core/templates/form.tpl.php'; ?>
 </main>
