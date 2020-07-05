@@ -1,12 +1,12 @@
-<section>
-    <nav >
-        <ul>
-            <li><a href="index.php"><?php print 'Home'; ?></a></li>
-            <li><a href="login.php"><?php print 'Login'; ?></a></li>
-            <li><a href="register.php"><?php print 'Register'; ?></a></li>
-            <li><a href="logout.php"><?php print 'Logout'; ?></a></li>
-        </ul>
-    </nav>
-</section>
-
-
+<nav>
+    <ul class="left-side">
+        <?php foreach ($data['left_buttons'] ?? [] as $button) : ?>
+            <li><a href="<?php print $button['href']; ?>"><?php print $button['text']; ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+    <ul class="right-side">
+        <?php foreach ($data['right_buttons'] ?? [] as $button) : ?>
+            <li><a href="<?php print $button['href']; ?>"><?php print $button['text']; ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+</nav>

@@ -1,117 +1,315 @@
-body{
-    /*height: 100vh;*/
-    /*background:linear-gradient(rgba(234,251,173,100) 0%, rgba(222,253,143,100) 45%, rgba(252,255,126,100) 100%);*/
-    background: lightgrey;
-    background-size: contain;
+* {
+    box-sizing: border-box;
 }
-
-
-form{
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid rgba(0,0,0,0.1);
-}
-
-button{
+html{
     font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #4CAF50;
+}
+
+body {
+    margin: 0 auto;
+    background-color: #d6cbd3;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#add-edit-form-container {
     width: 100%;
-    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.add-edit-drink-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*width: 50%;*/
+    padding: 20px 10px;
+    background-color: white;
+}
+
+.add-edit-drink-form input {
+    display: block;
+    width: 100%;
+    height: 25px;
+
+}
+
+.add-edit-drink-form label {
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2em;
     margin-top: 20px;
+}
+
+/*.add-edit-drink-form label:not(:first-of-type) {*/
+/*    font-size: 2em;*/
+/*    margin-top: 20px;*/
+/*}*/
+
+.add-edit-drink-form button {
+    height: 25px;
+    margin-top: 20px;
+    background-color: #ada397;
+    border: none;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.table-container table, tr, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
     padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
+    text-align: center;
+}
+
+#drinks-table-container table td:nth-child(7) {
+    border-right: none;
+}
+
+#drinks-table-container table td:last-of-type {
+    border-left: none;
+}
+
+.admin-btn-edit, .delete-btn, .view-order-btn {
+    text-decoration: none;
+    color: black;
+    font: 400 14px Roboto;
+    background-color: forestgreen;
+    border: 1px outset #767676;
+    padding: 3px 7px;
     cursor: pointer;
 }
 
-input{
-    margin-top: 10px;
-    margin-bottom: 10px;
+#delete-btn {
+    margin: 0;
+}
+
+form .reg-login-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    background-color: white;
+    padding: 20px 10px;
+    box-shadow: 5px 10px 8px #888888;
+}
+
+.reg-login-form input {
+    display: block;
+    width: 100%;
+    height: 25px;
+    border: 0;
+    border-bottom: 1px solid grey;
+    outline: none;
+    border-radius: 5px;
     padding: 5px;
 }
 
-input[type="text"]:focus {
-    background-color: lightyellow;
-    outline-color: lightyellow;
+.reg-login-form label {
+    font-size: 12px;
+    text-align: left;
+    align-content: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 5px;
 }
 
-input[type="password"]:focus{
-    background-color: lightyellow;
-    outline-color: lightyellow;
+.reg-login-form label:not(:first-of-type) {
+    margin-top: 20px;
 }
 
-textarea{
+.reg-login-form button {
+    width: 95%;
+    height: 50px;
+    margin-top: 20px;
+    border: none;
+    background-color: #ada397;
+    color: #50394c;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+#admin-order-status {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+#admin-order-status label {
     width: 100%;
-    height: 100px;
-    resize: vertical;
+    font-weight: bold;
 }
 
-input[type="email"]
-{
-    background-color: lightyellow;
-    outline-color: lightyellow;
-    margin: 20px;
-    padding: 20px;
-}
-.error{
-    font-family: "Roboto", sans-serif;
-    color: red;
+#admin-order-status select {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    padding: 5px 15px 5px 5px;
 }
 
-.nav_bar{
-    background-color: rgb(76, 175, 80);
+#admin-order-status button {
+    margin-top: 10px;
 }
+
 
 nav {
+    background-color:  #e3eaa7;
+    height: 7%;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
-
-
-li a{
+nav ul {
+    display: flex;
+    align-items: center;
+    height: 100%;
     text-decoration: none;
-    color:white;
-}
-
-ul li{
-    display: inline-block;
-    justify-content: space-around;
-    margin-left: 10px;
-}
-
-nav li:nth-child(6){
-    border-right:0;
-}
-
-nav ul{
     list-style: none;
+    margin: 0;
     padding: 0;
 }
 
-ul{
-    width:150px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
+nav .left-side {
+    padding-left: 30px;
 }
 
-.pixel-container{
-    position:relative;
-    width: 500px;
-    height: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid rgba(0,0,0,0.1);
-    background-color: white;
+nav .right-side {
+    padding-right: 30px;
 }
-.pixel-container>span{
-    position:absolute;
-    width:20px;
-    height:20px;
+
+nav li {
+    margin-right: 10px;
+    height: 100%;
+}
+
+nav a {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #50394c;
+    height: 100%;
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+nav a:hover {
+    background-color: #ada397;
+}
+
+.catalog {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.catalog .article-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+    width: calc(100% / 4 - 15px);
+}
+
+.catalog .article-container:not(:nth-child(4n)) {
+    margin-right: 20px;
+}
+
+.catalog article {
+    position: relative;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 60vh;
+    background-color: white;
+    overflow: hidden;
+}
+
+.catalog article span {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: bold;
+}
+
+.catalog article img {
+    height: 80%;
+}
+
+.catalog .drink-info {
+    width: 100%;
+    text-align: center;
+}
+
+.catalog .drink-info p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.catalog article .drink-info p:last-of-type {
+    margin-bottom: 15px;
+}
+
+.catalog .add-to-cart {
+    background-color: #4584A4;
+    color: white;
+    padding: 5px 20px;
+}
+
+.catalog .in-stock {
+    color: #767676;
+    font-weight: bold;
+    margin: 15px 0 10px;
+}
+
+.buyer-info h3 {
+    margin: 0;
+}
+
+.view-order p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.view-order table {
+    margin-bottom: 10px;
+}
+
+footer {
+    position: absolute;
+    background: #ada397;
+    height: 7%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+}
+
+footer>span{
+    font-size: 10px;
+    color: #50394c;
 }

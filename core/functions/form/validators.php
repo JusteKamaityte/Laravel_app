@@ -1,119 +1,215 @@
 <?php
 
 /**
- * funkcija grazina errora, jei laukelis tuscias, tikrina vieno field input
+ * F-cija tikrinanti ar laukelis nera tuscias
  * @param $field_input
  * @param $field
- * @return mixed
+ * @return bool
  */
-function validate_not_empty($field_input, &$field): bool
+function validate_not_empty($field_input, array &$field): bool
 {
-
     if (empty($field_input)) {
-        $field['error'] = 'Laukelis tuščias';
+        $field['error'] = 'Laukelis negali būti tuščias !';
+
         return false;
     }
 
     return true;
 }
 
-
 /**
- * sukurtus validatorius priskirti fieldui age
- * @param $safe_input
- * @param $field
+ * F-cija tikrinanti ar i laukeli ivesta skaicius
+ * @param $field_input
+ * @param array $field
  * @return bool
  */
-function validate_is_number($safe_input, &$field)
+function validate_is_number($field_input, array &$field): bool
 {
-    if (!is_numeric($safe_input)) {
-        $field['error'] = 'laukas privalo būti skaičius';
+    if (!is_numeric($field_input)) {
+        $field['error'] = 'Įveskite skaičių !';
+
         return false;
     }
+
     return true;
 }
 
 /**
- * funkcija tikrinanti ar skaičius yra teigiamas
- * @param $safe_input
- * @param $field
+ * F-cija tikrinanti ar ivestas skaicius yra teigiamas
+ * @param $field_input
+ * @param array $field
  * @return bool
  */
-function validate_is_positive($safe_input, &$field)
+function validate_is_positive($field_input, array &$field): bool
 {
+    if ($field_input < 0) {
+        $field['error'] = 'Įveskite teigiamą skaičių !';
 
-    if ($safe_input <= 0) {
-        $field['error'] = 'Lauko vertė privalo būti teigiamas skaičius';
         return false;
     }
+
     return true;
 }
 
 /**
+ * F-cija tikrinanti ar ivestas skaicius mazesnis nei 100
+ * @param $field_input
+ * @param array $field
+ * @return bool
+ */
+function validate_max_100($field_input, array &$field): bool
+{
+    if ($field_input > 100) {
+        $field['error'] = 'Įveskite skaičių mažesnį nei 100 !';
+
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * F-cija tikrinanti ar tarp zodziu yra tarpas
  * @param $field_input
  * @param array $field
  * @return bool
  */
 function validate_has_space($field_input, array &$field): bool
 {
-    if (!strpos($field_input, ' ')) {
-        $field['error'] = 'Turi įvesti ir VARDĄ ir PAVARDĘ';
+    if ($field_input == trim($field_input) && strpos($field_input, ' ') == false) {
+        $field['error'] = 'Tarp vardo ir pavardės nėra tarpo !';
+
         return false;
     }
+
     return true;
 }
 
 /**
- * @param $safe_input
- * @param $field
- * @param $parameters
+ * F-cija tikrinanti ar skaicius yra tinkamame rezyje
+ * @param $field_input
+ * @param array $field
+ * @param $params
  * @return bool
  */
-function validate_field_range($safe_input, array &$field, $parameters)
+function validate_field_range($field_input, array &$field, array $params): bool
 {
-
-    if ($safe_input < $parameters['min'] || $safe_input > $parameters['max']) {
-        $field['error'] = strtr('Skaicius turi buti daugiau nei @min ir maziau nei @max', [
-            '@min' => $parameters['min'],
-            '@max' => $parameters['max']
+    if ($field_input < $params['min'] || $field_input > $params['max']) {
+        $field['error'] = strtr('Skaicius turi buti daugiau nei @min ir mažiau nei @max', [
+            '@min' => $params['min'],
+            '@max' => $params['max']
         ]);
 
         return false;
     }
+
     return true;
 }
 
 /**
- * Patikrina ar pasirinkimas egzistuoja $field masyve
- * @param $field_input
- * @param $field
- * @return bool
- */
-function validate_select($field_input, array &$field): bool
-{
-    if (isset($field['value'][$field_input])) {
-        $field['error'] = 'Nera tokio pasirinkimo';
-        return false;
-    }
-    return true;
-}
-
-/**
- * F-cija, patikrinanti ar fieldai sutampa
- * @param $safe_input
+ * F-cija tikrinanti ar nurodyti laukeliai sutampa
+ * @param array $filtered_input isfiltruotas $_POST masyvas
  * @param array $form
- * @param array $params sutampanciu fieldu indeksu masyvas
+ * @param array $params
  * @return bool
  */
-function validate_fields_match($safe_input,  &$form, $params): bool
+function validate_fields_match(array $filtered_input, array &$form, array $params): bool
 {
-    $comparison_field_id = $params[0];
-    $comparison = $safe_input[$comparison_field_id];
-    foreach ($params as $field_id) {
-        if ($comparison != $safe_input[$field_id]) {
-            $form['error'] = 'These fields do not match!';
+    $comparision_field_id = $params[0];
+    $comparision = $filtered_input[$comparision_field_id];
+
+    foreach ($params as $param_id => $param) {
+        if ($comparision !== $filtered_input[$param]) {
+            $form['error'] = 'Laukeliai nesutampa !';
+
             return false;
         }
     }
+
     return true;
 }
+
+/**
+ * F-cija tikrinanti ar tekstas yra tinkamo ilgio
+ * @param $field_input
+ * @param array $field
+ * @param $params
+ * @return bool
+ */
+function validate_text_length($field_input, array &$field, array $params): bool
+{
+    $text_length = strlen($field_input);
+
+    if ($text_length < $params['min'] || $text_length > $params['max']) {
+        $field['error'] = strtr('Žodis turi buti ilgesnis nei @min ir trumpesnis nei @max simbolių', [
+            '@min' => $params['min'],
+            '@max' => $params['max']
+        ]);
+
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * F-cija tikrinanti ar email tinkamo formato
+ * @param $field_input
+ * @param array $field
+ * @return bool
+ */
+function validate_email($field_input, array &$field): bool
+{
+    $pattern = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";
+
+    if (!preg_match($pattern, $field_input)) {
+        $field['error'] = 'El paštas netinkamo formato !';
+
+        return false;
+    }
+
+    return true;
+
+}
+
+/**
+ * F-cija tikrinanti ar vartotojas tokiu email nebuvo registruotas anksciau
+ * @param $field_input
+ * @param array $field
+ * @return bool
+ */
+function validate_email_unique($field_input, array &$field): bool
+{
+    $database = App\App::$db->getData();
+
+    foreach ($database['users'] as $user) {
+        if ($user['email'] == $field_input) {
+            $field['error'] = 'Vartotojas tokiu el-paštu jau registruotas !';
+
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * F-cija tikrinanti ar toks vartotojas yra registruotas
+ * @param array $filtered_input
+ * @param $form
+ * @return bool
+ */
+function validate_login(array $filtered_input, &$form): bool
+{
+
+    if (isset($filtered_input['email'])) {
+        if (!App\App::$db->getRowsWhere('users', ['email' => $filtered_input['email'], 'password' => $filtered_input['password']])) {
+            $form['error'] = 'Toks vartotojas neregistruotas, arba blogai įvestas slaptažodis !';
+
+            return false;
+        }
+    }
+
+    return true;
+}
+

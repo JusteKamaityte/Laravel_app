@@ -4,7 +4,7 @@ namespace Core;
 class DataHolder{
 
     /**
-     * Pixel constructor.
+     * constructor
      * @param array|null $data
      */
     public function __construct(array $data = null)
@@ -13,36 +13,9 @@ class DataHolder{
             $this->_setData($data);
         }
     }
-
     /**
-     *nustato properties iš masyvo
-     * @param array $data
-     */
-    public function _setData(array $data): void
-    {
-        //per kiekviena data masyve esantį index ir value eina ciklas, iesko set metodų pagal
-        //property key , ir if $method egzistuoja, tai iškviečia
-        foreach ($data as $property_key => $value) {
-            $this->__set($property_key, $value);
-        }
-    }
-
-    /**
-     *calls all getters and returns value array
-     * @return array
-     */
-    public function _getData(): array
-    {
-        $results = [];
-        foreach ($this->_getPropertyKeys() as $property_key) {
-            $results[$property_key] = $this->__get($property_key);
-        }
-        return $results;
-    }
-
-
-    /**
-     * Calls out when property is set to some value.Automatiškai gražina seteri pgal property key(patikrina ar toks egzistuoja)
+     * Calls out when property is set to some value.
+     * Automatiškai gražina seteri pgal property key(patikrina ar toks egzistuoja)
      * @param $property_key
      * @param $value
      */
@@ -54,7 +27,8 @@ class DataHolder{
     }
 
     /**
-     *  Calls out when object property is given only. Grąžina geterį pagal property key (patikrina ar toks egzistuoja)
+     *  Calls out when object property is given only.
+     * Grąžina geterį pagal property key (patikrina ar toks egzistuoja)
      * @param $property_key
      * @return mixed
      */
@@ -67,12 +41,12 @@ class DataHolder{
 
     /**
      * Checks if setter method exists
-     * @param $key
+     * @param $property_key
      * @return string|null
      */
-    private function _getSetterMethod($key): ?string
+    private function _getSetterMethod($property_key): ?string
     {
-        $method = $this->_keyToMethod('set', $key);
+        $method = $this->_keyToMethod('set', $property_key);
         if (method_exists($this, $method)) {
             return $method;
         }
@@ -80,16 +54,18 @@ class DataHolder{
     }
 
     /**
-     * Grąžina get metodo pavadinimą pagal property key(patikrina ar metodas egzistuoja)
-     * @param $key
+     * Grąžina get metodo pavadinimą pagal property key
+     * (patikrina ar metodas egzistuoja)
+     * @param $property_key
      * @return string|null
      */
-    private function _getGetterMethod($key): ?string
+    private function _getGetterMethod($property_key): ?string
     {
-        $method = $this->_keyToMethod('get', $key);
+        $method = $this->_keyToMethod('get', $property_key);
         if (method_exists($this, $method)) {
             return $method;
         }
+        return true;
     }
 
     /**
@@ -105,6 +81,7 @@ class DataHolder{
 
     /**
      * Generates key name from method name
+     * Metodas grazinantis parametro pavadinima pagal paduoto metodo pavadinima.
      * @param string $prefix
      * @param string $method
      * @return string|string[]|null
@@ -112,13 +89,13 @@ class DataHolder{
     private function _methodToKey(string $prefix, string $method): string
     {
         $s_case = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $method));
-
         return str_replace($prefix .'_', '', $s_case);
     }
 
     /**
      * Return array with all property keys that belongs to getter's.
-     * F-ija kuri atiduoda masyva kuriame yra visi  properciu raktai kuriuos
+     * F-ija kuri atiduoda masyva kuriame yra visi
+     * properciu raktai kuriuos
      * galima nustatyti su aprasytais geteriais
      * @return array
      */
@@ -126,15 +103,41 @@ class DataHolder{
     {
         $keys = [];
         $class_methods = get_class_methods($this);
+
         foreach ($class_methods as $method) {
             if (preg_match('/^get/', $method)) {
                 $keys[] = $this->_methodToKey('get', $method);
             }
 //            var_dump($method);
         }
-        return($keys);
+        return $keys;
     }
 
+    /**
+     *Metodas kvieciantis atitinkama set'eri,
+     * kiekvienam paduoto $data masyvo indeksui.
+     * @param array $data
+     */
+    public function _setData(array $data): void
+    {
+        //per kiekviena data masyve esantį index ir value eina ciklas, iesko set metodų pagal
+        //property key , ir if $method egzistuoja, tai iškviečia
+        foreach ($data as $property_key => $value) {
+            $this->__set($property_key, $value);
+        }
+    }
 
-
+    /**
+     * Metodas grazinantis reiksmiu masyva is visu property.
+     *calls all getters and returns value array
+     * @return array
+     */
+    public function _getData(): ?array
+    {
+        $results = [];
+        foreach ($this->_getPropertyKeys() as $key) {
+            $results[$key] = $this->__get($key);
+        }
+        return $results;
+    }
 }

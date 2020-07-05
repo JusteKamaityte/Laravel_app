@@ -1,65 +1,66 @@
 <?php
+
 namespace Core\Databases;
-/**
- * Class for getting and saving data to/from file
- */
+
 class FileDB
 {
-    /** @var string File location */
     private $file_name;
-    /** @var array Information to be saved */
     private $data;
 
-
     /**
+     * Konstruktorius nustatantis $file_name (vieta kur bus issaugotas failas) pagal paduota parametra.
      * FileDB constructor.
-     * @param string $file_name
+     * @param $file_name
      */
-    public function __construct(string $file_name)
+    public function __construct($file_name)
     {
         $this->file_name = $file_name;
     }
 
     /**
-     * Sets current database data
-     * (doesnt save)
+     * Metodas nustatantis $data masyva, pagal gauta paramaetra.
      * @param $data_array
      */
     public function setData(array $data_array): void
     {
-         $this->data = $data_array;
+        $this->data = $data_array;
     }
 
     /**
-     * Writes data to file
+     * Metodas issaugantis $data masyva i faila. (vieta nurodyta $file_name).
      * @return bool
      */
     public function save(): bool
     {
-        $bytes_written = file_put_contents($this->file_name, json_encode($this->data));
+        $string = json_encode($this->data);
+        $bytes_written = file_put_contents($this->file_name, $string);
+
         if ($bytes_written !== false) {
             return true;
         }
+
         return false;
+
     }
 
     /**
-     * Get data from file
-     * overwrites $data
+     * Metodas uzkraunantis masyva is failo i $data.
      */
     public function load(): void
     {
         if (file_exists($this->file_name)) {
             $data = file_get_contents($this->file_name);
-            $this->data = $data !== false ? json_decode($data, true) : false;
+            if ($data !== false) {
+                $this->data = json_decode($data, true);
+            }
         } else {
             $this->data = [];
         }
     }
 
     /**
-     * Returns current $data
-     * @return array
+     * Metodas grazinantis $data masyva.
+     * @return array|null
      */
     public function getData(): ?array
     {
@@ -67,75 +68,94 @@ class FileDB
     }
 
     /**
-     * Funkcija $table_name indeksu sukuria tuščią masyvą
+     * Metodas sukuriantis tuscia masyva $table_name indeksu.
      * @param $table_name
      * @return bool
      */
-    public function createTable($table_name)
+    public function createTable(string $table_name): bool
     {
         if (!$this->tableExists($table_name)) {
+
             $this->data[$table_name] = [];
+
             return true;
         }
+
         return false;
     }
 
     /**
-     * Funkcija tikrina ar toks table jau egzistuoja
-     * @param $table_name
+     * Metodas tikrinantis ar toks table jau egzistuoja.
+     * @param string $table_name
      * @return bool
      */
-    public function tableExists($table_name)
+    public function tableExists(string $table_name): bool
     {
         if (isset($this->data[$table_name])) {
+
             return true;
         }
+
         return false;
     }
 
     /**
-     * Funkcija ištrina nurodytą table kartu su indeksu
-     * @param $table_name
-     */
-    public function dropTable($table_name)
-    {
-        unset($this->data[$table_name]);
-    }
-
-    /**
-     * Funkcija kuri išvalo visą turinį nurodytoje lenteleje
+     * Metodas istrinantis nurodyta table kartu su indeksu.
      * @param $table_name
      * @return bool
      */
-    public function truncateTable($table_name)
+    public function dropTable(string $table_name): bool
+    {
+        if ($this->tableExists($table_name)) {
+            unset($this->data[$table_name]);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Metodas istrinanti table duomenis, bet ne visa table.
+     * @param $table_name
+     * @return bool
+     */
+    public function truncateTable(string $table_name): bool
     {
         if ($this->tableExists($table_name)) {
             $this->data[$table_name] = [];
+
             return true;
         }
+
         return false;
     }
 
     /**
-     * F-ija pridedanti viena eilute su automatiniu indeksu arba musu parasytu
+     * metodas israsantis eilutes masyva ($row) i table.
      * @param string $table_name
      * @param array $row
      * @param null $row_id
-     * @return bool|mixed|null
+     * @return bool|int
      */
     public function insertRow(string $table_name, array $row, $row_id = null)
     {
         if ($row_id == null) {
             $this->data[$table_name][] = $row;
+
             return array_key_last($this->data[$table_name]);
+
         } elseif (!$this->rowExists($table_name, $row_id)) {
             $this->data[$table_name][$row_id] = $row;
+
             return $row_id;
         }
+
         return false;
     }
+
     /**
-     * Patikrina ar eilute egzistuoja
+     * Metodas patikrinantis ar table egzistuoja eilute su nurodytu indeksu.
      * @param string $table_name
      * @param $row_id
      * @return bool
@@ -143,101 +163,96 @@ class FileDB
     public function rowExists(string $table_name, $row_id): bool
     {
         if (isset($this->data[$table_name][$row_id])) {
+
             return true;
         }
+
         return false;
     }
 
-
     /**
-     * Perrašo table esantį row_id indeksu eilutės masyvą į row
-     * @param $table_name
+     * Metodas perasantis eilute indeksu $row_id i masyva $row.
+     * @param string $table_name
      * @param $row_id
-     * @param $row
+     * @param array $row
      * @return bool
      */
-    public function updateRow(string $table_name,array $row, $row_id): bool
+    public function updateRow(string $table_name, $row_id, array $row): bool
     {
-
         if ($this->rowExists($table_name, $row_id)) {
             $this->data[$table_name][$row_id] = $row;
+
             return true;
         }
+
         return false;
     }
 
     /**
-     * ištrina eilutę, jei tokia egzistuoja
-     * @param $table_name
+     * Metodas istrinantis nurodyta ($row_id) eilute.
+     * @param string $table_name
      * @param $row_id
      * @return bool
      */
     public function deleteRow(string $table_name, $row_id): bool
     {
-
         if ($this->rowExists($table_name, $row_id)) {
             unset($this->data[$table_name][$row_id]);
+
             return true;
-        } else {
-            return false;
         }
 
+        return false;
     }
 
     /**
-     * Function returns row according to row_id, reik pataisyt
-     * @param $table_name
+     * Metodas grazinantis nurodyta ($row_id) eilute.
+     * @param string $table_name
      * @param $row_id
      * @return mixed
      */
     public function getRowById(string $table_name, $row_id)
     {
         if ($this->rowExists($table_name, $row_id)) {
-            $this->data[$table_name][$row_id];
-            return true;
+            return ['id' => $row_id] + $this->data[$table_name][$row_id];
         }
+
         return false;
     }
 
-
     /**
-     * Returns a row array that meets the specified conditions
+     * Metodas, grazinantis eiluciu masyva ($results), kurios atitinka nurodytus kriterijus ($conditions).
      * @param string $table_name
      * @param array $conditions
-     * @return mixed
+     * @return array
      */
-    public function getRowsWhere(string $table_name, array $conditions = [])
+    public function getRowsWhere(string $table_name, array $conditions = []): array
     {
-        $result = [];
+        $results = [];
+
         foreach ($this->data[$table_name] as $row_id => $row) {
-            $match = true;
-            foreach ($conditions as $search_key => $search_value) {
-                if(!isset($row[$search_key]) || $row[$search_key] !=$search_value){
-                    $match = false;
+            $passed = true;
+
+            foreach ($conditions as $condition_id => $condition_value) {
+                if (!isset($row[$condition_id]) || $row[$condition_id] != $condition_value) {
+                    $passed = false;
+                    break;
                 }
             }
-            if($match){
+            if ($passed) {
                 $row['id'] = $row_id;
-
-                $result[$row_id] = $row;
-
+                $results[$row_id] = $row;
             }
         }
-        return $result;
+
+        return $results;
     }
 
+    public function getRowWhere(string $table_name, array $conditions = []): ?array
+    {
+        $results = $this->getRowsWhere($table_name, $conditions);
 
-    /**
-     * Returns one row that meets specified conditions
-     * @param $table_name
-     * @param $conditions
-     * @return mixed
-     */
-    public function getRowWhere($table_name, $conditions){
-        $rows= $this->getRowsWhere($table_name, $conditions);
-        return reset($rows);
+        return reset($results) ?: null;
     }
+
 }
-
-
-

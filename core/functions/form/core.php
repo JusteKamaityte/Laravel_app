@@ -1,95 +1,101 @@
 <?php
 
 /**
- * funkcija apsauganti nuo pavojingu ivesciu(POST)
+ * F-cija filtruojanti formos inputus
  * @param array $form
  * @return array|null
  */
-function get_filtered_input(array $form): ?array
+function get_filtered_inputs(array $form): ?array
 {
-
-    $filter_parameters = [];
+    $filter_params = [];
 
     foreach ($form['fields'] as $field_id => $field) {
-
         if (isset($field['filter'])) {
-            $filter_parameters[$field_id] = $field['filter'];
+            $filter_params[$field_id] = $field['filter'];
         } else {
-            $filter_parameters[$field_id] = FILTER_SANITIZE_SPECIAL_CHARS;
+            $filter_params[$field_id] = FILTER_SANITIZE_SPECIAL_CHARS;
         }
     }
 
-    return filter_input_array(INPUT_POST, $filter_parameters);
+    return filter_input_array(INPUT_POST, $filter_params);
 }
 
 /**
- * F-cija, kuri validuoja pacia forma
- * (sukuria fieldams-formai errorus)
+ * F-cija tikrinanti ar teisingai uzpildyta forma
+ * sukuria laukialaims/formai errorus
  * @param array $form
- * @param array $safe_input
+ * @param array $safe_input isfiltruotas $_POST masyvas
  * @return bool
  */
 function validate_form(array &$form, array $safe_input): bool
 {
     $success = true;
 
-    //tikrinam field lygio validatorius
-    foreach ($form['fields'] as $field_index => &$field) {
-        $field['value'] = $safe_input[$field_index];
-        foreach ($field['validate'] ?? [] as $validator_index => $field_validator) {
-            if (is_array($field_validator)) {
-                $validator_function = $validator_index;
-                $validator_params = $field_validator;
+    foreach ($form['fields'] as $field_id => &$field) {
+        $field['value'] = $safe_input[$field_id];
 
-                $is_valid = $validator_function($field['value'],  $field, $validator_params);
+        foreach ($field['validators'] ?? [] as $validator_id => $field_validator) {
+            if (!is_array($field_validator)) {
+                if (!$field_validator($field['value'], $field)) {
+                    $success = false;
+                    break;
+                }
             } else {
-                $validator_function = $field_validator;
-                $is_valid = $validator_function($field['value'], $field);
-            }
-            if (!$is_valid) {
-                $success = false;
-                var_dump($validator_index,$field_validator);
-                break;
+                $validator_function = $validator_id;
+                $validator_params = $field_validator;
+                $validator = $validator_function($field['value'], $field, $validator_params);
+
+                if (!$validator) {
+                    $success = false;
+                    break;
+                }
             }
         }
     }
-    //Dabar tikrinsim formos lygio validatorius
     if ($success) {
-        foreach ($form['validators'] ?? [] as $validator_index => $form_validator) {
-            if (is_array($form_validator)) {
-                $validator_function = $validator_index;
-                $validator_params = $form_validator;
-                $is_valid = $validator_function($safe_input, $form, $validator_params);
-            } else {
+        foreach ($form['validators'] ?? [] as $validator_id => $form_validator) {
+            if (!is_array($form_validator)) {
                 $validator_function = $form_validator;
-                $is_valid = $validator_function($safe_input, $form);
+                $validator = $validator_function($safe_input, $form);
+            } else {
+                $validator_function = $validator_id;
+                $validator_params = $form_validator;
+                $validator = $validator_function($safe_input, $form, $validator_params);
             }
-            if (!$is_valid) {
+
+            if (!$validator) {
                 $success = false;
-                var_dump($validator_index,$form_validator);
                 break;
             }
         }
     }
-    if ($success) {
-        if (isset($form['callbacks']['success'])) {
-            $form['callbacks']['success']($safe_input, $form);
-        }
+
+    if (isset ($form['callbacks']['success']) && $success) {
+        $form['callbacks']['success']($form, $safe_input);
+    } elseif (isset($form['callbacks']['failed']) && !$success) {
+        $form['callbacks']['failed']($form, $safe_input);
     }
+
     return $success;
 }
 
 /**
- * kodas kuris uzpildo forma is data masyvo
- * @param array $form
- * @param array $data
+ * F-cija uzpildanti formos laukus, kuriuos anksciau pilde vartotojas.
+ * @param $form
+ * @param $data
  */
-function fill_form(array &$form, array $data): void{
-    foreach ($form['fields'] as $field_id => &$field){
-        //tikrinam ar isset data = field id
-        if(isset($data[$field_id]) ){
-            $field['value'] = $data[$field_id];
-
-        }
+function fill_form(array &$form, array $data): void
+{
+    foreach ($form['fields'] as $field_id => &$field) {
+        $field['value'] = $data[$field_id] ?? $field['value'] ?? '';
     }
+}
+
+/**
+ * F-cija grazinanti paspausto formos mygtuko reiksme.
+ * @return string|null
+ */
+function get_form_action() : ?string
+{
+    return $_POST['action'] ?? null;
 }

@@ -1,25 +1,20 @@
-<?php require '../bootloader.php'; ?>
-<table  <?php print html_attr(($table['attr'] ?? []) + ['method' => 'POST']); ?>>
-
+<table>
     <thead>
-    <?php foreach ($table['thead'] ?? [] as $thead => $thead_value) : ?>
-        <th><?php print $thead_value; ?>
-
+    <?php foreach ($data['thead'] ?? [] as $thead => $thead_value): ?>
+        <th <?php print html_attr($thead['attr'] ?? []); ?>>
+            <?php print $thead; ?>
         </th>
     <?php endforeach; ?>
     </thead>
     <tbody>
-    <?php foreach ($table['tbody'] ?? [] as $trow): ?>
+    <?php foreach ($data['tbody'] ?? [] as $trow): ?>
         <tr>
-            <?php foreach ($trow ?? [] as $tcol_value) : ?>
-               <th>
-                    <?php print $tcol_value ; ?>
-                </th>
+            <?php foreach ($trow ?? [] as $row_data) : ?>
+               <td> <?php print $row_data; ?></td>
             <?php endforeach; ?>
         </tr>
     <?php endforeach; ?>
     </tbody>
-
 </table>
 
 

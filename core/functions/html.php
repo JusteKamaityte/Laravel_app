@@ -1,7 +1,7 @@
 <?php
 
 /**
- *funkcija generuojanti formos atributus
+ * F-ija generuojanti html atributus
  * @param array $attr
  * @return string
  */
@@ -17,84 +17,100 @@ function html_attr(array $attr): string
 }
 
 /**
- * @param $field
+ * F-cija generuojanti radio atributus
+ * @param array $field
  * @param $field_id
  * @param $option_id
  * @return string
  */
-function radio_attr(&$field, $field_id, $option_id){
+function radio_attr(array $field, $field_id, $option_id)
+{
+    $attr = $field['extra']['attr'] ?? [];
 
-    $attr = [
+    $attr += [
         'name' => $field_id,
+        'type' => $field['type'],
         'value' => $option_id,
-        'type' => 'radio'
+        'class' => $field['class']
     ];
 
-    if(($field['value'] ?? '') == $option_id ){
+    if ($option_id == ($field['value']) ?? null) {
         $attr['checked'] = true;
     }
+
     return html_attr($attr);
 }
 
 /**
+ * F-cija generuojanti input atributus
  * @param $field_id
- * @param $field
+ * @param array $field
  * @return string
  */
-function input_attr($field_id,  $field){
-    $attrs = $field['extra']['attr'] ?? [];
-    $attrs += [
+function input_attr($field_id, array $field): string
+{
+    $attr = $field['extra']['attr'] ?? [];
+
+    $attr += [
+        'type' => $field['type'],
         'name' => $field_id,
-        'type' => 'input',
         'value' => $field['value'] ?? ''
     ];
 
-    return html_attr($attrs);
-}
-
-/**
- * @param $field_id
- * @param $field
- * @return string
- */
-function select_attr($field_id, $field){
-    $attr = $field['extra']['attr'] ?? [];
-    $attr += [
-        'name' => $field_id
-    ];
     return html_attr($attr);
 }
 
 /**
- * @param $field
+ * F-cija generuojanti select atributus
  * @param $field_id
- * @param $option_id
+ * @param array $field
  * @return string
  */
-function option_attr($field, $option_id){
+function select_attr($field_id, array $field): string
+{
+    $attr = $field['extra']['attr'] ?? [];
+
+    $attr += [
+        'name' => $field_id,
+        'type' => $field['type'],
+        'value' => $field['value'] ?? ''
+    ];
+
+    return html_attr($attr);
+}
+
+/**
+ * F-cija generuojanti option atributus
+ * @param $option_id
+ * @param $field
+ * @return string
+ */
+function option_attr($option_id, $field): string
+{
     $attr = [
         'value' => $option_id,
     ];
 
-    if(($field['value'] ?? '') == $option_id ){
+    if ($field['value'] == $option_id) {
         $attr['selected'] = true;
     }
+
     return html_attr($attr);
 }
 
 /**
- * @param $field
+ * F-cija generuojanti textarea atributus
  * @param $field_id
+ * @param array $field
  * @return string
  */
-function textarea_attr($field, $field_id){
+function textarea_attr($field_id, array $field): string
+{
     $attr = $field['extra']['attr'] ?? [];
+
     $attr += [
-        'name' => $field_id
+        'name' => $field_id,
     ];
 
-    if(($field['value'] ?? '') == $field_id ){
-        $attr['textarea'] = true;
-    }
     return html_attr($attr);
 }

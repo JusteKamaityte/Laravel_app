@@ -1,8 +1,8 @@
 <?php
 namespace App;
 
-use App\Users\User;
 use Core\Databases\FileDB;
+use Core\Router;
 use Core\Session;
 
 class App
@@ -14,12 +14,16 @@ class App
     {
         self::$db = new FileDB(DB_FILE);
         self::$db->load();
-
         self::$session = new Session();
     }
 
     public function __destruct()
     {
         self::$db->save();
+    }
+
+    public static function run()
+    {
+        print Router::run();
     }
 }

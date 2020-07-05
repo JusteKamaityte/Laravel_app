@@ -1,9 +1,19 @@
 <?php
+
 require '../bootloader.php';
-if($created = App\App::$db->createTable('users')){
-    var_dump('users table created');
+
+if (!App\App::$db->tableExists('users')) {
+    App\App::$db->createTable('users');
 }
 
-if($created = App\App::$db->createTable('pixels')){
-    var_dump('pixels table created');
+if (!App\App::$db->tableExists('drinks')) {
+    App\App::$db->createTable('drinks');
+}
+
+if (!App\App::$db->tableExists('items')) {
+    App\App::$db->createTable('items');
+}
+
+if (!App\App::$db->tableExists('orders')) {
+    App\App::$db->createTable('orders');
 }
